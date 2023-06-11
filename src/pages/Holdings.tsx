@@ -1,7 +1,13 @@
+import Navbar from '@components/Navbar'
+import Container from 'react-bootstrap/Container'
+
 function Holdings () {
   return (
       <div>
-          <h1>Holdings</h1>
+        <Navbar />
+        <Container>
+          <h3>This is the holdings page.</h3>
+        </Container>
       </div>
   )
 }
