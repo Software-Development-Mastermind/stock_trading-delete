@@ -8,7 +8,7 @@ function Login () {
         <Navbar />
         <Container className='content-container'>
           <Container className='login-box rounded shadow'>
-            <h3 className='text-center'>Login</h3>
+            <h3 className='text-center mt-3 mb-3'>Login</h3>
             <Form className='login-form'>
               <Form.Group className='mb-3' controlId='formBasicEmail'>
                 <FloatingLabel 
@@ -28,9 +28,11 @@ function Login () {
                 <Form.Control type='password' placeholder='Enter password' />
                 </FloatingLabel>
               </Form.Group>
-              <Button variant='primary' type='submit'>
-                Login
-              </Button>
+              <Container className='text-center'>
+                <Button className='mt-1' variant='primary' type='submit'>
+                  Login
+                </Button>
+              </Container>
             </Form>
           </Container>
         </Container>
