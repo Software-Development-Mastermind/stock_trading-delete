@@ -3,7 +3,7 @@ import os
 
 from dotenv import load_dotenv; load_dotenv()
 
-class FMP_API():
+class FMP_API:
 
   def __init__(self) -> None:
     self.session = requests.Session()
