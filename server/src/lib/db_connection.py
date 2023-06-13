@@ -17,7 +17,7 @@ class DBConnection:
       exists = self.cursor.fetchone()
 
       if exists:
-        return {"Error: f'User with email {email} already exists'"}
+        return {f'User with email "{email}" already exists'}
       
       else:
         query = "INSERT INTO users (email, password) VALUES (%s, %s)"
@@ -29,7 +29,24 @@ class DBConnection:
 
     return {email}
   
-  # def authenticate_user(self, email, password):
+  def authenticate_user(self, email, password):
+    try:
+      query = "SELECT 1 FROM users WHERE email = %s AND password = %s"
+      self.cursor.execute(query, (email, password))
+      exists = self.cursor.fetchone()
+
+      if exists:
+        return True
+      
+      else:
+        return False
+    
+    except (Exception, psycopg2.DatabaseErrorError) as error:
+      print(error)
+      return False
+
     
 
 db_connection = DBConnection()
+
+print(db_connection.add_user('test@gmail.com', 'test123'))
