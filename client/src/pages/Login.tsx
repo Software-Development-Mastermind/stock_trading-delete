@@ -3,6 +3,7 @@ import Navbar from '@components/Navbar'
 import '@styles/Login.css'
 
 function Login () {
+  
     return (
       <>
         <Navbar />
