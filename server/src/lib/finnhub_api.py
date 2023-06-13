@@ -22,4 +22,4 @@ class FinnhubAPI:
     return res.json()
     
 finnhub_api = FinnhubAPI()
-print(finnhub_api.get_quote('AAPL'))
+
