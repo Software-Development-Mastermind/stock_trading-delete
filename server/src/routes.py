@@ -2,14 +2,12 @@ from flask import Blueprint, request, jsonify
 from .extensions import db
 from src.models.users import Users
 
-main = Blueprint('main', __name__)
+api = Blueprint('api', __name__, url_prefix='/api')
 
-@main.route('/users', methods=['POST'])
+@api.route('/users', methods=['POST'])
 def create_user():
   data = request.get_json()
   email = data['email']
-
-# Check if user already exists. If so, return 409 status code - conflict.
 
   existing_user = Users.query.filter_by(email=email).first()
   if existing_user:
@@ -20,3 +18,4 @@ def create_user():
   db.session.commit()
 
   return "New user created!", 201
+
