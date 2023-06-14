@@ -2,6 +2,7 @@ import os
 from flask import Flask
 from .extensions import db
 from src.routes import main
+from dotenv import load_dotenv; load_dotenv()
 
 
 def create_app():

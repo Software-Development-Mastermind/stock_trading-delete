@@ -1,15 +1,14 @@
 from flask import Blueprint, request, jsonify
-from server.src import db
-from server.src.models import User
+from .extensions import db
+from src.models.users import Users
 
 main = Blueprint('main', __name__)
 
-@main.route('/user', methods=['POST'])
+@main.route('/users', methods=['POST'])
 def create_user():
   data = request.get_json()
-  new_user = User(email=data['email'], password=data['password'])
+  new_user = Users(email=data['email'], password=data['password'])
   db.session.add(new_user)
   db.session.commit()
 
-  return jsonify({'message': 'New user created!'}
-)
+  return "New user created!"
