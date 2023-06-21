@@ -19,3 +19,22 @@ def create_user():
 
   return "New user created!", 201
 
+@api.route('/users/authenticate', methods=['POST'])
+def authenticate_user():
+  data = request.get_json()
+  email = data['email']
+  password =data['password']
+
+  valid_credentials = Users.query.filter_by(email=email, password=password).first()
+  if valid_credentials:
+    return "User authenticated!", 200
+  
+  elif not valid_credentials:
+    valid_email = Users.query.filter_by(email=email).first()
+    if valid_email:
+      return "Invalid password!", 401
+    else:
+      return "Invalid email!", 401
+    
+
+

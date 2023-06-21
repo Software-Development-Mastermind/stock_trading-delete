@@ -22,4 +22,3 @@ class FinnhubAPI:
     return res.json()
     
 finnhub_api = FinnhubAPI()
-
