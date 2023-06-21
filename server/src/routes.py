@@ -29,7 +29,7 @@ def authenticate_user():
   if valid_credentials:
     return "User authenticated!", 200
   
-  elif not valid_credentials:
+  else:
     valid_email = Users.query.filter_by(email=email).first()
     if valid_email:
       return "Invalid password!", 401
