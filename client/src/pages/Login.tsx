@@ -1,4 +1,5 @@
-import axios from 'axios'
+import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import { Button, Container, Form, FloatingLabel } from 'react-bootstrap'
 
@@ -9,6 +10,32 @@ import '@styles/Login.css'
 function Login () {
 
   const auth = new AuthMethods()
+  const navigate = useNavigate()
+
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+
+  useEffect(() => {
+    if (auth.loggedIn()) {
+      navigate('/')
+    }
+  }, []);
+
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    try {
+      const login = await auth.login(email, password)
+      if (login) {
+        navigate('/')
+      } else {
+        setEmail('')
+        setPassword('')
+      }
+    } catch (err) {
+      console.log(`Login failed: ${err}`)
+    }
+  } 
+  
   
     return (
       <>
