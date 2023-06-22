@@ -4,7 +4,14 @@ class AuthMethods {
 
   login = async (email: string, password: string) => {
     try {
-      const res = await axios.post('/api/users/authenticate', { email, password });
+      const res = await axios.post('/api/users/authenticate', { 
+        email: email,
+        password: password
+      }, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
       const res_data = res.data
       this.setToken(res_data.token)
       return true
