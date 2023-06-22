@@ -1,8 +1,14 @@
+import axios from 'axios'
+
 import { Button, Container, Form, FloatingLabel } from 'react-bootstrap'
+
 import Navbar from '@components/Navbar'
+import AuthMethods from '@utils/index'
 import '@styles/Login.css'
 
 function Login () {
+
+  const auth = new AuthMethods()
   
     return (
       <>

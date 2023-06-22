@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-class AuthHelperMethods {
+class AuthMethods {
 
   login = async (email: string, password: string) => {
     try {
@@ -49,4 +49,4 @@ class AuthHelperMethods {
 
 }
 
-export default AuthHelperMethods
+export default AuthMethods
