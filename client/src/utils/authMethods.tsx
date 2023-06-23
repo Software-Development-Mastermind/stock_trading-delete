@@ -1,4 +1,5 @@
 import axios from 'axios';
+import decode from 'jwt-decode'
 
 class AuthMethods {
 
@@ -13,7 +14,7 @@ class AuthMethods {
         }
       });
       const res_data = res.data
-      console.log(res_data)
+      console.log(res_data.message)
       console.log(`Token is: ${res_data.access_token}`)
       this.setToken(res_data.access_token)
       return true
@@ -30,8 +31,8 @@ class AuthMethods {
 
   isTokenExpired = (token: string) => {
     try {
-      const decoded = decode(token);
-      if (decoded.exp < Date.now() / 1000) {
+      const decodedToken = this.decodeToken(token)
+      if (decodedToken.exp < Date.now() / 1000) {
         console.log('Token expired')
         return true;
       }
@@ -54,6 +55,16 @@ class AuthMethods {
 
   logout = () => {
     localStorage.removeItem('token')
+  }
+
+  decodeToken = (token: string) => {
+    try {
+      const decodedToken = decode(token)
+      return decodedToken
+    } catch (err) {
+      console.log(`Decoding token failed: ${err}`)
+      return null
+    }
   }
 
 }
