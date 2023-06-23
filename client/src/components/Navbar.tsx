@@ -8,33 +8,34 @@ import '@styles/Navbar.css'
 
 function NavbarComponent () {
 
-    const auth = new AuthMethods()
-    const navigate = useNavigate()
+  const auth = new AuthMethods()
+  const navigate = useNavigate()
 
-    const handleLogout = async (e: any) => {
-        e.preventDefault();
-        auth.logout()
-        navigate('/login')
-    }
+  const handleLogout = async (e: any) => {
+      e.preventDefault();
+      auth.logout()
+      navigate('/login')
+  }
     
     return (
-        <Navbar className='navbar shadow'>
-            <Nav.Item className='nav-item'>
-                <Nav.Link href='/'>Home</Nav.Link>
-            </Nav.Item>
-            <Nav.Item className='nav-item'>
-                <Nav.Link href='/holdings'>Holdings</Nav.Link>
-            </Nav.Item>
-            <Nav.Item className='nav-item'>
-                <Nav.Link href='/trade'>Trade</Nav.Link>
-            </Nav.Item>
-            <Nav.Item className='nav-item'>
-                <a onClick={handleLogout}> 
-                    Logout
-                </a>
-            </Nav.Item>
-            
-        </Navbar>
+
+      <Navbar className='navbar shadow'>
+        <Nav.Item className='nav-item'>
+            <Nav.Link href='/'>Home</Nav.Link>
+        </Nav.Item>
+        <Nav.Item className='nav-item'>
+            <Nav.Link href='/holdings'>Holdings</Nav.Link>
+        </Nav.Item>
+        <Nav.Item className='nav-item'>
+            <Nav.Link href='/trade'>Trade</Nav.Link>
+        </Nav.Item>
+        <Nav.Item className='nav-item'>
+            <a onClick={handleLogout}> 
+                Logout
+            </a>
+        </Nav.Item>
+      </Navbar>
+
     )
 }
 
