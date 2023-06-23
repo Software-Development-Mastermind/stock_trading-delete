@@ -1,7 +1,14 @@
 import axios from 'axios';
 import decode from 'jwt-decode'
 
-class AuthMethods {
+interface IAuthMethods {
+  login: (email: string, password: string) => Promise<boolean>
+  loggedIn: () => boolean
+  isTokenExpired: (token: string) => boolean
+  decodeToken: (token: string) => object
+}
+
+class AuthMethods implements IAuthMethods {
 
   login = async (email: string, password: string) => {
     try {
