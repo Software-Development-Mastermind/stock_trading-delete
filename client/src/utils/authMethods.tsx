@@ -66,8 +66,7 @@ class AuthMethods implements IAuthMethods {
 
   decodeToken = (token: string) => {
     try {
-      const decodedToken = decode(token)
-      return decodedToken
+      return decode(token)
     } catch (err) {
       console.log(`Decoding token failed: ${err}`)
       return null
