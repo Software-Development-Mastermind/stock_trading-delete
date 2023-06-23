@@ -14,8 +14,8 @@ class AuthMethods {
       });
       const res_data = res.data
       console.log(res_data)
-      console.log(`Token is: ${res_data.token}`)
-      this.setToken(res_data.token)
+      console.log(`Token is: ${res_data.access_token}`)
+      this.setToken(res_data.access_token)
       return true
     } catch (err) {
       console.log(`Authenticating user failed: ${err}`)
