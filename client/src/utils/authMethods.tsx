@@ -14,6 +14,7 @@ class AuthMethods {
       });
       const res_data = res.data
       console.log(res_data)
+      console.log(`Token is: ${res_data.token}`)
       this.setToken(res_data.token)
       return true
     } catch (err) {
