@@ -19,7 +19,7 @@ def create_user():
 
   return "New user created!", 201
 
-@api.route('/users/authenticate', methods=['POST'])
+@api.route('/authenticate', methods=['POST'])
 def authenticate_user():
   data = request.get_json()
   email = data['email']
