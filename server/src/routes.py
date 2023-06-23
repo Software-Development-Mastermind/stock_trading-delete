@@ -1,4 +1,6 @@
 from flask import Blueprint, request
+from flask_jwt_extended import create_access_token
+
 from .extensions import db
 from src.models.users import Users
 
@@ -25,8 +27,11 @@ def authenticate_user():
   password = request.json['password']
 
   valid_credentials = Users.query.filter_by(email=email, password=password).first()
+  
   if valid_credentials:
-    return "User authenticated!", 200
+    access_token = create_access_token(identity=email)
+    successful_auth_response = {'access_token': access_token, 'message': 'User authenticated!'}
+    return successful_auth_response, 200
   
   else:
     valid_email = Users.query.filter_by(email=email).first()
