@@ -1,5 +1,5 @@
 .navbar {
-  background-color: #333333;
+  background-color: #04013f;
   align-items: center;
 }
 
@@ -12,6 +12,11 @@
 
 .nav-item:hover {
   color: #e6e6e6;
+}
+
+.nav-item.active {
+  color: #08b8fd;
+  font-weight: bold;
 }
 
 .logout-btn {

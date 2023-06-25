@@ -1,4 +1,5 @@
-import { useNavigate } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import { useNavigate, useLocation } from 'react-router-dom'
 
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
@@ -10,6 +11,12 @@ function NavbarComponent () {
 
   const auth = new AuthMethods()
   const navigate = useNavigate()
+  const location = useLocation()
+  const [activeLink, setActiveLink] = useState('')
+
+  useEffect(() =>{
+    setActiveLink(location.pathname)
+  }, [location])
 
   const handleLogout = async (e: any) => {
       e.preventDefault();
@@ -20,13 +27,13 @@ function NavbarComponent () {
     return (
 
       <Navbar className='navbar shadow'>
-        <Nav.Item className='nav-item'>
+        <Nav.Item className={`nav-item ${activeLink === '/' ? 'active' : ''}`}>
             <Nav.Link href='/'>Home</Nav.Link>
         </Nav.Item>
-        <Nav.Item className='nav-item'>
+        <Nav.Item className={`nav-item ${activeLink === '/holdings' ? 'active' : ''}`}>
             <Nav.Link href='/holdings'>Holdings</Nav.Link>
         </Nav.Item>
-        <Nav.Item className='nav-item'>
+        <Nav.Item className={`nav-item ${activeLink === '/trade' ? 'active' : ''}`}>
             <Nav.Link href='/trade'>Trade</Nav.Link>
         </Nav.Item>
         <Nav.Item className='nav-item logout-btn'>
