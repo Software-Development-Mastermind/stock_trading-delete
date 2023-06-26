@@ -1,4 +1,4 @@
-import { Search } from '@/components'
+import { Search, StockTable } from '@/components'
 import { Navbar } from '@components/index'
 
 function Trade() {
@@ -6,6 +6,7 @@ function Trade() {
     <>
       <Navbar />
       <Search />
+      <StockTable />
     </>
     )
 }
