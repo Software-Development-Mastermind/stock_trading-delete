@@ -1,8 +1,14 @@
+import Axios from 'axios';
+
 import { Container } from 'react-bootstrap';
 
+
 import '@styles/StockTable.css'
+import { get } from 'http';
 
 function StockTable() {
+
+  
 
   const stocks : {
     ticker: string;
