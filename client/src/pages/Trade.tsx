@@ -1,12 +1,16 @@
+import { useState } from 'react'
 import { Search, StockTable } from '@/components'
 import { Navbar } from '@components/index'
 
 function Trade() {
+
+  const [companies, setCompanies] = useState([])
+
   return (
     <>
       <Navbar />
-      <Search />
-      <StockTable />
+      <Search setCompanies={setCompanies} />
+      <StockTable companies={companies} />
     </>
     )
 }

@@ -5,21 +5,21 @@ import { Container, Form, Button } from "react-bootstrap"
 
 import '@styles/Search.css'
 
-function Search() {
+function Search({ setCompanies } : any) {
 
   const [search, setSearch] = useState('')
-  const [companies, setCompanies] = useState([])
-
-  const getCompanyinfo = async (search: string) => {
-    const res = await Axios.get(`/api/search/${search}`)
+  
+  const handleSearch= async (e: any) => {
+    e.preventDefault()
+    const res = await Axios.get(`/api/stock_search/${search}`)
+    console.log(res)
     setCompanies(res.data)
-    console.log(companies)
   }
   
   return(
     <div>
       <Container className='search-container shadow rounded'>
-        <Form className='d-flex'>
+        <Form className='d-flex' onSubmit={handleSearch}>
           <Form.Control
             type='search'
             placeholder='Search by ticker or company name'
@@ -29,7 +29,11 @@ function Search() {
             value = {search}
           >
           </Form.Control>
-          <Button className='rounded-pill shadow-sm' variant='primary'>
+          <Button 
+            className='rounded-pill shadow-sm' 
+            variant='primary' 
+            type='submit'
+            >
             Search
           </Button>
         </Form>

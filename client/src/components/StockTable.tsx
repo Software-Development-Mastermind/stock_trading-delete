@@ -1,43 +1,21 @@
-import Axios from 'axios';
-
 import { Container } from 'react-bootstrap';
 
 
 import '@styles/StockTable.css'
-import { get } from 'http';
 
-function StockTable() {
+function StockTable({ companies }) {
 
-  
 
-  const stocks : {
-    ticker: string;
-    name: string;
-  } [] = [];
-
-  interface TableRowProps {
-    ticker: string;
-    name: string;
+  const renderCompanyTable = () => {
+    return companies.map((company: any, i: number) => {
+      return (
+        <tr key={i}>
+          <td>{company.symbol}</td>
+          <td>{company.name}</td>
+        </tr>
+      )
+    })
   }
-
-  const TableRow = ({ ticker, name }: TableRowProps) => {
-    return (
-      <tr>
-        <td>{ticker}</td>
-        <td>{name}</td>
-      </tr>
-    );
-  }
-
-  // const renderTableData = () => {
-  //   return (
-  //     <tr key={i}>
-  //       <td>{ticker}</td>
-  //       <td>{name}</td>
-  //     </tr>
-  //   )
-  //   })
-  // }
 
   return(
       <Container className='stock-table-container'>
@@ -49,7 +27,7 @@ function StockTable() {
             </tr>
           </thead>
           <tbody className='text-center'>
-            {/* {renderTableData()} */}
+            {renderCompanyTable()}
           </tbody>
         </table>
 
