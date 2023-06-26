@@ -1,15 +1,15 @@
-import { Container, Row, Col, Form, Button } from "react-bootstrap"
+import { Container, Form, Button } from "react-bootstrap"
 
 import '@styles/Search.css'
 
 function Search() {
   return(
     <div>
-      <Container className='search-container'>
+      <Container className='search-container shadow rounded'>
         <Form className='d-flex'>
           <Form.Control
             type='search'
-            placeholder='Search'
+            placeholder='Search by ticker or company name'
             className='searchbar me-2 rounded-pill shadow-sm'
             aria-label='Search'
           >

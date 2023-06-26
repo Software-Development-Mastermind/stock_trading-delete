@@ -1,14 +1,15 @@
 .search-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 20vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 10vh;
+  width: 70vw;
+  margin-top: 5vh;
 }
 
 .searchbar {
-    margin: 0 auto;
-    background-color: #e6e6e6;
-    width: 30vw;
-    color: white;
+  margin: 0 auto;
+  background-color: #e6e6e6;
+  width: 40vw;
 }
