@@ -19,11 +19,9 @@ class FMP_API:
     self.api_key = os.getenv('FMP_API_KEY')
     self.api_key_url = '&apikey=' + self.api_key
   
-  def get_ticker(self, symbol):
-      url = self.ticker_url + symbol + self.api_key_url
+  def get_company_info(self, company_name):
+      url = self.ticker_url + company_name + self.api_key_url
       res = self.session.get(url, params = self.search_params)
       return res.json()
   
 fmp_api = FMP_API()
-print(fmp_api.api_key)
-print(fmp_api.get_ticker('AAPL'))

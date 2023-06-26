@@ -3,6 +3,8 @@ from flask_jwt_extended import create_access_token
 
 from .extensions import db
 from src.models.users import Users
+from src.lib.finnhub_api import finnhub_api
+from src.lib.fmp_api import fmp_api
 
 api = Blueprint('api', __name__, url_prefix='/api')
 
@@ -39,6 +41,9 @@ def authenticate_user():
       return "Invalid password!", 401
     else:
       return "Invalid email!", 401
-    
-
+  
+@api.route('/stock_search/<search>', methods=['GET'])
+def stock_search(search):
+  res = fmp_api.get_company_info(search)
+  return res, 200
 

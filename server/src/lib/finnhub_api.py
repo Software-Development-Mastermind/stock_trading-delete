@@ -16,9 +16,16 @@ class FinnhubAPI:
     self.quote_url = self.base_url + 'quote?symbol='
     self.company_url = self.base_url + 'stock/profile2?symbol='
 
+  def get_company_name(self, symbol):
+    url = self.company_url + symbol
+    res = self.session.get(url)
+    return res.json()['name']
+
   def get_quote(self, symbol):
     url = self.quote_url + symbol
     res = self.session.get(url)
     return res.json()
     
 finnhub_api = FinnhubAPI()
+
+print(finnhub_api.get_company_name('MSFT'))
