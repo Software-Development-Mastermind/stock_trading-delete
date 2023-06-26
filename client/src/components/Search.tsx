@@ -18,7 +18,7 @@ function Search({ setCompanies } : any) {
   
   return(
     <div>
-      <Container className='search-container shadow rounded'>
+      <Container className='search-container'>
         <Form className='d-flex' onSubmit={handleSearch}>
           <Form.Control
             type='search'
