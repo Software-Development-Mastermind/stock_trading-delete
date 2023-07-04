@@ -1,4 +1,4 @@
-import { Container } from 'react-bootstrap';
+import { Container, Table } from 'react-bootstrap';
 
 
 import '@styles/StockTable.css'
@@ -22,7 +22,7 @@ function StockTable({ companies }) {
 
   return(
       <Container className='stock-table-container'>
-        <table className='mt-4 table table-striped shadow-sm'>
+        <Table striped hover className='mt-4 shadow-sm'>
           <thead className='table-head text-center'>
             <tr className-='text-center'>
               <th>Ticker</th>
@@ -33,7 +33,7 @@ function StockTable({ companies }) {
           <tbody className='text-center'>
             {renderCompanyTable()}
           </tbody>
-        </table>
+        </Table>
 
       </Container>
       
