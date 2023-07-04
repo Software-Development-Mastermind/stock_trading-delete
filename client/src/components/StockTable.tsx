@@ -10,10 +10,15 @@ function StockTable({ companies }) {
     return companies.map((company, i) => {
       return (
         <tr key={i}>
-          <td>{company.symbol}</td>
-          <td>{company.name}</td>
-          <td>
-            <button className='btn btn-primary btn-sm'>Trade</button>
+          <td className='ticker'>
+            <span>
+              {company.symbol}
+            </span>
+          </td>
+          <td className='stock-name'>
+            <span>
+              {company.name}
+            </span>
           </td>
         </tr>
       )
@@ -27,7 +32,6 @@ function StockTable({ companies }) {
             <tr className-='text-center'>
               <th>Ticker</th>
               <th>Name</th>
-              <th>Trade</th>
             </tr>
           </thead>
           <tbody className='text-center'>

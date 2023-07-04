@@ -1,7 +1,24 @@
 .stock-table-container {
-  width: 70vw;
+  width: 45vw;
 }
+
 .table-head th {
   background-color: #04013f;
   color: white;
+}
+
+tr:hover {
+  cursor: pointer;
+}
+
+.ticker {
+  width: 10%;
+}
+
+.ticker span {
+  color: green;
+}
+
+.stock-name {
+  width: 70%;
 }
