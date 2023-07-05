@@ -52,3 +52,8 @@ def stock_quote(symbol):
   res = finnhub_api.get_quote(symbol)
   return res, 200
 
+@api.route('/stock_financials/<symbol>', methods=['GET'])
+def stock_financials(symbol):
+  res = finnhub_api.get_financials(symbol)
+  return res, 200
+
