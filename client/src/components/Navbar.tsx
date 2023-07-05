@@ -26,7 +26,7 @@ function NavbarComponent () {
     
     return (
 
-      <Navbar className='navbar shadow'>
+      <Navbar className='navbar shadow-sm'>
         <Nav.Item className={`nav-item ${activeLink === '/' ? 'active' : ''}`}>
             <Nav.Link href='/'>Home</Nav.Link>
         </Nav.Item>
