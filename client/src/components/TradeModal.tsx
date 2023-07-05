@@ -1,6 +1,6 @@
 import { Modal, Button } from 'react-bootstrap'
 
-function TradeModal({ show, hide }) {
+function TradeModal({ show, hide, company }) {
 
   return (
     <Modal

@@ -2,13 +2,22 @@ import { useState } from 'react'
 import { Search, StockTable, TradeModal } from '@/components'
 import { Navbar } from '@components/index'
 
-function Trade() {
+interface Company {
+  symbol: string;
+  name: string;
+}
 
-  const [companies, setCompanies] = useState([])
-  const [showTradeModal, setShowTradeModal] = useState(false)
+function Trade(): JSX.Element {
+
+  const [companies, setCompanies] = useState<Company[]>([]);
+  const [showTradeModal, setShowTradeModal] = useState<boolean>(false);
+  const [selectedCompany, setSelectedCompany] = useState<Company | null>(null)
   
   const handleHideTradeModal = () => setShowTradeModal(false)
-  const handleShowTradeModal = () => setShowTradeModal(true)
+  const handleShowTradeModal = (company: Company) => {
+    setShowTradeModal(true)
+    setSelectedCompany(company)
+  }
 
   return (
     <>
@@ -20,7 +29,8 @@ function Trade() {
         />
       <TradeModal 
         show={showTradeModal} 
-        hide={handleHideTradeModal} 
+        hide={handleHideTradeModal}
+        company={selectedCompany} 
         />
     </>
     )
