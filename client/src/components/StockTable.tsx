@@ -2,14 +2,26 @@ import { Container, Table } from 'react-bootstrap';
 
 import '@styles/StockTable.css'
 
-function StockTable({ companies, showModal }) {
+interface Company {
+  symbol: string;
+  name: string;
+}
 
-  const handleShowModal = () => showModal();
+interface StockTableProps {
+  companies: Company[];
+  showModal: (company: Company) => void;
+}
+
+function StockTable({ companies, showModal }: StockTableProps) {
+
+  const handleShowModal = (company: Company) => {
+    showModal(company);
+  }
 
   const renderCompanyTable = () => {
     return companies.map((company, i) => {
       return (
-        <tr key={i} onClick={handleShowModal}>
+        <tr key={i} onClick={() => handleShowModal(company)}>
           <td className='ticker'>
             <span>
               {company.symbol}

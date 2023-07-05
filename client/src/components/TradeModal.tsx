@@ -7,7 +7,8 @@ function TradeModal({ show, hide }) {
       centered show={show}
       onHide={hide}
       backdrop='static'
-    >
+      size='lg'
+      >
       <Modal.Header closeButton>
         <Modal.Title>Trade</Modal.Title>
       </Modal.Header>
