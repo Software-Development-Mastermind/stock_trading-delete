@@ -1,11 +1,7 @@
 import { Container, Table } from 'react-bootstrap';
+import { Company } from '@/pages/Trade';
 
 import '@styles/StockTable.css'
-
-interface Company {
-  symbol: string;
-  name: string;
-}
 
 interface StockTableProps {
   companies: Company[];

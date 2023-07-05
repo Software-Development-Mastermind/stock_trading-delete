@@ -1,6 +1,15 @@
 import { Modal, Button } from 'react-bootstrap'
+import { Company } from '@/pages/Trade'
 
-function TradeModal({ show, hide, company }) {
+interface TradeModalProps {
+  show: boolean;
+  hide: () => void;
+  company: Company;
+}
+
+function TradeModal({ show, hide, company }: TradeModalProps): JSX.Element | null {
+
+  if (!company) return null
 
   return (
     <Modal
@@ -10,7 +19,7 @@ function TradeModal({ show, hide, company }) {
       size='lg'
       >
       <Modal.Header closeButton>
-        <Modal.Title>Trade</Modal.Title>
+        <Modal.Title>{`${company.name} (${company.symbol})`}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <p>Trade</p>

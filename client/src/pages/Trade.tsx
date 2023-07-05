@@ -36,4 +36,5 @@ function Trade(): JSX.Element {
     )
 }
 
+export type { Company }
 export default Trade
