@@ -1,4 +1,5 @@
-import { Modal, Button, Table } from 'react-bootstrap'
+import Axios from 'axios'
+import { Modal, Button, Table, Form } from 'react-bootstrap'
 import { Company } from '@/pages/Trade'
 
 interface TradeModalProps {
@@ -10,6 +11,11 @@ interface TradeModalProps {
 function TradeModal({ show, hide, company }: TradeModalProps): JSX.Element | null {
 
   if (!company) return null
+
+  getCompanyFinancials = async (company.symbol) => {
+    const res = await Axios.get(`/api/stock_financials/${company.symbol}`)
+    console.log(res)
+  }
 
   return (
     <Modal
@@ -23,7 +29,7 @@ function TradeModal({ show, hide, company }: TradeModalProps): JSX.Element | nul
       </Modal.Header>
       <Modal.Body>
         <p>Historical Price Chart will go HERE</p>
-        <Table>
+        <Table borderless>
           <tbody>
             <tr>
               <td>Current Price:</td>
@@ -43,6 +49,11 @@ function TradeModal({ show, hide, company }: TradeModalProps): JSX.Element | nul
             </tr>
           </tbody>
         </Table>
+      <p>TRADE</p>
+        <Form>
+          <Form.Group>
+          </Form.Group>
+        </Form>
       </Modal.Body>
       <Modal.Footer>
         <Button className='btn btn-secondary' onClick={hide}>Close</Button>

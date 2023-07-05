@@ -47,3 +47,8 @@ def stock_search(search):
   res = fmp_api.get_company_info(search)
   return res, 200
 
+@api.route('/stock_quote/<symbol>', methods=['GET'])
+def stock_quote(symbol):
+  res = finnhub_api.get_quote(symbol)
+  return res, 200
+
