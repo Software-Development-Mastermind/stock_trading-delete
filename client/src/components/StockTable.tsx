@@ -1,15 +1,15 @@
 import { Container, Table } from 'react-bootstrap';
 
-
 import '@styles/StockTable.css'
 
-function StockTable({ companies }) {
+function StockTable({ companies, showModal }) {
 
+  const handleShowModal = () => showModal();
 
   const renderCompanyTable = () => {
     return companies.map((company, i) => {
       return (
-        <tr key={i}>
+        <tr key={i} onClick={handleShowModal}>
           <td className='ticker'>
             <span>
               {company.symbol}
@@ -38,7 +38,6 @@ function StockTable({ companies }) {
             {renderCompanyTable()}
           </tbody>
         </Table>
-
       </Container>
       
   );
