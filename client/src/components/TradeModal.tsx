@@ -1,6 +1,7 @@
 import Axios from 'axios'
 import { Modal, Button, Table, Form } from 'react-bootstrap'
 import { Company } from '@/pages/Trade'
+import { useEffect, useState } from 'react';
 
 interface TradeModalProps {
   show: boolean;
@@ -8,13 +9,32 @@ interface TradeModalProps {
   company: Company;
 }
 
+interface Financials {
+  "52WeekHigh": number;
+  "52WeekLow": number;
+  "52WeekLowDate": string;
+}
+
 function TradeModal({ show, hide, company }: TradeModalProps): JSX.Element | null {
 
   if (!company) return null
 
-  getCompanyFinancials = async (company.symbol) => {
-    const res = await Axios.get(`/api/stock_financials/${company.symbol}`)
-    console.log(res)
+  const [financials, setFinancials] = useState<Financials | null>(null)
+
+  useEffect(() => {
+    if (show && company) {
+      getCompanyFinancials(company.symbol)
+    }
+  }, [show, company])
+
+  const getCompanyFinancials = async (symbol: string) => {
+    try {
+      const res = await Axios.get(`/api/stock_financials/${symbol}`)
+      setFinancials(res.data)
+      console.log(res.data)
+    } catch {
+      console.log('Error retreiving company financials')
+    }
   }
 
   return (
