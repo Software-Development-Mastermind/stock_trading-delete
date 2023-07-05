@@ -20,10 +20,12 @@ function TradeModal({ show, hide, company }: TradeModalProps): JSX.Element | nul
   if (!company) return null
 
   const [financials, setFinancials] = useState<Financials | null>(null)
+  const [quote, setQuote] = useState<number | null>(null)
 
   useEffect(() => {
     if (show && company) {
       getCompanyFinancials(company.symbol)
+      getStockQuote(company.symbol)
     }
   }, [show, company])
 
@@ -33,7 +35,18 @@ function TradeModal({ show, hide, company }: TradeModalProps): JSX.Element | nul
       setFinancials(res.data)
       console.log(res.data)
     } catch {
-      console.log('Error retreiving company financials')
+      console.log('Error getting company financials')
+    }
+  }
+
+  const getStockQuote = async (symbol: string) => {
+    try {
+      const res = await Axios.get(`/api/stock_quote/${symbol}`)
+      const quoteData = res.data
+      setQuote(quoteData.c)
+      console.log(res.data)
+    } catch {
+      console.log('Error getting stock quote')
     }
   }
 
@@ -53,7 +66,7 @@ function TradeModal({ show, hide, company }: TradeModalProps): JSX.Element | nul
           <tbody>
             <tr>
               <td>Current Price:</td>
-              <td>$0</td>
+              <td>{`$${quote}`}</td>
             </tr>
             <tr>
               <td>Shares Owned:</td>
