@@ -1,8 +1,23 @@
-function TradeModal() {
+import { Modal, Button } from 'react-bootstrap'
+
+function TradeModal({ show, hide }) {
+
   return (
-    <div>
-      <h1>Trade Modal</h1>
-    </div>
+    <Modal
+      centered show={show}
+      onHide={hide}
+      backdrop='static'
+    >
+      <Modal.Header closeButton>
+        <Modal.Title>Trade</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <p>Trade</p>
+      </Modal.Body>
+      <Modal.Footer>
+        <Button className='btn btn-secondary' onClick={hide}>Close</Button>
+      </Modal.Footer>
+    </Modal>
   )
 }
 
