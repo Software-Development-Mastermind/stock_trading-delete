@@ -21,41 +21,19 @@ function TradeModal({ show, hide, company }: TradeModalProps): JSX.Element | nul
 
   if (!company) return null
 
+  const Company = new CompanyMethods()
+
   const [financials, setFinancials] = useState<Financials | null>(null)
   const [quote, setQuote] = useState<number | null>(null)
 
   useEffect(() => {
     if (show && company) {
-      getCompanyFinancials(company.symbol)
-      getStockQuote(company.symbol)
+      const financialData = Company.getFinancials(company.symbol)
+      setFinancials(financialData)
+      const quote = Company.getQuote(company.symbol)
+      setQuote(quote)
     }
   }, [show, company])
-
-
-
-
-
-
-  // const getCompanyFinancials = async (symbol: string) => {
-  //   try {
-  //     const res = await Axios.get(`/api/stock_financials/${symbol}`)
-  //     setFinancials(res.data)
-  //     console.log(res.data)
-  //   } catch {
-  //     console.log('Error getting company financials')
-  //   }
-  // }
-
-  // const getStockQuote = async (symbol: string) => {
-  //   try {
-  //     const res = await Axios.get(`/api/stock_quote/${symbol}`)
-  //     const quoteData = res.data
-  //     setQuote(quoteData.c)
-  //     console.log(res.data)
-  //   } catch {
-  //     console.log('Error getting stock quote')
-  //   }
-  // }
 
   return (
     <Modal
@@ -65,7 +43,7 @@ function TradeModal({ show, hide, company }: TradeModalProps): JSX.Element | nul
       size='lg'
       >
       <Modal.Header closeButton>
-        <Modal.Title>{`${company.name} (${company.symbol})`}</Modal.Title>
+        <Modal.Title>{`${company.name || company.description} (${company.symbol})`}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <p>Historical Price Chart will go HERE</p>
