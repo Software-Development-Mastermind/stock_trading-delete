@@ -12,7 +12,7 @@ class FMP_API:
         'Accept': 'application/json',
         }
     self.search_params = {
-       'count': 5,
+       'limit': 10,
         }
     self.base_url = 'https://financialmodelingprep.com/api/v3/'
     self.name_search_url = self.base_url + 'search-name?query='

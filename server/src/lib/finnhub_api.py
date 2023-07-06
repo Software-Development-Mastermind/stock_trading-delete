@@ -12,6 +12,9 @@ class FinnhubAPI:
         'Accept': 'application/json',
         'X-Finnhub-Token': os.getenv('FINNHUB_API_KEY')
         }
+    self.search_params = {
+       'limit': 10,
+        }
     self.base_url = 'https://finnhub.io/api/v1/'
     self.ticker_search_url = self.base_url + 'search?q='
     self.quote_url = self.base_url + 'quote?symbol='
