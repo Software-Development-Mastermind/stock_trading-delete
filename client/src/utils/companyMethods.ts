@@ -12,7 +12,7 @@ class CompanyMethods implements ICompanyMethods {
       const res = await Axios.get(`/api/company_search/${search}`)
       return res.data
     } catch {
-      console.log('Error getting company by name')
+      console.log(`Error getting company by name: ${err}`)
     }
   }
 
@@ -20,8 +20,8 @@ class CompanyMethods implements ICompanyMethods {
     try {
       const res = await Axios.get(`/api/ticker_search/${search}`)
       return res.data.result
-    } catch {
-      console.log('Error getting company by ticker')
+    } catch (err) {
+      console.log(`Error getting company by ticker: ${err}`)
     }
   }
 
@@ -30,8 +30,8 @@ class CompanyMethods implements ICompanyMethods {
       const res = await Axios.get(`/api/stock_financials/${symbol}`)
       const financialsData = res.data
       return financialsData
-    } catch {
-      console.log('Error getting company financials')
+    } catch (err) {
+      console.log(`Error getting company financials: ${err}`)
     }
   }
 
@@ -40,8 +40,8 @@ class CompanyMethods implements ICompanyMethods {
       const res = await Axios.get(`/api/stock_quote/${symbol}`)
       const quoteData = res.data
       return quoteData
-    } catch {
-      console.log('Error getting stock quote')
+    } catch (err) {
+      console.log(`Error getting stock quote data: ${err}`)
     }
   }
 
