@@ -1,31 +1,33 @@
 import { Container, Table } from 'react-bootstrap';
-import { Company } from '@/pages/Trade';
+import { StockData } from '@/pages/Trade';
 
 import '@styles/StockTable.css'
 
 interface StockTableProps {
-  companies: Company[];
-  showModal: (company: Company) => void;
+  stocks: StockData[];
+  showModal: (stock: StockData) => void;
 }
 
-function StockTable({ companies, showModal }: StockTableProps) {
+function StockTable({ stocks, showModal }: StockTableProps) {
 
-  const handleShowModal = (company: Company) => {
-    showModal(company);
+  if (!stocks) return null
+
+  const handleShowModal = (stock: StockData) => {
+    showModal(stock);
   }
 
-  const renderCompanyTable = () => {
-    return companies.map((company, i) => {
+  const renderStockTable = () => {
+    return stocks.map((stock, i) => {
       return (
-        <tr key={i} onClick={() => handleShowModal(company)}>
+        <tr key={i} onClick={() => handleShowModal(stock)}>
           <td className='ticker'>
             <span>
-              {company.symbol}
+              {stock.symbol}
             </span>
           </td>
           <td className='stock-name'>
             <span>
-              {company.name || company.description}
+              {stock.name || stock.description}
             </span>
           </td>
         </tr>
@@ -43,7 +45,7 @@ function StockTable({ companies, showModal }: StockTableProps) {
             </tr>
           </thead>
           <tbody className='text-center'>
-            {renderCompanyTable()}
+            {renderStockTable()}
           </tbody>
         </Table>
       </Container>

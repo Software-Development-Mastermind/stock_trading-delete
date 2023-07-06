@@ -11,7 +11,7 @@ class CompanyMethods implements ICompanyMethods {
     try {
       const res = await Axios.get(`/api/company_search/${search}`)
       return res.data
-    } catch {
+    } catch (err) {
       console.log(`Error getting company by name: ${err}`)
     }
   }
@@ -28,7 +28,7 @@ class CompanyMethods implements ICompanyMethods {
   getFinancials = async (symbol: string) => {
     try {
       const res = await Axios.get(`/api/stock_financials/${symbol}`)
-      const financialsData = res.data
+      const financialsData = res.data.metric
       return financialsData
     } catch (err) {
       console.log(`Error getting company financials: ${err}`)

@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Search, StockTable, TradeModal } from '@/components'
 import { Navbar } from '@components/index'
 
-interface Company {
+interface StockData {
   symbol: string;
   name: string;
   description: string;
@@ -10,32 +10,32 @@ interface Company {
 
 function Trade(): JSX.Element {
 
-  const [companies, setCompanies] = useState<Company[]>([]);
+  const [stocks, setStocks] = useState<StockData[]>([]);
   const [showTradeModal, setShowTradeModal] = useState<boolean>(false);
-  const [selectedCompany, setSelectedCompany] = useState<Company | null>(null)
+  const [selectedStock, setSelectedStock] = useState<StockData | null>(null)
   
   const handleHideTradeModal = () => setShowTradeModal(false)
-  const handleShowTradeModal = (company: Company) => {
+  const handleShowTradeModal = (stock: StockData) => {
     setShowTradeModal(true)
-    setSelectedCompany(company)
+    setSelectedStock(stock)
   }
 
   return (
     <>
       <Navbar />
-      <Search setCompanies={setCompanies} />
+      <Search setStocks={setStocks} />
       <StockTable 
-        companies={companies}
+        stocks={stocks}
         showModal={handleShowTradeModal} 
         />
       <TradeModal 
         show={showTradeModal} 
         hide={handleHideTradeModal}
-        company={selectedCompany} 
+        selectedStock={selectedStock} 
         />
     </>
     )
 }
 
-export type { Company }
+export type { StockData }
 export default Trade

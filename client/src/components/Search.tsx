@@ -1,30 +1,26 @@
 import { useState } from "react"
-import Axios from "axios"
-
 import { Container, Form, Button } from "react-bootstrap"
+
+import { CompanyMethods } from "@utils/index"
 
 import '@styles/Search.css'
 
-function Search({ setCompanies } : any) {
+function Search({ setStocks } : any) {
 
   const [search, setSearch] = useState('')
+
+  const company = new CompanyMethods()
   
   const handleSearch= async (e: any) => {
     e.preventDefault()
 
     if (search.length === 4 && search === search.toUpperCase()) {
-      try {
-        const res = await Axios.get(`/api/ticker_search/${search}`)
-        console.log(res.data.result)
-        setCompanies(res.data.result)
-      } catch {
-        console.log('Error getting company by ticker')
-      }
+      const tickerRes = await company.searchByTicker(search)
+      setStocks(tickerRes)
     } else {
-      try{
-        const res = await Axios.get(`/api/company_search/${search}`)
-        console.log(res.data)
-        setCompanies(res.data)
+      try {
+        const nameRes = await company.searchByName(search)
+        setStocks(nameRes)
       } catch {
         console.log('Error getting company by name')
       }

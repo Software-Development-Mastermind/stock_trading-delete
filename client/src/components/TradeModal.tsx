@@ -1,13 +1,12 @@
-import Axios from 'axios'
 import { Modal, Button, Table, Form } from 'react-bootstrap'
-import { CompanyData } from '@pages/Trade'
+import { StockData } from '@pages/Trade'
 import { useEffect, useState } from 'react';
 import { CompanyMethods } from '@utils/index'
 
 interface TradeModalProps {
   show: boolean;
   hide: () => void;
-  company: CompanyData;
+  selectedStock: StockData;
 }
 
 interface Financials {
@@ -17,23 +16,26 @@ interface Financials {
   "52WeekLowDate": string;
 }
 
-function TradeModal({ show, hide, company }: TradeModalProps): JSX.Element | null {
+function TradeModal({ show, hide, selectedStock }: TradeModalProps): JSX.Element | null {
 
-  if (!company) return null
+  if (!selectedStock) return null
 
-  const Company = new CompanyMethods()
+  const company = new CompanyMethods()
 
   const [financials, setFinancials] = useState<Financials | null>(null)
-  const [quote, setQuote] = useState<number | null>(null)
+  const [price, setPrice] = useState<number | null>(null)
 
   useEffect(() => {
-    if (show && company) {
-      const financialData = Company.getFinancials(company.symbol)
-      setFinancials(financialData)
-      const quote = Company.getQuote(company.symbol)
-      setQuote(quote)
+    if (show && selectedStock) {
+      const getStockData = async () => {
+        const financialData = await company.getFinancials(selectedStock.symbol)
+        setFinancials(financialData)
+        const quote = await company.getQuote(selectedStock.symbol)
+        setPrice(quote.c)
+      }
+      getStockData()
     }
-  }, [show, company])
+  }, [show, selectedStock])
 
   return (
     <Modal
@@ -43,7 +45,7 @@ function TradeModal({ show, hide, company }: TradeModalProps): JSX.Element | nul
       size='lg'
       >
       <Modal.Header closeButton>
-        <Modal.Title>{`${company.name || company.description} (${company.symbol})`}</Modal.Title>
+        <Modal.Title>{`${selectedStock.name || selectedStock.description} (${selectedStock.symbol})`}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <p>Historical Price Chart will go HERE</p>
@@ -51,7 +53,7 @@ function TradeModal({ show, hide, company }: TradeModalProps): JSX.Element | nul
           <tbody>
             <tr>
               <td>Current Share Price:</td>
-              <td>{`$${quote}`}</td>
+              <td>{price != null ? `$${price}` : 'Temporarily unavailable.'}</td>
             </tr>
             <tr>
               <td>Shares Owned:</td>
