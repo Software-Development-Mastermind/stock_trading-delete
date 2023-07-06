@@ -11,6 +11,7 @@ interface TradeModalProps {
 
 interface Financials {
   "52WeekHigh": number;
+  "52WeekHighDate": string;
   "52WeekLow": number;
   "52WeekLowDate": string;
 }
@@ -65,7 +66,7 @@ function TradeModal({ show, hide, company }: TradeModalProps): JSX.Element | nul
         <Table borderless>
           <tbody>
             <tr>
-              <td>Current Price:</td>
+              <td>Current Share Price:</td>
               <td>{`$${quote}`}</td>
             </tr>
             <tr>

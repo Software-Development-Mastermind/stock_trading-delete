@@ -42,9 +42,14 @@ def authenticate_user():
     else:
       return "Invalid email!", 401
   
-@api.route('/stock_search/<search>', methods=['GET'])
+@api.route('/company_search/<search>', methods=['GET'])
 def stock_search(search):
-  res = fmp_api.get_company_info(search)
+  res = fmp_api.search_by_name(search)
+  return res, 200
+
+@api.route('/ticker_search/<symbol>', methods=['GET'])
+def ticker_search(symbol):
+  res = finnhub_api.search_by_ticker(symbol)
   return res, 200
 
 @api.route('/stock_quote/<symbol>', methods=['GET'])

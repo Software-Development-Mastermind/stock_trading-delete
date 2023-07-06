@@ -11,8 +11,8 @@ function Search({ setCompanies } : any) {
   
   const handleSearch= async (e: any) => {
     e.preventDefault()
-    const res = await Axios.get(`/api/stock_search/${search}`)
-    console.log(res)
+    const res = await Axios.get(`/api/company_search/${search}`)
+    console.log(res.data)
     setCompanies(res.data)
   }
   

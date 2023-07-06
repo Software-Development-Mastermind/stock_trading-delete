@@ -13,13 +13,14 @@ class FinnhubAPI:
         'X-Finnhub-Token': os.getenv('FINNHUB_API_KEY')
         }
     self.base_url = 'https://finnhub.io/api/v1/'
+    self.ticker_search_url = self.base_url + 'search?q='
     self.quote_url = self.base_url + 'quote?symbol='
     self.financials_url = self.base_url + 'stock/metric?symbol='
 
-  def get_company_name(self, symbol):
-    url = self.company_url + symbol
+  def search_by_ticker(self, ticker):
+    url = self.ticker_search_url + ticker
     res = self.session.get(url)
-    return res.json()['name']
+    return res.json()
 
   def get_quote(self, symbol):
     url = self.quote_url + symbol
