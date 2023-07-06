@@ -11,9 +11,24 @@ function Search({ setCompanies } : any) {
   
   const handleSearch= async (e: any) => {
     e.preventDefault()
-    const res = await Axios.get(`/api/company_search/${search}`)
-    console.log(res.data)
-    setCompanies(res.data)
+
+    if (search.length === 4 && search === search.toUpperCase()) {
+      try {
+        const res = await Axios.get(`/api/ticker_search/${search}`)
+        console.log(res.data.result)
+        setCompanies(res.data.result)
+      } catch {
+        console.log('Error getting company by ticker')
+      }
+    } else {
+      try{
+        const res = await Axios.get(`/api/company_search/${search}`)
+        console.log(res.data)
+        setCompanies(res.data)
+      } catch {
+        console.log('Error getting company by name')
+      }
+    }
   }
   
   return(

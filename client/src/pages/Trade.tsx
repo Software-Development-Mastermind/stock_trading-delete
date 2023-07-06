@@ -4,6 +4,7 @@ import { Navbar } from '@components/index'
 
 interface Company {
   symbol: string;
+  name: string;
   description: string;
 }
 

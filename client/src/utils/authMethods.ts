@@ -75,4 +75,4 @@ class AuthMethods implements IAuthMethods {
 
 }
 
-export default AuthMethods
+export default AuthMethods;

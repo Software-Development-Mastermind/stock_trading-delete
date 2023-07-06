@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { Button, Container, Form, FloatingLabel } from 'react-bootstrap'
 
 import Navbar from '@components/Navbar'
-import AuthMethods from '@utils/index'
+import { AuthMethods } from '@utils/index'
 import '@styles/Login.css'
 
 function Login () {

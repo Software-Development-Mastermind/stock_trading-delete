@@ -25,7 +25,7 @@ function StockTable({ companies, showModal }: StockTableProps) {
           </td>
           <td className='stock-name'>
             <span>
-              {company.name}
+              {company.name || company.description}
             </span>
           </td>
         </tr>
@@ -37,7 +37,7 @@ function StockTable({ companies, showModal }: StockTableProps) {
       <Container className='stock-table-container'>
         <Table striped hover className='mt-4 shadow-sm'>
           <thead className='table-head text-center'>
-            <tr className-='text-center'>
+            <tr className='text-center'>
               <th>Ticker</th>
               <th>Name</th>
             </tr>

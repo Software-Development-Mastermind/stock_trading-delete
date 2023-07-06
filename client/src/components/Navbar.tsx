@@ -4,7 +4,7 @@ import { useNavigate, useLocation } from 'react-router-dom'
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 
-import AuthMethods from '@utils/index'
+import { AuthMethods } from '@utils/index'
 import '@styles/Navbar.css'
 
 function NavbarComponent () {

@@ -1,3 +1,4 @@
 import AuthMethods from "./authMethods";
+import CompanyMethods from "./companyMethods";
 
-export default AuthMethods;
+export { AuthMethods, CompanyMethods };
