@@ -15,12 +15,13 @@ function Search({ setStocks } : any) {
     e.preventDefault()
 
     if (search.length === 4 && search === search.toUpperCase()) {
-      const tickerRes = await company.searchByTicker(search)
-      setStocks(tickerRes)
+      const tickers = await company.searchByTicker(search)
+      console.log(tickers)
+      setStocks(tickers)
     } else {
       try {
-        const nameRes = await company.searchByName(search)
-        setStocks(nameRes)
+        const names = await company.searchByName(search)
+        setStocks(names)
       } catch {
         console.log('Error getting company by name')
       }
