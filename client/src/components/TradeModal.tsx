@@ -1,12 +1,13 @@
 import Axios from 'axios'
 import { Modal, Button, Table, Form } from 'react-bootstrap'
-import { Company } from '@/pages/Trade'
+import { CompanyData } from '@pages/Trade'
 import { useEffect, useState } from 'react';
+import { CompanyMethods } from '@utils/index'
 
 interface TradeModalProps {
   show: boolean;
   hide: () => void;
-  company: Company;
+  company: CompanyData;
 }
 
 interface Financials {
@@ -30,26 +31,31 @@ function TradeModal({ show, hide, company }: TradeModalProps): JSX.Element | nul
     }
   }, [show, company])
 
-  const getCompanyFinancials = async (symbol: string) => {
-    try {
-      const res = await Axios.get(`/api/stock_financials/${symbol}`)
-      setFinancials(res.data)
-      console.log(res.data)
-    } catch {
-      console.log('Error getting company financials')
-    }
-  }
 
-  const getStockQuote = async (symbol: string) => {
-    try {
-      const res = await Axios.get(`/api/stock_quote/${symbol}`)
-      const quoteData = res.data
-      setQuote(quoteData.c)
-      console.log(res.data)
-    } catch {
-      console.log('Error getting stock quote')
-    }
-  }
+
+
+
+
+  // const getCompanyFinancials = async (symbol: string) => {
+  //   try {
+  //     const res = await Axios.get(`/api/stock_financials/${symbol}`)
+  //     setFinancials(res.data)
+  //     console.log(res.data)
+  //   } catch {
+  //     console.log('Error getting company financials')
+  //   }
+  // }
+
+  // const getStockQuote = async (symbol: string) => {
+  //   try {
+  //     const res = await Axios.get(`/api/stock_quote/${symbol}`)
+  //     const quoteData = res.data
+  //     setQuote(quoteData.c)
+  //     console.log(res.data)
+  //   } catch {
+  //     console.log('Error getting stock quote')
+  //   }
+  // }
 
   return (
     <Modal
