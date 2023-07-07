@@ -1,7 +1,7 @@
 import { Modal, Button, Table, Form } from 'react-bootstrap'
 import { StockData } from '@pages/Trade'
 import { useEffect, useState } from 'react';
-import { CompanyMethods } from '@utils/index'
+import { CompanyMethods, formatDate } from '@utils/index'
 
 interface TradeModalProps {
   show: boolean;
@@ -127,11 +127,11 @@ function TradeModal({ show, hide, selectedStock }: TradeModalProps): JSX.Element
           <tbody>
             <p>HISTORIC PERFORMANCE</p>
             <tr>
-              <td>52 Week High [on {financials["52WeekHighDate"]}]</td>
+              <td>52 Week High - {formatDate(financials["52WeekHighDate"])}:</td>
               <td>{financials["52WeekHigh"] != null ? `$${financials["52WeekHigh"]}` : 'Temporarily unavailable.'}</td>
             </tr>
             <tr>
-              <td>52 Week Low [on {financials["52WeekLowDate"]}]</td>
+              <td>52 Week Low - {formatDate(financials["52WeekLowDate"])}:</td>
               <td>{financials["52WeekLow"] != null ? `$${financials["52WeekLow"]}` : 'Temporarily unavailable.'}</td>
             </tr>
           </tbody>
@@ -160,6 +160,7 @@ function TradeModal({ show, hide, selectedStock }: TradeModalProps): JSX.Element
           <Form.Group>
           </Form.Group>
         </Form>
+
       </Modal.Body>
       <Modal.Footer>
         <Button className='btn btn-secondary shadow-sm' onClick={hide}>Close</Button>
