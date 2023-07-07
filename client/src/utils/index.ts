@@ -1,9 +1,10 @@
 import AuthMethods from "./authMethods";
 import CompanyMethods from "./companyMethods";
-import { getFormattedFirstWord } from "./helperFunctions";
+import { getFormattedFirstWord, formatDate } from "./helperFunctions";
 
 export { 
     AuthMethods, 
     CompanyMethods, 
-    getFormattedFirstWord 
+    getFormattedFirstWord,
+    formatDate
 };

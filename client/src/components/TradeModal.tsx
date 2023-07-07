@@ -124,7 +124,6 @@ function TradeModal({ show, hide, selectedStock }: TradeModalProps): JSX.Element
         </Table>
 
         <Table borderless>              
-            
           <tbody>
             <p>HISTORIC PERFORMANCE</p>
             <tr>
