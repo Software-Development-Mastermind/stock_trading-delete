@@ -10,12 +10,13 @@ interface TradeModalProps {
 }
 
 interface QuoteData {
-  c: number;
-  h: number;
-  l: number;
-  o: number;
-  pc: number;
-  t: number;
+  "currentPrice": number;
+  "change": number;
+  "percentChange": number;
+  "dailyHigh": number;
+  "dailyLow": number;
+  "openPrice": number;
+  "previousClose": number;
 }
 
 interface FinancialData {
@@ -32,12 +33,13 @@ function TradeModal({ show, hide, selectedStock }: TradeModalProps): JSX.Element
   const company = new CompanyMethods()
 
   const [quote, setQuote] = useState<QuoteData>({
-    c: 0,
-    h: 0,
-    l: 0,
-    o: 0,
-    pc: 0,
-    t: 0
+    "currentPrice" : 0,
+    "change": 0,
+    "percentChange": 0,
+    "dailyHigh": 0,
+    "dailyLow": 0,
+    "openPrice": 0,
+    "previousClose": 0
   })
 
   const [financials, setFinancials] = useState<FinancialData>({
@@ -47,20 +49,41 @@ function TradeModal({ show, hide, selectedStock }: TradeModalProps): JSX.Element
     "52WeekLowDate": ''
   })
   
-
-  const [price, setPrice] = useState<number | null>(null)
-
   useEffect(() => {
     if (show && selectedStock) {
       const getStockData = async () => {
+
         const financialData = await company.getFinancials(selectedStock.symbol)
-        setFinancials(financialData)
+        setFinancials({
+          "52WeekHigh": financialData["52WeekHigh"],
+          "52WeekHighDate": financialData["52WeekHighDate"],
+          "52WeekLow": financialData["52WeekLow"],
+          "52WeekLowDate": financialData["52WeekLowDate"]
+        })
+        
         const quote = await company.getQuote(selectedStock.symbol)
-        setPrice(quote.c)
+        setQuote({
+          "currentPrice" : quote.c,
+          "change": quote.d,
+          "percentChange": quote.dp,
+          "dailyHigh": quote.h,
+          "dailyLow": quote.l,
+          "openPrice": quote.o,
+          "previousClose": quote.pc
+        })
+        
       }
       getStockData()
     }
   }, [show, selectedStock])
+
+  useEffect(() => {
+    console.log('Updated quote:', quote);
+  }, [quote]);
+
+  useEffect(() => {
+    console.log('Updated financials:', financials);
+  }, [financials])
 
   return (
     <Modal
@@ -78,17 +101,9 @@ function TradeModal({ show, hide, selectedStock }: TradeModalProps): JSX.Element
           <tbody>
             <tr>
               <td>CURRENT SHARE PRICE:</td>
-              <td>{price != null ? `$${price}` : 'Temporarily unavailable.'}</td>
+              <td>{quote.currentPrice != null ? `$${quote.currentPrice}` : 'Temporarily unavailable.'}</td>
             </tr>
             <p>TODAY</p>
-            <tr>
-              <td>Change:</td>
-              <td>{price != null ? `$${price}` : 'Temporarily unavailable.'}</td>
-            </tr>
-            <tr>
-              <td>52 Week High:</td>
-              <td>{price != null ? `$${price}` : 'Temporarily unavailable.'}</td>
-            </tr>
             <p>TRADE</p>
             <tr>
               <td>Shares Owned:</td>
