@@ -102,19 +102,19 @@ function TradeModal({ show, hide, selectedStock }: TradeModalProps): JSX.Element
             <p>TODAY</p>
             <tr>
               <td>Open Price:</td>
-              <td>{quote.openPrice != null ? `$ ${quote.openPrice}` : 'Temporarily unavailable.'}</td>
+              <td className='text-start'>{quote.openPrice != null ? `$ ${quote.openPrice}` : 'Temporarily unavailable.'}</td>
             </tr>
             <tr>
               <td>Change:</td>
-              <td>{quote.change != null ? `$ ${quote.change} (${quote.percentChange}%)` : 'Temporarily unavailable.'}</td>
+              <td className='text-start'>{quote.change != null ? `$ ${quote.change} (${quote.percentChange}%)` : 'Temporarily unavailable.'}</td>
             </tr>
             <tr>
               <td>Today's High:</td>
-              <td>{quote.dailyHigh != null ? `$ ${quote.dailyHigh}` : 'Temporarily unavailable.'}</td>
+              <td className='text-start'>{quote.dailyHigh != null ? `$ ${quote.dailyHigh}` : 'Temporarily unavailable.'}</td>
             </tr>
             <tr>
               <td>Today's Low:</td>
-              <td>{quote.dailyLow != null ? `$ ${quote.dailyLow}` : 'Temporarily unavailable.'}</td>
+              <td className='text-start'>{quote.dailyLow != null ? `$ ${quote.dailyLow}` : 'Temporarily unavailable.'}</td>
             </tr>
             <tr>
               <td>Previous Close:</td>
@@ -128,11 +128,11 @@ function TradeModal({ show, hide, selectedStock }: TradeModalProps): JSX.Element
             <p>HISTORIC PERFORMANCE</p>
             <tr>
               <td>52 Week High - {formatDate(financials["52WeekHighDate"])}:</td>
-              <td>{financials["52WeekHigh"] != null ? `$${financials["52WeekHigh"]}` : 'Temporarily unavailable.'}</td>
+              <td className='text-start'>{financials["52WeekHigh"] != null ? `$${financials["52WeekHigh"]}` : 'Temporarily unavailable.'}</td>
             </tr>
             <tr>
               <td>52 Week Low - {formatDate(financials["52WeekLowDate"])}:</td>
-              <td>{financials["52WeekLow"] != null ? `$${financials["52WeekLow"]}` : 'Temporarily unavailable.'}</td>
+              <td className='text-start'>{financials["52WeekLow"] != null ? `$${financials["52WeekLow"]}` : 'Temporarily unavailable.'}</td>
             </tr>
           </tbody>
         </Table>
@@ -143,15 +143,15 @@ function TradeModal({ show, hide, selectedStock }: TradeModalProps): JSX.Element
             <p>TRADE</p>
             <tr>
               <td>Shares Owned:</td>
-              <td>15</td>
+              <td className='text-start'>15</td>
             </tr>
             <tr>
               <td>Cash Balance:</td>
-              <td>$100,000</td>
+              <td className='text-start'>$100,000</td>
             </tr>
             <tr>
               <td>Buying Power:</td>
-              <td>50 shares</td>
+              <td className='text-start'>50 shares</td>
             </tr>
           </tbody>
         </Table>
