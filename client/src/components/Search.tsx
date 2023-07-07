@@ -10,24 +10,34 @@ function Search({ setStocks } : any) {
   const [search, setSearch] = useState('')
 
   const company = new CompanyMethods()
-  
+
   const handleSearch= async (e: any) => {
     e.preventDefault()
 
-    if (search.length === 4 && search === search.toUpperCase()) {
+    if (search === search.toUpperCase()) {
+
       const tickers = await company.searchByTicker(search)
       console.log(tickers)
-      setStocks(tickers)
-    } else {
-      try {
-        const names = await company.searchByName(search)
-        setStocks(names)
-      } catch {
-        console.log('Error getting company by name')
+      
+      const match = tickers.find((ticker: any) => ticker.symbol === search)
+      if (match) {
+        const description = match.description
+        const name = await company.searchByName(description)
+        console.log(name)
+        setStocks(name)
+        return
       }
-    }
+
+      console.log(tickers)
+      setStocks(tickers)
+      }
+
+    const names = await company.searchByName(search)
+    console.log(names)
+    setStocks(names)
+
   }
-  
+   
   return(
     <div>
       <Container className='search-container'>
