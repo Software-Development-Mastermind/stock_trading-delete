@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { Container, Form, Button } from "react-bootstrap"
 
-import { CompanyMethods } from "@utils/index"
+import { CompanyMethods, getFormattedFirstWord } from "@utils/index"
 
 import '@styles/Search.css'
 
@@ -21,7 +21,7 @@ function Search({ setStocks } : any) {
       
       const match = tickers.find((ticker: any) => ticker.symbol === search)
       if (match) {
-        const description = match.description
+        const description = getFormattedFirstWord(match.description)
         const name = await company.searchByName(description)
         console.log(name)
         setStocks(name)
