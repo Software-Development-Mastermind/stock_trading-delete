@@ -2,6 +2,7 @@ import { Modal, Button, Table, Form } from 'react-bootstrap'
 import { StockData } from '@pages/Trade'
 import { useEffect, useState } from 'react';
 import { CompanyMethods, formatDate } from '@utils/index'
+import { QuoteTable, FinancialsTable, TradeTable } from '@components/index'
 
 interface TradeModalProps {
   show: boolean;
@@ -95,66 +96,12 @@ function TradeModal({ show, hide, selectedStock }: TradeModalProps): JSX.Element
       <Modal.Header closeButton>
         <Modal.Title>{`${selectedStock.name || selectedStock.description} (${selectedStock.symbol})`}</Modal.Title>
       </Modal.Header>
+
       <Modal.Body>
 
-        <Table borderless size='sm'>
-          <tbody>
-            <p>TODAY</p>
-            <tr>
-              <td>Open Price:</td>
-              <td className='text-start'>{quote.openPrice != null ? `$ ${quote.openPrice}` : 'Temporarily unavailable.'}</td>
-            </tr>
-            <tr>
-              <td>Change:</td>
-              <td className='text-start'>{quote.change != null ? `$ ${quote.change} (${quote.percentChange}%)` : 'Temporarily unavailable.'}</td>
-            </tr>
-            <tr>
-              <td>Today's High:</td>
-              <td className='text-start'>{quote.dailyHigh != null ? `$ ${quote.dailyHigh}` : 'Temporarily unavailable.'}</td>
-            </tr>
-            <tr>
-              <td>Today's Low:</td>
-              <td className='text-start'>{quote.dailyLow != null ? `$ ${quote.dailyLow}` : 'Temporarily unavailable.'}</td>
-            </tr>
-            <tr>
-              <td>Previous Close:</td>
-              <td>{quote.previousClose != null ? `$ ${quote.previousClose}` : 'Temporarily unavailable.'}</td>
-            </tr>
-          </tbody>
-        </Table>
-
-        <Table borderless size='sm'>              
-          <tbody>
-            <p>HISTORIC PERFORMANCE</p>
-            <tr>
-              <td>52 Week High - {formatDate(financials["52WeekHighDate"])}:</td>
-              <td className='text-start'>{financials["52WeekHigh"] != null ? `$${financials["52WeekHigh"]}` : 'Temporarily unavailable.'}</td>
-            </tr>
-            <tr>
-              <td>52 Week Low - {formatDate(financials["52WeekLowDate"])}:</td>
-              <td className='text-start'>{financials["52WeekLow"] != null ? `$${financials["52WeekLow"]}` : 'Temporarily unavailable.'}</td>
-            </tr>
-          </tbody>
-        </Table>
-
-          
-        <Table borderless size='sm'>
-          <tbody>
-            <p>TRADE</p>
-            <tr>
-              <td>Shares Owned:</td>
-              <td className='text-start'>15</td>
-            </tr>
-            <tr>
-              <td>Cash Balance:</td>
-              <td className='text-start'>$100,000</td>
-            </tr>
-            <tr>
-              <td>Buying Power:</td>
-              <td className='text-start'>50 shares</td>
-            </tr>
-          </tbody>
-        </Table>
+        <QuoteTable quote={quote} />
+        <FinancialsTable financials={financials} />
+        <TradeTable quote={quote} />
 
         <Form>
           <Form.Group>
@@ -162,9 +109,11 @@ function TradeModal({ show, hide, selectedStock }: TradeModalProps): JSX.Element
         </Form>
 
       </Modal.Body>
+
       <Modal.Footer>
         <Button className='btn btn-secondary shadow-sm' onClick={hide}>Close</Button>
       </Modal.Footer>
+
     </Modal>
   )
 }

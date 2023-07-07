@@ -1,6 +1,6 @@
 import { Table } from 'react-bootstrap';
 
-function TradeTable() {
+function TradeTable({ quote }) {
   return (
     <Table borderless size='sm'>
       <tbody>

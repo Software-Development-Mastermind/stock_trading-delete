@@ -29,3 +29,5 @@ function QuoteTable({ quote }) {
     </Table>
   )
 }
+
+export default QuoteTable;
