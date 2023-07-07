@@ -23,7 +23,6 @@ function Search({ setStocks } : any) {
       if (match) {
         const description = getFormattedFirstWord(match.description)
         const name = await company.searchByName(description)
-        console.log(name)
         setStocks(name)
         return
       }
@@ -33,7 +32,6 @@ function Search({ setStocks } : any) {
       }
 
     const names = await company.searchByName(search)
-    console.log(names)
     setStocks(names)
 
   }

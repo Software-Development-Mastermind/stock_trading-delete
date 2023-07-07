@@ -9,7 +9,10 @@ interface TradeModalProps {
   selectedStock: StockData;
 }
 
-interface Financials {
+interface PerformanceData {
+  "name": string; // "name" or "description"
+  "symbol": string; // "symbol"
+  "currentPrice": number; // "c"
   "52WeekHigh": number;
   "52WeekHighDate": string;
   "52WeekLow": number;
@@ -22,7 +25,17 @@ function TradeModal({ show, hide, selectedStock }: TradeModalProps): JSX.Element
 
   const company = new CompanyMethods()
 
-  const [financials, setFinancials] = useState<Financials | null>(null)
+  const [performance, setPerformance] = useState<PerformanceData>({
+    "name": '',
+    "symbol": '',
+    "currentPrice": 0,
+    "52WeekHigh": 0,
+    "52WeekHighDate": '',
+    "52WeekLow": 0,
+    "52WeekLowDate": ''
+  })
+  
+
   const [price, setPrice] = useState<number | null>(null)
 
   useEffect(() => {
@@ -51,10 +64,16 @@ function TradeModal({ show, hide, selectedStock }: TradeModalProps): JSX.Element
         <p>Historical Price Chart will go HERE</p>
         <Table borderless>
           <tbody>
+            <p>PERFORMANCE</p>
             <tr>
               <td>Current Share Price:</td>
               <td>{price != null ? `$${price}` : 'Temporarily unavailable.'}</td>
             </tr>
+            <tr>
+              <td>52 Week High:</td>
+              <td>{price != null ? `$${price}` : 'Temporarily unavailable.'}</td>
+            </tr>
+            <p>TRADE</p>
             <tr>
               <td>Shares Owned:</td>
               <td>15</td>
