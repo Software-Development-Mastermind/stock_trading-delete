@@ -60,7 +60,7 @@ function TradeModal({ show, hide, selectedStock }: TradeModalProps): JSX.Element
           "52WeekLow": financialData["52WeekLow"],
           "52WeekLowDate": financialData["52WeekLowDate"]
         })
-        
+
         const quote = await company.getQuote(selectedStock.symbol)
         setQuote({
           "currentPrice" : quote.c,
@@ -96,14 +96,51 @@ function TradeModal({ show, hide, selectedStock }: TradeModalProps): JSX.Element
         <Modal.Title>{`${selectedStock.name || selectedStock.description} (${selectedStock.symbol})`}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <p>Historical Price Chart will go HERE</p>
+
         <Table borderless>
           <tbody>
-            <tr>
-              <td>CURRENT SHARE PRICE:</td>
-              <td>{quote.currentPrice != null ? `$${quote.currentPrice}` : 'Temporarily unavailable.'}</td>
-            </tr>
             <p>TODAY</p>
+            <tr>
+              <td>Open Price:</td>
+              <td>{quote.openPrice != null ? `$ ${quote.openPrice}` : 'Temporarily unavailable.'}</td>
+            </tr>
+            <tr>
+              <td>Change:</td>
+              <td>{quote.change != null ? `$ ${quote.change} (${quote.percentChange}%)` : 'Temporarily unavailable.'}</td>
+            </tr>
+            <tr>
+              <td>Today's High:</td>
+              <td>{quote.dailyHigh != null ? `$ ${quote.dailyHigh}` : 'Temporarily unavailable.'}</td>
+            </tr>
+            <tr>
+              <td>Today's Low:</td>
+              <td>{quote.dailyLow != null ? `$ ${quote.dailyLow}` : 'Temporarily unavailable.'}</td>
+            </tr>
+            <tr>
+              <td>Previous Close:</td>
+              <td>{quote.previousClose != null ? `$ ${quote.previousClose}` : 'Temporarily unavailable.'}</td>
+            </tr>
+          </tbody>
+        </Table>
+
+        <Table borderless>              
+            
+          <tbody>
+            <p>HISTORIC PERFORMANCE</p>
+            <tr>
+              <td>52 Week High [on {financials["52WeekHighDate"]}]</td>
+              <td>{financials["52WeekHigh"] != null ? `$${financials["52WeekHigh"]}` : 'Temporarily unavailable.'}</td>
+            </tr>
+            <tr>
+              <td>52 Week Low [on {financials["52WeekLowDate"]}]</td>
+              <td>{financials["52WeekLow"] != null ? `$${financials["52WeekLow"]}` : 'Temporarily unavailable.'}</td>
+            </tr>
+          </tbody>
+        </Table>
+
+          
+        <Table borderless>
+          <tbody>
             <p>TRADE</p>
             <tr>
               <td>Shares Owned:</td>
@@ -119,14 +156,14 @@ function TradeModal({ show, hide, selectedStock }: TradeModalProps): JSX.Element
             </tr>
           </tbody>
         </Table>
-      <p>TRADE</p>
+
         <Form>
           <Form.Group>
           </Form.Group>
         </Form>
       </Modal.Body>
       <Modal.Footer>
-        <Button className='btn btn-secondary' onClick={hide}>Close</Button>
+        <Button className='btn btn-secondary shadow-sm' onClick={hide}>Close</Button>
       </Modal.Footer>
     </Modal>
   )
