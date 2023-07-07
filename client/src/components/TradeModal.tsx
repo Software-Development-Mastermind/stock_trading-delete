@@ -77,13 +77,13 @@ function TradeModal({ show, hide, selectedStock }: TradeModalProps): JSX.Element
     }
   }, [show, selectedStock])
 
-  useEffect(() => {
-    console.log('Updated quote:', quote);
-  }, [quote]);
+  // useEffect(() => {
+  //   console.log('Updated quote:', quote);
+  // }, [quote]);
 
-  useEffect(() => {
-    console.log('Updated financials:', financials);
-  }, [financials])
+  // useEffect(() => {
+  //   console.log('Updated financials:', financials);
+  // }, [financials])
 
   return (
     <Modal
@@ -97,7 +97,7 @@ function TradeModal({ show, hide, selectedStock }: TradeModalProps): JSX.Element
       </Modal.Header>
       <Modal.Body>
 
-        <Table borderless>
+        <Table borderless size='sm'>
           <tbody>
             <p>TODAY</p>
             <tr>
@@ -123,7 +123,7 @@ function TradeModal({ show, hide, selectedStock }: TradeModalProps): JSX.Element
           </tbody>
         </Table>
 
-        <Table borderless>              
+        <Table borderless size='sm'>              
           <tbody>
             <p>HISTORIC PERFORMANCE</p>
             <tr>
@@ -138,7 +138,7 @@ function TradeModal({ show, hide, selectedStock }: TradeModalProps): JSX.Element
         </Table>
 
           
-        <Table borderless>
+        <Table borderless size='sm'>
           <tbody>
             <p>TRADE</p>
             <tr>
