@@ -11,7 +11,12 @@ from .extensions import (
 )
 
 from src.routes.auth_routes import CreateNewUser, AuthenticateUser
-from src.routes.search_routes import SearchByCompany, SearchByTicker, GetStockQuote, GetStockFinancials
+from src.routes.stock_routes import (
+  SearchByCompany, 
+  SearchByTicker, 
+  GetStockQuote, 
+  GetStockFinancials
+  )
 
 api_bp = Blueprint('api', __name__, url_prefix='/api')
 
