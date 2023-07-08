@@ -1,30 +1,14 @@
-import { Modal, Button, Table, Form } from 'react-bootstrap'
+import { Modal, Button, Form } from 'react-bootstrap'
 import { StockData } from '@pages/Trade'
 import { useEffect, useState } from 'react';
-import { CompanyMethods, formatDate } from '@utils/index'
+import { CompanyMethods } from '@utils/index'
 import { QuoteTable, FinancialsTable, TradeTable } from '@components/index'
+import type { QuoteData, FinancialData } from '@utils/index'
 
 interface TradeModalProps {
   show: boolean;
   hide: () => void;
   selectedStock: StockData;
-}
-
-interface QuoteData {
-  "currentPrice": number;
-  "change": number;
-  "percentChange": number;
-  "dailyHigh": number;
-  "dailyLow": number;
-  "openPrice": number;
-  "previousClose": number;
-}
-
-interface FinancialData {
-  "52WeekHigh": number;
-  "52WeekHighDate": string;
-  "52WeekLow": number; 
-  "52WeekLowDate": string;
 }
 
 function TradeModal({ show, hide, selectedStock }: TradeModalProps): JSX.Element | null {
@@ -93,6 +77,7 @@ function TradeModal({ show, hide, selectedStock }: TradeModalProps): JSX.Element
       backdrop='static'
       size='lg'
       >
+
       <Modal.Header closeButton>
         <Modal.Title>{`${selectedStock.name || selectedStock.description} (${selectedStock.symbol})`}</Modal.Title>
       </Modal.Header>
