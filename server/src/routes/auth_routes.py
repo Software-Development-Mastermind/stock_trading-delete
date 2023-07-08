@@ -4,6 +4,7 @@ from flask_jwt_extended import create_access_token
 
 from ..extensions import db
 from src.models.users import Users
+from src.models.portfolios import Portfolios
 from src import api
 
 @api.route('/create_user')
@@ -17,7 +18,8 @@ class CreateNewUser(Resource):
       return "A user with that email aleady exists!", 409
 
     new_user = Users(email=email, password=password)
-    db.session.add(new_user)
+    new_portfolio = Portfolios(user_id=new_user.id)
+    db.session.add(new_user, new_portfolio)
     db.session.commit()
 
     return "New user created!", 201
