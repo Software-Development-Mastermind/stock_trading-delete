@@ -10,6 +10,7 @@ from src import api
 @api.route('/create_user')
 class CreateNewUser(Resource):
   def post(self):
+
     email = request.json['email']
     password = request.json['password']
 
@@ -18,7 +19,7 @@ class CreateNewUser(Resource):
       return "A user with that email aleady exists!", 409
 
     new_user = Users(email=email, password=password)
-    new_portfolio = Portfolios(user_id=new_user.id)
+    new_portfolio = Portfolios(user_id=new_user.id, cash=100000)
     db.session.add(new_user, new_portfolio)
     db.session.commit()
 
@@ -27,6 +28,7 @@ class CreateNewUser(Resource):
 @api.route('/authenticate')
 class AuthenticateUser(Resource):
   def post(self):
+    
     email = request.json['email']
     password = request.json['password']
 
