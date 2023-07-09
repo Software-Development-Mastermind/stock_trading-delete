@@ -11,3 +11,4 @@ class Stocks(db.Model):
   portfolio_id = db.Column(db.Integer, db.ForeignKey('portfolio.id'), nullable = False)
   symbol = db.Column(db.String(10), nullable = False)
   shares = db.Column(db.Integer, nullable = False)
+  cost = db.Column(db.Float, nullable = False)

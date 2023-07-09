@@ -43,8 +43,8 @@ class UpdateCash(Resource):
 
       return "Portfolio not found!", 404
     
-@api.route('get_stock/<id>')
-class GetStock(Resource):
+@api.route('get_stock_data/<id>')
+class GetStockData(Resource):
   def get(self, id):
 
     stock = Stocks.query.filter_by(id=id).first()
@@ -54,7 +54,8 @@ class GetStock(Resource):
         'id': stock.id,
         'portfolio_id': stock.portfolio_id,
         'symbol': stock.symbol,
-        'shares': stock.shares
+        'shares': stock.shares,
+        'cost': stock.cost,
       }
 
       return stock_data, 200
@@ -62,32 +63,41 @@ class GetStock(Resource):
     else:
 
       return "Stock not found!", 404
-    
-@api.route('stock_transaction/<user_id>')
-class BuyOrSellStock(Resource):
+            
+@api.route('buy_stock/<user_id>')
+class BuyStock(Resource):
   def post(self, user_id):
-  
+
       portfolio = Portfolios.query.filter_by(user_id=user_id).first()
       if portfolio:
 
         symbol = request.json['symbol']
         shares = request.json['shares']
-        transaction_type = request.json['transaction_type']
         stock = Stocks.query.filter_by(portfolio_id=portfolio.id, symbol=symbol).first()
+          
+        if stock:
+          stock.shares += shares
+          db.session.commit()
+          return f"Bought {shares} shares of {symbol}.", 200
+        
+        else:
+          new_stock = Stocks(portfolio_id=portfolio.id, symbol=symbol, shares=shares)
+          db.session.add(new_stock)
+          db.session.commit()
+          return f"Bought {shares} shares of {symbol}.", 200
+        
+@api.route('sell_stock/<user_id>')
+class SellStock(Resource):
+  def post(self, user_id):
 
-        if transaction_type == 'buy':
-          if stock:
-            stock.shares += shares
-            db.session.commit()
-            return f"Bought {shares} shares of {symbol}.", 200
-          else:
-            new_stock = Stocks(portfolio_id=portfolio.id, symbol=symbol, shares=shares)
-            db.session.add(new_stock)
-            db.session.commit()
-            return f"Bought {shares} shares of {symbol}.", 200
+    portfolio = Portfolios.query.filter_by(user_id=user_id).first()
+    if portfolio:
 
-        elif transaction_type == 'sell':
-          if stock:
+      symbol = request.json['symbol']
+      shares = request.json['shares']
+      stock = Stocks.query.filter_by(portfolio_id=portfolio.id, symbol=symbol).first()
+
+      if stock:
             if stock.shares >= shares:
               stock.shares -= shares
               db.session.commit()
@@ -95,10 +105,9 @@ class BuyOrSellStock(Resource):
                 db.session.delete(stock)
                 db.session.commit()
               return f"Sold {shares} shares of {symbol}.", 200
+            
             else:
               return f"You don't have enough shares of {symbol} to sell!", 400
-          else:
-            return f"You don't have any shares of {symbol} to sell!", 400
-        
-        else:
-          return "Invalid transaction type!", 400
+      else:
+        return f"You don't have any shares of {symbol} to sell!", 400
+      
