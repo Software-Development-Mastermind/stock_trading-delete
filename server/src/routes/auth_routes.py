@@ -3,24 +3,32 @@ from flask_restx import Resource
 from flask_jwt_extended import create_access_token
 
 from ..extensions import db
-from src.models.users import Users
-from src.models.portfolios import Portfolios
+from src.models.users import User
+from src.models.portfolios import Portfolio
 from src import api
 
 @api.route('/create_user')
 class CreateNewUser(Resource):
   def post(self):
 
+    inspector = db.inspect(db.engine)
+    existing_tables = inspector.get_table_names()
+
+    if 'users' not in existing_tables:
+      User.__table__.create(db.engine)
+
     email = request.json['email']
     password = request.json['password']
 
-    existing_user = Users.query.filter_by(email=email).first()
+    existing_user = User.query.filter_by(email=email).first()
     if existing_user:
       return "A user with that email aleady exists!", 409
 
-    new_user = Users(email=email, password=password)
-    new_portfolio = Portfolios(user_id=new_user.id, cash=100000)
-    db.session.add(new_user, new_portfolio)
+    new_user = User(email=email, password=password)
+    new_portfolio = Portfolio(cash=100000)
+
+    new_user.portfolio = new_portfolio
+    db.session.add(new_user)
     db.session.commit()
 
     return "New user created!", 201
@@ -28,11 +36,11 @@ class CreateNewUser(Resource):
 @api.route('/authenticate')
 class AuthenticateUser(Resource):
   def post(self):
-    
+
     email = request.json['email']
     password = request.json['password']
 
-    valid_credentials = Users.query.filter_by(email=email, password=password).first()
+    valid_credentials = User.query.filter_by(email=email, password=password).first()
     
     if valid_credentials:
       access_token = create_access_token(identity=email)
@@ -40,7 +48,7 @@ class AuthenticateUser(Resource):
       return successful_auth_response, 200
     
     else:
-      valid_email = Users.query.filter_by(email=email).first()
+      valid_email = User.query.filter_by(email=email).first()
       if valid_email:
         return "Invalid password!", 401
       else:

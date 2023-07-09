@@ -2,14 +2,14 @@ from flask import request
 from flask_restx import Resource
 
 from ..extensions import db
-from src.models.portfolios import Portfolios, Stocks
+from src.models.portfolios import Portfolio, Stock
 from src import api
 
 @api.route('get_portfolio/<user_id>')
 class GetPortfolio(Resource):
   def get(self, user_id):
 
-    portfolio = Portfolios.query.filter_by(user_id=user_id).first()
+    portfolio = Portfolio.query.filter_by(user_id=user_id).first()
 
     if portfolio:
 
@@ -30,7 +30,7 @@ class GetPortfolio(Resource):
 class UpdateCash(Resource):
   def post(self, user_id):
 
-    portfolio = Portfolios.query.filter_by(user_id=user_id).first()
+    portfolio = Portfolio.query.filter_by(user_id=user_id).first()
     if portfolio:
 
       cash = request.json['cash']
@@ -47,7 +47,7 @@ class UpdateCash(Resource):
 class GetStockData(Resource):
   def get(self, id):
 
-    stock = Stocks.query.filter_by(id=id).first()
+    stock = Stock.query.filter_by(id=id).first()
     if stock:
 
       stock_data = {
@@ -73,7 +73,7 @@ class BuyStock(Resource):
 
         symbol = request.json['symbol']
         shares = request.json['shares']
-        stock = Stocks.query.filter_by(portfolio_id=portfolio.id, symbol=symbol).first()
+        stock = Stock.query.filter_by(portfolio_id=portfolio.id, symbol=symbol).first()
           
         if stock:
           stock.shares += shares
@@ -81,7 +81,7 @@ class BuyStock(Resource):
           return f"Bought {shares} shares of {symbol}.", 200
         
         else:
-          new_stock = Stocks(portfolio_id=portfolio.id, symbol=symbol, shares=shares)
+          new_stock = Stock(portfolio_id=portfolio.id, symbol=symbol, shares=shares)
           db.session.add(new_stock)
           db.session.commit()
           return f"Bought {shares} shares of {symbol}.", 200
@@ -90,12 +90,12 @@ class BuyStock(Resource):
 class SellStock(Resource):
   def post(self, user_id):
 
-    portfolio = Portfolios.query.filter_by(user_id=user_id).first()
+    portfolio = Portfolio.query.filter_by(user_id=user_id).first()
     if portfolio:
 
       symbol = request.json['symbol']
       shares = request.json['shares']
-      stock = Stocks.query.filter_by(portfolio_id=portfolio.id, symbol=symbol).first()
+      stock = Stock.query.filter_by(portfolio_id=portfolio.id, symbol=symbol).first()
 
       if stock:
             if stock.shares >= shares:
