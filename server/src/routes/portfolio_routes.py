@@ -91,11 +91,14 @@ class BuyOrSellStock(Resource):
             if stock.shares >= shares:
               stock.shares -= shares
               db.session.commit()
+              if stock.shares == 0:
+                db.session.delete(stock)
+                db.session.commit()
               return f"Sold {shares} shares of {symbol}.", 200
             else:
               return f"You don't have enough shares of {symbol} to sell!", 400
           else:
             return f"You don't have any shares of {symbol} to sell!", 400
-
+        
         else:
           return "Invalid transaction type!", 400
