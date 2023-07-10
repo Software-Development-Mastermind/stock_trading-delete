@@ -1,3 +1,5 @@
+import Axios from 'axios'
+
 const getFormattedFirstWord = (str: string) => {
 	const firstWord = str.split(' ')[0]
 	return firstWord.charAt(0).toUpperCase() + firstWord.slice(1)
@@ -11,4 +13,14 @@ const formatDate = (date: string) => {
 	return `${month} ${day}, ${year}`
 }
 
-export { getFormattedFirstWord, formatDate}
+const getUserId = async (email: string) => {
+  try {
+    const res = await Axios.get(`/api/get_user_id/${email}`)
+    return res.data
+    
+  } catch (err) {
+    console.log(`Error getting user id: ${err}`)
+  }
+}
+
+export { getFormattedFirstWord, formatDate, getUserId}
