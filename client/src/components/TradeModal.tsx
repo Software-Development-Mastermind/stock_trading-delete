@@ -1,9 +1,10 @@
 import { Modal, Button, Form } from 'react-bootstrap'
-import { StockData } from '@pages/Trade'
 import { useEffect, useState } from 'react';
+
 import { CompanyMethods } from '@utils/index'
 import { QuoteTable, FinancialsTable, TradeTable } from '@components/index'
-import type { QuoteData, FinancialData } from '@utils/index'
+
+import type { StockData, QuoteData, FinancialData } from '@utils/index'
 
 interface TradeModalProps {
   show: boolean;
