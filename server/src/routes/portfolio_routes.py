@@ -5,21 +5,6 @@ from ..extensions import db
 from src.models.portfolios import Portfolio, Stock
 from src import api
 
-@api.route('get_user_id/<email>')
-class GetUserId(Resource):
-  def get(self, email):
-
-    user = User.query.filter_by(email=email).first()
-
-    if user:
-
-      user_id = user.id
-      return user_id, 200
-    
-    else:
-
-      return "User not found!", 404
-
 @api.route('get_portfolio/<user_id>')
 class GetPortfolio(Resource):
   def get(self, user_id):

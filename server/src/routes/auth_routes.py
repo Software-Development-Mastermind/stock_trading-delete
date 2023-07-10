@@ -61,5 +61,20 @@ class AuthenticateUser(Resource):
         return "Invalid password!", 401
       else:
         return "Invalid email!", 401
+      
+@api.route('/get_user_id/<email>')
+class GetUserId(Resource):
+  def get(self, email):
+
+    user = User.query.filter_by(email=email).first()
+
+    if user:
+
+      user_id = user.id
+      return user_id, 200
+    
+    else:
+
+      return "User not found!", 404
     
 

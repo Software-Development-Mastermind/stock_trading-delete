@@ -1,11 +1,13 @@
 import { useState, useEffect, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
+import Axios from 'axios'
 
 import { Button, Container, Form, FloatingLabel } from 'react-bootstrap'
 
 import Navbar from '@components/Navbar'
 import { AuthMethods, AuthContext } from '@utils/index'
 import '@styles/Login.css'
+import { get } from 'http'
 
 function Login () {
 
@@ -23,13 +25,26 @@ function Login () {
     }
   }, []);
 
+  const getUserId = async (email: string) => {
+    try {
+      const res = await Axios.get(`/api/get_user_id/${email}`)
+      return res.data
+      
+    } catch (err) {
+      console.log(`Error getting user id: ${err}`)
+    }
+  }
+
   const handleLogin = async (e: any) => {
     e.preventDefault();
     try {
       const login = await auth.login(email, password)
       console.log(login)
       if (login) {
-        setUser(email)
+        setUser({
+          "email": email,
+          "id": await getUserId(email)
+        })
         navigate('/')
       } else {
         setEmail('')
@@ -39,6 +54,10 @@ function Login () {
       console.log(`Login failed: ${err}`)
     }
   }
+
+  useEffect(() => {
+    console.log(user)
+  }, [user])
    
   return (
     <>
