@@ -1,7 +1,19 @@
+import { useContext } from 'react';
+import Axios from 'axios';
 import { Table } from 'react-bootstrap';
+import { AuthContext, CompanyMethods } from '@utils/index'
 import type { QuoteData } from '@utils/index'
 
 function TradeTable({ quote }: QuoteData) {
+
+  const { user } = useContext(AuthContext)
+  
+  const company = new CompanyMethods()
+
+  const getUserPortfolio = async () => {
+    portfolio = await Axios.get(`/api/portfolio/${user.id}`)
+  }
+
   return (
     <>
       <p>TRADE</p>
@@ -13,7 +25,7 @@ function TradeTable({ quote }: QuoteData) {
           </tr>
           <tr>
             <td>Cash Balance:</td>
-            <td className='text-start'>$100,000</td>
+            <td className='text-start'>{}</td>
           </tr>
           <tr>
             <td>Buying Power:</td>
