@@ -30,8 +30,8 @@ function NavbarComponent () {
         <Nav.Item className={`nav-item ${activeLink === '/' ? 'active' : ''}`}>
             <Nav.Link href='/'>Home</Nav.Link>
         </Nav.Item>
-        <Nav.Item className={`nav-item ${activeLink === '/holdings' ? 'active' : ''}`}>
-            <Nav.Link href='/holdings'>Holdings</Nav.Link>
+        <Nav.Item className={`nav-item ${activeLink === '/portfolio' ? 'active' : ''}`}>
+            <Nav.Link href='/portfolio'>Portfolio</Nav.Link>
         </Nav.Item>
         <Nav.Item className={`nav-item ${activeLink === '/trade' ? 'active' : ''}`}>
             <Nav.Link href='/trade'>Trade</Nav.Link>

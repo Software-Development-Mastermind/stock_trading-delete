@@ -1,6 +1,6 @@
 import Login from './Login'
 import Home from './Home'
-import Holdings from './Holdings'
+import Portfolio from './Portfolio'
 import Trade from './Trade'
 
-export { Login, Home, Holdings, Trade } 
+export { Login, Home, Portfolio, Trade } 

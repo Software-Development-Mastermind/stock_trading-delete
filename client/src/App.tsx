@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Route, Routes } from 'react-router-dom'
-import { Login, Home, Holdings, Trade } from '@pages/index'
+import { Login, Home, Portfolio, Trade } from '@pages/index'
 
 function App() {
   
@@ -8,7 +8,7 @@ function App() {
     <Routes>
       <Route path="/login" element={<Login />} />
       <Route path="/" element={<Home />} />
-      <Route path="/holdings" element={<Holdings />} />
+      <Route path="/portfolio" element={<Portfolio />} />
       <Route path="/trade" element={<Trade />} />
     </Routes>
   )
