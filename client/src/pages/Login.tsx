@@ -1,15 +1,13 @@
-import { useState, useEffect, useContext } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { Button, Container, Form, FloatingLabel } from 'react-bootstrap'
 
 import Navbar from '@components/Navbar'
-import { AuthMethods, AuthContext, getUserId } from '@utils/index'
+import { AuthMethods, getUserId } from '@utils/index'
 import '@styles/Login.css'
 
-function Login () {
-
-  const { user, setUser } = useContext(AuthContext);
+function Login ({ setUser }) {
 
   const auth = new AuthMethods()
   const navigate = useNavigate()
@@ -42,11 +40,7 @@ function Login () {
       console.log(`Login failed: ${err}`)
     }
   }
-
-  useEffect (() => {
-    console.log(user)
-  }, [user])
-   
+ 
   return (
     <>
       <Navbar />

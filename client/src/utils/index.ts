@@ -1,6 +1,6 @@
 import AuthMethods from "./authMethods";
 import CompanyMethods from "./companyMethods";
-import AuthContext from "./authContext";
+import UserContext from "./userContext";
 import { getFormattedFirstWord, formatDate, getUserId } from "./helperFunctions";
 import type { StockData, QuoteData, FinancialData } from "./types";
 
@@ -9,7 +9,7 @@ export {
     CompanyMethods, 
     getFormattedFirstWord,
     formatDate,
-    AuthContext,
+    UserContext,
     getUserId
 };
 
