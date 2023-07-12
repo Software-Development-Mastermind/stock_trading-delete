@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
+import { UserContext } from '@utils/index'
 
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
@@ -12,6 +13,8 @@ function NavbarComponent () {
   const auth = new AuthMethods()
   const navigate = useNavigate()
   const location = useLocation()
+  const { user } = useContext(UserContext)
+
   const [activeLink, setActiveLink] = useState('')
 
   useEffect(() =>{
@@ -42,7 +45,7 @@ function NavbarComponent () {
         </Nav.Item>
         {auth.loggedIn() && (
         <Nav.Item className='nav-item logout-btn'>
-          <a onClick={handleLogout}>Logout</a>
+          <a onClick={handleLogout}>Logout [{user.email}]</a>
         </Nav.Item>
       )}
       </Navbar>
