@@ -1,6 +1,11 @@
 import axios from 'axios';
 import decode from 'jwt-decode'
 
+import { useContext } from 'react';
+import { UserContext } from '@utils/index'
+
+
+
 interface IAuthMethods {
   login: (email: string, password: string) => Promise<boolean>
   loggedIn: () => boolean
@@ -9,6 +14,8 @@ interface IAuthMethods {
 }
 
 class AuthMethods implements IAuthMethods {
+
+  private user = useContext(UserContext)
 
   login = async (email: string, password: string) => {
     try {
@@ -63,6 +70,8 @@ class AuthMethods implements IAuthMethods {
   logout = () => {
     localStorage.removeItem('token')
     localStorage.removeItem('user')
+    this.user.setUser(null)
+    console.log(`${this.user}`)
   }
 
   decodeToken = (token: string) => {

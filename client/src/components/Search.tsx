@@ -10,7 +10,7 @@ function Search({ setStocks } : any) {
   const [search, setSearch] = useState('')
 
   const company = new CompanyMethods()
-
+ 
   const handleSearch= async (e: any) => {
     e.preventDefault()
 

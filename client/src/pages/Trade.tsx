@@ -1,6 +1,7 @@
-import { useState } from 'react'
-import { Search, StockTable, TradeModal } from '@/components'
-import { Navbar } from '@components/index'
+import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { Search, StockTable, TradeModal, Navbar } from '@/components/index'
+import { AuthMethods } from '@/utils/index'
 
 interface StockData {
   symbol: string;
@@ -9,6 +10,9 @@ interface StockData {
 }
 
 function Trade(): JSX.Element {
+
+  const navigate = useNavigate()
+  const auth = new AuthMethods()
 
   const [stocks, setStocks] = useState<StockData[]>([]);
   const [showTradeModal, setShowTradeModal] = useState<boolean>(false);
@@ -19,6 +23,10 @@ function Trade(): JSX.Element {
     setShowTradeModal(true)
     setSelectedStock(stock)
   }
+
+  useEffect(() => {
+    if (!auth.loggedIn()) {navigate("/login")}
+    }, []);
 
   return (
     <>
