@@ -18,6 +18,10 @@ function NavbarComponent () {
     setActiveLink(location.pathname)
   }, [location])
 
+  useEffect(() => {
+    if (!auth.loggedIn()) {navigate("/login")}
+    }, []);
+
   const handleLogout = async (e: any) => {
       e.preventDefault();
       auth.logout()
@@ -36,11 +40,11 @@ function NavbarComponent () {
         <Nav.Item className={`nav-item ${activeLink === '/trade' ? 'active' : ''}`}>
             <Nav.Link href='/trade'>Trade</Nav.Link>
         </Nav.Item>
+        {auth.loggedIn() && (
         <Nav.Item className='nav-item logout-btn'>
-            <a onClick={handleLogout}> 
-                Logout
-            </a>
+          <a onClick={handleLogout}>Logout</a>
         </Nav.Item>
+      )}
       </Navbar>
 
     )
