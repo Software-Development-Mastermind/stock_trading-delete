@@ -18,14 +18,6 @@ function UserProvider({ children }) {
     }
   }, []);
 
-  useEffect(() => {
-    if (user) {
-      console.log(`User at the provider level: ${user}`);
-      console.log(`User email at the provider level: ${user.email}`);
-      console.log(`User id at the provider level: ${user.id}`);
-    }
-  }, [user]);
-
   return(
 
     <UserContext.Provider value={{ user, setUser }}>
