@@ -1,13 +1,13 @@
 import { useContext, useEffect, useState } from 'react';
 import Axios from 'axios';
 import { Table } from 'react-bootstrap';
-import { CompanyMethods, UserContext } from '@utils/index'
+import { CompanyMethods } from '@utils/index'
 import type { QuoteData } from '@utils/index'
 
 
 function TradeTable({ quote }: QuoteData) {
 
-  const { user } = useContext(UserContext)
+ 
 
   // const [portfolio, setPortfolio] = useState<any>({})
   

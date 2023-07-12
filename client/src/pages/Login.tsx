@@ -4,12 +4,10 @@ import { useNavigate } from 'react-router-dom'
 import { Button, Container, Form, FloatingLabel } from 'react-bootstrap'
 
 import Navbar from '@components/Navbar'
-import { AuthMethods, getUserId, UserContext } from '@utils/index'
+import { AuthMethods, getUserId } from '@utils/index'
 import '@styles/Login.css'
 
 function Login () {
-
-  const { setUser } = useContext(UserContext)
 
   const auth = new AuthMethods()
   const navigate = useNavigate()
@@ -29,7 +27,7 @@ function Login () {
       const login = await auth.login(email, password)
       console.log(login)
       if (login) {
-        setUser({
+        auth.setCurrentUser({
           "email": email,
           "id": await getUserId(email)
         })

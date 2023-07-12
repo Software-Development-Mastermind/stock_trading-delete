@@ -23,4 +23,8 @@ const getUserId = async (email: string) => {
   }
 }
 
-export { getFormattedFirstWord, formatDate, getUserId}
+export { 
+  getFormattedFirstWord, 
+  formatDate, 
+  getUserId, 
+}

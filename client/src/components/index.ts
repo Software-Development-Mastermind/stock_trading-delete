@@ -5,7 +5,6 @@ import TradeModal from './TradeModal'
 import QuoteTable from './QuoteTable'
 import FinancialsTable from './FinancialsTable'
 import TradeTable from './TradeTable'
-import UserProvider from './UserProvider'
 
 
 export { 
@@ -16,5 +15,4 @@ export {
     QuoteTable,
     FinancialsTable,
     TradeTable,
-    UserProvider
 }

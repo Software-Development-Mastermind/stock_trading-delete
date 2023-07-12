@@ -1,9 +1,7 @@
 import axios from 'axios';
 import decode from 'jwt-decode'
 
-import { useContext } from 'react';
-import { UserContext } from '@utils/index'
-
+ 
 
 
 interface IAuthMethods {
@@ -15,7 +13,6 @@ interface IAuthMethods {
 
 class AuthMethods implements IAuthMethods {
 
-  private user = useContext(UserContext)
 
   login = async (email: string, password: string) => {
     try {
@@ -40,7 +37,8 @@ class AuthMethods implements IAuthMethods {
 
   loggedIn = () => {
     const token = this.getToken()
-    return !!token && !this.isTokenExpired(token)
+    const user = this.getCurrentUser()
+    return !!token && !this.isTokenExpired(token) && !!user
   }
 
   isTokenExpired = (token: string) => {
@@ -81,6 +79,14 @@ class AuthMethods implements IAuthMethods {
       console.log(`Decoding token failed: ${err}`)
       return null
     }
+  }
+
+  setCurrentUser = (user: any) => {
+    localStorage.setItem('user', JSON.stringify(user))
+  }
+
+  getCurrentUser = () => {
+    return JSON.parse(localStorage.getItem('user') || '{}')
   }
 
 }

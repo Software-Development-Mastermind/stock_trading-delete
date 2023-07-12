@@ -1,6 +1,5 @@
-import { useState, useEffect, useContext } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
-import { UserContext } from '@utils/index'
 
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
@@ -13,8 +12,8 @@ function NavbarComponent () {
   const auth = new AuthMethods()
   const navigate = useNavigate()
   const location = useLocation()
-  const { user } = useContext(UserContext)
-
+  const user = auth.getCurrentUser()
+  
   const [activeLink, setActiveLink] = useState('')
 
   useEffect(() =>{

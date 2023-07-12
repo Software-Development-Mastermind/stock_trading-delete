@@ -9,6 +9,7 @@ function Portfolio () {
 
   const navigate = useNavigate()
   const auth = new AuthMethods()
+  const user = auth.getCurrentUser()
 
   useEffect(() => {
     if (!auth.loggedIn()) {navigate("/login")}
@@ -18,7 +19,7 @@ function Portfolio () {
       <div>
         <Navbar />
         <Container>
-          <h3>This is the portfolio page.</h3>
+          <h3>This is {user.email}'s portfolio page.</h3>
         </Container>
       </div>
   )
