@@ -1,13 +1,15 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { Button, Container, Form, FloatingLabel } from 'react-bootstrap'
 
 import Navbar from '@components/Navbar'
-import { AuthMethods, getUserId } from '@utils/index'
+import { AuthMethods, getUserId, UserContext } from '@utils/index'
 import '@styles/Login.css'
 
-function Login ({ setUser }) {
+function Login () {
+
+  const { setUser } = useContext(UserContext)
 
   const auth = new AuthMethods()
   const navigate = useNavigate()

@@ -1,29 +1,22 @@
-import { useEffect, useState } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Route, Routes } from 'react-router-dom'
 import { Login, Home, Portfolio, Trade } from '@pages/index'
-import { UserContext } from '@utils/index'
+import { UserProvider } from '@components/index'
 
 function App() {
-
-  const [user, setUser] = useState(null)
-
-  useEffect(() => {
-    if (user) {
-    console.log(`User id at the App level: ${user.id}`)
-    }
-  }, [user])
   
   return (
-    <UserContext.Provider value={user}>
+    <UserProvider>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login setUser={setUser} />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/portfolio" element={<Portfolio />} />
         <Route path="/trade" element={<Trade />} />
       </Routes>
-    </UserContext.Provider>
+    </UserProvider>
   )
 }
 
 export default App
+
+

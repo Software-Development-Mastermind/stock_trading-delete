@@ -7,7 +7,7 @@ import type { QuoteData } from '@utils/index'
 
 function TradeTable({ quote }: QuoteData) {
 
-  const user = useContext(UserContext)
+  const { user } = useContext(UserContext)
 
   // const [portfolio, setPortfolio] = useState<any>({})
   
