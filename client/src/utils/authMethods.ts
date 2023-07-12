@@ -68,8 +68,7 @@ class AuthMethods implements IAuthMethods {
   logout = () => {
     localStorage.removeItem('token')
     localStorage.removeItem('user')
-    this.user.setUser(null)
-    console.log(`${this.user}`)
+    this.setCurrentUser({})
   }
 
   decodeToken = (token: string) => {
