@@ -87,7 +87,7 @@ function TradeModal({ show, hide, selectedStock }: TradeModalProps): JSX.Element
 
         <QuoteTable quote={quote} />
         <FinancialsTable financials={financials} />
-        <TradeTable quote={quote} />
+        <TradeTable quote={quote} selectedStock={ selectedStock } />
 
         <Form>
           <Form.Group>
