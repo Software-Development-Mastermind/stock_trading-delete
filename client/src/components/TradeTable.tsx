@@ -1,7 +1,7 @@
 import { useEffect, useState, useContext } from 'react';
 import Axios from 'axios';
 import { Table } from 'react-bootstrap';
-import { CompanyMethods, UserContext, formatDollarAmount, removeCommas } from '@utils/index'
+import { UserContext, formatDollarAmount, removeCommas } from '@utils/index'
 import type { QuoteData } from '@utils/index'
 
 
@@ -35,18 +35,18 @@ function TradeTable({ quote, selectedStock }: QuoteData) {
     calculateBuyingPower()
   }, [userCash, price]);
 
-  const getUserPortfolio = async (userId) => {
+  const getUserPortfolio = async (userId: number) => {
     const portfolioRes = await Axios.get(`/api/get_portfolio/${userId}`)
     setPortfolio([portfolioRes.data])
   }
 
-  const getUserCash = async (userId) => {
+  const getUserCash = async (userId: number) => {
     const res= await Axios.get(`/api/get_cash/${userId}`)
     const formattedCash = formatDollarAmount(res.data.cash)
     setUserCash(formattedCash)
   }
 
-  const getSharesOwned = (symbol) => {
+  const getSharesOwned = (symbol: string) => {
     for (let i = 0; i < portfolio.length; i++) {
       if (portfolio[i].symbol === symbol) {
         setSharesOwned(portfolio[i].shares)
