@@ -47,11 +47,11 @@ class GetCash(Resource):
 class UpdateCash(Resource):
   def post(self, user_id):
 
-    portfolio = Portfolio.query.filter_by(user_id=user_id).first()
-    if portfolio:
+    user = User.query.filter_by(id=user_id).first()
+    if user:
 
       cash = request.json['cash']
-      portfolio.cash = cash
+      user.cash = cash
       db.session.commit()
 
       return f"Cash updated to ${cash}.", 200

@@ -27,7 +27,7 @@ class CreateNewUser(Resource):
     if existing_user:
       return "A user with that email aleady exists!", 409
 
-    new_user = User(email=email, password=password, cash=10000)
+    new_user = User(email=email, password=password, cash=100000)
     db.session.add(new_user)
     db.session.commit()
     
