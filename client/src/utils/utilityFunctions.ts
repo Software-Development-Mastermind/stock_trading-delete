@@ -13,6 +13,14 @@ const formatDate = (date: string) => {
 	return `${month} ${day}, ${year}`
 }
 
+const formatDollarAmount = (num: number) => {
+  if (Number.isInteger(num)) {
+    return num.toLocaleString('en-US'), { style: 'currency', currency: 'USD' }
+  } else {
+    return num.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+  }
+}
+
 const getUserId = async (email: string) => {
   try {
     const res = await Axios.get(`/api/get_user_id/${email}`)
@@ -25,6 +33,7 @@ const getUserId = async (email: string) => {
 
 export { 
   getFormattedFirstWord, 
-  formatDate, 
-  getUserId, 
+  formatDate,
+  formatDollarAmount, 
+  getUserId 
 }
