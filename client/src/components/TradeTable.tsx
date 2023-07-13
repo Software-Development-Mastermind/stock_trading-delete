@@ -9,6 +9,7 @@ function TradeTable({ quote }: QuoteData) {
 
   const user = useContext(UserContext)
   const userId = user.id
+  const userCash = user.cash
   console.log(`userId: ${userId}`)
  
   const [portfolio, setPortfolio] = useState<any>({})
@@ -16,6 +17,12 @@ function TradeTable({ quote }: QuoteData) {
   useEffect(() => {
     getUserPortfolio(userId)
   }, [])
+
+  const getUserCash = async (userId) => {
+    const cashData = await Axios.get(`/api/get_cash/${userId}`)
+    console.log(cashData)
+    return cashData
+  }
 
   const getUserPortfolio = async (userId) => {
     const portfolioData = await Axios.get(`/api/get_portfolio/${userId}`)
@@ -34,7 +41,7 @@ function TradeTable({ quote }: QuoteData) {
           </tr>
           <tr>
             <td>Cash Balance:</td>
-            <td className='text-start'>{user.cash}</td>
+            <td className='text-start'>{userCash}</td>
           </tr>
           <tr>
             <td>Buying Power:</td>
