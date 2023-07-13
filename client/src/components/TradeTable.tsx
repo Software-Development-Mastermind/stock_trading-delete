@@ -1,7 +1,7 @@
 import { useEffect, useState, useContext } from 'react';
 import Axios from 'axios';
 import { Table } from 'react-bootstrap';
-import { CompanyMethods, UserContext, formatDollarAmount } from '@utils/index'
+import { CompanyMethods, UserContext, formatDollarAmount, removeCommas } from '@utils/index'
 import type { QuoteData } from '@utils/index'
 
 
@@ -12,10 +12,12 @@ function TradeTable({ quote, selectedStock }: QuoteData) {
   const user = useContext(UserContext)
   const userId = user.id
   const symbol = selectedStock.symbol.toString()
+  const price = quote.currentPrice
   
   const [userCash, setUserCash] = useState<any>(0)
   const [portfolio, setPortfolio] = useState<any>([])
   const [sharesOwned, setSharesOwned] = useState<any>(0)
+  const [buyingPower, setBuyingPower] = useState<any>(0)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -28,6 +30,10 @@ function TradeTable({ quote, selectedStock }: QuoteData) {
   useEffect(() => {
     getSharesOwned(symbol)
   }, [portfolio])
+
+  useEffect(() => {
+    calculateBuyingPower()
+  }, [userCash, price]);
 
   const getUserPortfolio = async (userId) => {
     const portfolioRes = await Axios.get(`/api/get_portfolio/${userId}`)
@@ -48,6 +54,12 @@ function TradeTable({ quote, selectedStock }: QuoteData) {
     }
   }
 
+  const calculateBuyingPower = () => {
+    const formattedCash = removeCommas(userCash)
+    const buyingPower = Math.floor(formattedCash / price)
+    setBuyingPower(buyingPower)
+  }
+
   return (
     <>
       <p>TRADE</p>
@@ -63,7 +75,7 @@ function TradeTable({ quote, selectedStock }: QuoteData) {
           </tr>
           <tr>
             <td>Buying Power:</td>
-            <td className='text-start'>0</td>
+            <td className='text-start'>{buyingPower} shares</td>
           </tr>
         </tbody>
       </Table>

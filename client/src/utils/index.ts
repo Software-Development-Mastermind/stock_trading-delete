@@ -5,6 +5,7 @@ import {
     getFormattedFirstWord, 
     formatDate, 
     formatDollarAmount, 
+    removeCommas,
     getUserId 
 } from "./utilityFunctions";
 import type { 
@@ -19,6 +20,7 @@ export {
     getFormattedFirstWord,
     formatDate,
     formatDollarAmount,
+    removeCommas,
     getUserId,
     UserContext
 };

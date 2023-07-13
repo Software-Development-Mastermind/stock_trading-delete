@@ -19,6 +19,11 @@ const formatDollarAmount = (num: number) => {
   return Number.isInteger(num) ? withoutDecimal : withDecimal
 }
 
+const removeCommas = (num: number) => {
+  const numStr = num.toString()
+  return parseFloat(numStr.replace(',', ''))
+}
+
 const getUserId = async (email: string) => {
   try {
     const res = await Axios.get(`/api/get_user_id/${email}`)
@@ -32,6 +37,7 @@ const getUserId = async (email: string) => {
 export { 
   getFormattedFirstWord, 
   formatDate,
-  formatDollarAmount, 
+  formatDollarAmount,
+  removeCommas, 
   getUserId 
 }
