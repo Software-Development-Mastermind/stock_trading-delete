@@ -38,7 +38,7 @@ class AuthMethods implements IAuthMethods {
   loggedIn = () => {
     const token = this.getToken()
     const user = this.getCurrentUser()
-    return !!token && !this.isTokenExpired(token) && !!user
+    return !!token && !this.isTokenExpired(token) && user
   }
 
   isTokenExpired = (token: string) => {

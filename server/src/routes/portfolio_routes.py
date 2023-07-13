@@ -5,7 +5,7 @@ from ..extensions import db
 from src.models.portfolios import Portfolio, Stock
 from src import api
 
-@api.route('get_portfolio/<user_id>')
+@api.route('/get_portfolio/<user_id>')
 class GetPortfolio(Resource):
   def get(self, user_id):
 
@@ -26,7 +26,7 @@ class GetPortfolio(Resource):
 
       return "Portfolio not found!", 404
 
-@api.route('update_cash/<user_id>')
+@api.route('/update_cash/<user_id>')
 class UpdateCash(Resource):
   def post(self, user_id):
 
@@ -43,7 +43,7 @@ class UpdateCash(Resource):
 
       return "Portfolio not found!", 404
     
-@api.route('get_stock_data/<id>')
+@api.route('/get_stock_data/<id>')
 class GetStockData(Resource):
   def get(self, id):
 
@@ -64,11 +64,11 @@ class GetStockData(Resource):
 
       return "Stock not found!", 404
             
-@api.route('buy_stock/<user_id>')
+@api.route('/buy_stock/<user_id>')
 class BuyStock(Resource):
   def post(self, user_id):
 
-      portfolio = Portfolios.query.filter_by(user_id=user_id).first()
+      portfolio = Portfolio.query.filter_by(user_id=user_id).first()
       if portfolio:
 
         symbol = request.json['symbol']

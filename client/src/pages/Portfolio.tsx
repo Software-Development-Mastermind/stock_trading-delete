@@ -1,6 +1,6 @@
-import { useEffect } from 'react'
+import { useEffect, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { AuthMethods } from '@utils/index'
+import { AuthMethods, UserContext } from '@utils/index'
 
 import Navbar from '@components/Navbar'
 import Container from 'react-bootstrap/Container'
@@ -9,7 +9,7 @@ function Portfolio () {
 
   const navigate = useNavigate()
   const auth = new AuthMethods()
-  const user = auth.getCurrentUser()
+  const user = useContext(UserContext)
 
   useEffect(() => {
     if (!auth.loggedIn()) {navigate("/login")}

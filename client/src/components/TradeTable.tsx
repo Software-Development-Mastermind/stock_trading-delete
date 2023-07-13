@@ -1,31 +1,27 @@
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import Axios from 'axios';
 import { Table } from 'react-bootstrap';
-import { CompanyMethods } from '@utils/index'
+import { CompanyMethods, UserContext } from '@utils/index'
 import type { QuoteData } from '@utils/index'
 
 
 function TradeTable({ quote }: QuoteData) {
 
+  const user = useContext(UserContext)
+  const userId = user.id
+  console.log(`userId: ${userId}`)
  
-
-  // const [portfolio, setPortfolio] = useState<any>({})
+  const [portfolio, setPortfolio] = useState<any>({})
   
-  // const company = new CompanyMethods()
-
   useEffect(() => {
-    console.log(user)
-  })
+    getUserPortfolio(userId)
+  }, [])
 
-  // useEffect(() => {
-  //   const portfolioData = getUserPortfolio()
-  //   setPortfolio(portfolioData)
-  // })
-
-  // const getUserPortfolio = async () => {
-  //   const portfolio = await Axios.get(`/api/portfolio/${user.id}`)
-  //   console.log(portfolio.data)``
-  // }
+  const getUserPortfolio = async (userId) => {
+    const portfolioData = await Axios.get(`/api/get_portfolio/${userId}`)
+    console.log(portfolioData)
+    setPortfolio(portfolioData)
+  }
 
   return (
     <>
@@ -38,7 +34,7 @@ function TradeTable({ quote }: QuoteData) {
           </tr>
           <tr>
             <td>Cash Balance:</td>
-            <td className='text-start'>{100}</td>
+            <td className='text-start'>{user.cash}</td>
           </tr>
           <tr>
             <td>Buying Power:</td>
