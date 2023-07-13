@@ -13,7 +13,7 @@ class GetPortfolio(Resource):
     stocks = Stock.query.filter_by(user_id=user_id).all()
 
     if stocks:
-      stocks_data = []
+      portfolio_data = []
       for stock in stocks:
         stocks_data = {
           'id': stock.id,
@@ -21,7 +21,7 @@ class GetPortfolio(Resource):
           'shares': stock.shares,
           'cost': stock.cost,
         }
-        stocks_data.append(stocks_data)
+        portfolio_data.append(stocks_data)
 
       return stocks_data, 200
     
@@ -59,28 +59,7 @@ class UpdateCash(Resource):
     else:
 
       return "Portfolio not found!", 404
-    
-@api.route('/get_stock_data/<id>')
-class GetStockData(Resource):
-  def get(self, id):
-
-    stock = Stock.query.filter_by(id=id).first()
-    if stock:
-
-      stock_data = {
-        'id': stock.id,
-        'portfolio_id': stock.portfolio_id,
-        'symbol': stock.symbol,
-        'shares': stock.shares,
-        'cost': stock.cost,
-      }
-
-      return stock_data, 200
-    
-    else:
-
-      return "Stock not found!", 404
-            
+                
 @api.route('/buy_stock/<user_id>')
 class BuyStock(Resource):
   def post(self, user_id):
