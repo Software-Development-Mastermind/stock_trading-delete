@@ -9,18 +9,18 @@ from src import api
 class GetPortfolio(Resource):
   def get(self, user_id):
 
-    portfolio = Portfolio.query.filter_by(user_id=user_id).first()
+    stocks = Stock.query.filter_by(user_id=user_id).first()
 
-    if portfolio:
+    if stocks:
 
-      portfolio_data = {
-        'id': portfolio.id,
-        'user_id': portfolio.user_id,
-        'cash': portfolio.cash,
-        'stocks': []
+      stocks_data = {
+        'id': Stock.id,
+        'symbol': Stock.symbol,
+        'shares': Stock.shares,
+        'cost': Stock.cost,
       }
 
-      return portfolio_data, 200
+      return stocks_data, 200
     
     else:
 
