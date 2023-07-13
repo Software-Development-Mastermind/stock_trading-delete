@@ -14,11 +14,9 @@ const formatDate = (date: string) => {
 }
 
 const formatDollarAmount = (num: number) => {
-  if (Number.isInteger(num)) {
-    return num.toLocaleString('en-US'), { style: 'currency', currency: 'USD' }
-  } else {
-    return num.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })
-  }
+  const withoutDecimal = num.toLocaleString('en-US')
+  const withDecimal = num.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+  return Number.isInteger(num) ? withoutDecimal : withDecimal
 }
 
 const getUserId = async (email: string) => {

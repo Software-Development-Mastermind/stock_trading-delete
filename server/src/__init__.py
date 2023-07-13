@@ -17,7 +17,7 @@ from src.routes.stock_routes import (
   GetStockQuote, 
   GetStockFinancials
   )
-from src.routes.user_routes import GetCash, UpdateCash
+from src.routes.user_routes import GetCash, UpdateCash, GetPortfolio, BuyStock
 
 api_bp = Blueprint('api', __name__, url_prefix='/api')
 
@@ -43,7 +43,9 @@ def create_app():
   api.add_resource(GetStockQuote, '/stock_quote/<symbol>')
   api.add_resource(GetStockFinancials, '/stock_financials/<symbol>')
 
+  api.add_resource(GetPortfolio, '/get_portfolio/<user_id>')
   api.add_resource(GetCash, '/get_cash/<user_id>')
   api.add_resource(UpdateCash, '/update_cash/<user_id>')
+  api.add_resource(BuyStock, '/buy_stock/<user_id>')
 
   return app

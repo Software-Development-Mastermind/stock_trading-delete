@@ -84,47 +84,48 @@ class GetStockData(Resource):
 @api.route('/buy_stock/<user_id>')
 class BuyStock(Resource):
   def post(self, user_id):
+      
+    symbol = request.json['symbol']
+    shares = request.json['shares']
+    cost = request.json['price'] * shares
 
-      portfolio = Portfolio.query.filter_by(user_id=user_id).first()
-      if portfolio:
+    stock = Stock.query.filter_by(user_id=user_id, symbol=symbol).first()
+    if stock:
+      stock.shares += shares
+      stock.cost += cost
+      db.session.commit()
+      
+      return f"Bought {shares} shares of existing stock {symbol} for {cost}.", 200
 
-        symbol = request.json['symbol']
-        shares = request.json['shares']
-        stock = Stock.query.filter_by(portfolio_id=portfolio.id, symbol=symbol).first()
-          
-        if stock:
-          stock.shares += shares
-          db.session.commit()
-          return f"Bought {shares} shares of {symbol}.", 200
-        
-        else:
-          new_stock = Stock(portfolio_id=portfolio.id, symbol=symbol, shares=shares)
-          db.session.add(new_stock)
-          db.session.commit()
-          return f"Bought {shares} shares of {symbol}.", 200
+    else:
+      new_stock = Stock(user_id=user_id, symbol=symbol, shares=shares, cost=cost)
+      db.session.add(new_stock)
+      db.session.commit()
+      
+      return f"Bought {shares} shares of new stock {symbol} for {cost}.", 201
         
 @api.route('sell_stock/<user_id>')
 class SellStock(Resource):
   def post(self, user_id):
 
-    portfolio = Portfolio.query.filter_by(user_id=user_id).first()
-    if portfolio:
+    symbol = request.json['symbol']
+    shares = request.json['shares']
+    value = request.json['price'] * shares
 
-      symbol = request.json['symbol']
-      shares = request.json['shares']
-      stock = Stock.query.filter_by(portfolio_id=portfolio.id, symbol=symbol).first()
-
-      if stock:
-            if stock.shares >= shares:
-              stock.shares -= shares
-              db.session.commit()
-              if stock.shares == 0:
-                db.session.delete(stock)
-                db.session.commit()
-              return f"Sold {shares} shares of {symbol}.", 200
-            
-            else:
-              return f"You don't have enough shares of {symbol} to sell!", 400
-      else:
-        return f"You don't have any shares of {symbol} to sell!", 400
+    stock = Stock.query.filter_by(user_id=user_id, symbol=symbol).first()
+    if stock:
+      if stock.shares >= shares:
+        stock.shares -= shares
+        stock.cost -= value
+        db.session.commit()
+        if stock.shares == 0:
+          db.session.delete(stock)
+          db.session.commit()
+        return f"Sold {shares} shares of {symbol} for {value}.", 200
       
+      else:
+        return f"User does not have enough shares of {symbol} to sell!", 400
+        
+    else:
+        
+      return "Stock not found!", 404
