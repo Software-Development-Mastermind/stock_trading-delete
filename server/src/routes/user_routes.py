@@ -18,6 +18,7 @@ class GetPortfolio(Resource):
         stocks_data = {
           'id': stock.id,
           'symbol': stock.symbol,
+          'name': stock.name,
           'shares': stock.shares,
           'cost': stock.cost,
         }
@@ -65,6 +66,7 @@ class BuyStock(Resource):
   def post(self, user_id):
       
     symbol = request.json['symbol']
+    name = request.json['name']
     shares = request.json['shares']
     cost = request.json['price'] * shares
 
@@ -77,7 +79,12 @@ class BuyStock(Resource):
       return f"Bought {shares} shares of existing stock {symbol} for {cost}.", 200
 
     else:
-      new_stock = Stock(user_id=user_id, symbol=symbol, shares=shares, cost=cost)
+      new_stock = Stock(
+        user_id=user_id, 
+        symbol=symbol, 
+        name=name, 
+        shares=shares, 
+        cost=cost)
       db.session.add(new_stock)
       db.session.commit()
       

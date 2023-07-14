@@ -1,6 +1,6 @@
 import Axios from 'axios'
 import { useEffect, useState, useContext } from 'react'
-import { Table } from 'react-bootstrap'
+import { Container, Table } from 'react-bootstrap'
 import { UserContext } from '@utils/index'
 
 
@@ -24,8 +24,9 @@ function PortfolioTable() {
       return (
         <tr key={i}>
           <td>{holding.symbol}</td>
+          <td>{holding.name}</td>
           <td>{holding.shares}</td>
-          <td>{holding.price}</td>
+          <td>$ {holding.cost}</td>
           <td>{holding.total}</td>
         </tr>
       )
@@ -35,21 +36,23 @@ function PortfolioTable() {
 
 
   return (
-    <Table>
-      <thead>
-        <tr>
-          <th>Ticker</th>
-          <th>Company</th>
-          <th>Shares</th>
-          <th>Cost</th>
-          <th>Current Value</th>
-          <th>Gain/Loss</th>
-        </tr>
-      </thead>
-      <tbody>
-      </tbody>
-      {renderPortfolioTable()}
-    </Table>
+    <Container shadow-sm>
+      <Table>
+        <thead>
+          <tr>
+            <th>Ticker</th>
+            <th>Company</th>
+            <th>Shares</th>
+            <th>Cost</th>
+            <th>Current Value</th>
+            <th>Gain/Loss</th>
+          </tr>
+        </thead>
+        <tbody>
+        {renderPortfolioTable()}
+        </tbody>
+      </Table>
+    </Container>
   )
 }
 
