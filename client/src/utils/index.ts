@@ -6,6 +6,7 @@ import {
     formatDate, 
     formatDollarAmount, 
     removeCommas,
+    roundDown,
     getUserId 
 } from "./utilityFunctions";
 import type { 
@@ -22,6 +23,7 @@ export {
     formatDollarAmount,
     removeCommas,
     getUserId,
+    roundDown,
     UserContext
 };
 

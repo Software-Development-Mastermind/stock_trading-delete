@@ -24,6 +24,10 @@ const removeCommas = (num: number) => {
   return parseFloat(numStr.replace(',', ''))
 }
 
+const roundDown = (num: number) => {
+  return Math.floor(num * 100) / 100
+}
+
 const getUserId = async (email: string) => {
   try {
     const res = await Axios.get(`/api/get_user_id/${email}`)
@@ -38,6 +42,7 @@ export {
   getFormattedFirstWord, 
   formatDate,
   formatDollarAmount,
-  removeCommas, 
+  removeCommas,
+  roundDown, 
   getUserId 
 }

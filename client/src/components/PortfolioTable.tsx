@@ -1,7 +1,7 @@
 import Axios from 'axios'
 import { useEffect, useState, useContext } from 'react'
 import { Container, Table } from 'react-bootstrap'
-import { UserContext, formatDollarAmount, CompanyMethods } from '@utils/index'
+import { UserContext, formatDollarAmount, CompanyMethods, roundDown } from '@utils/index'
 
 
 function PortfolioTable() {
@@ -43,7 +43,6 @@ function PortfolioTable() {
       })
     );
     setHoldings(holdingsWithCurrentValue);
-    console.log(`The holdings state is ${holdings}`);
     setIsLoading(false);
   };
     
@@ -60,7 +59,7 @@ function PortfolioTable() {
     const renderedRows = holdings.map((holding: any, i) => {
       const formattedCost = formatDollarAmount(holding.cost)
       const formattedCurrentValue = formatDollarAmount(holding.currentValue)
-      const formattedGainLoss = formatDollarAmount(holding.currentValue - holding.cost)
+      const gainLoss = roundDown(holding.cost / holding.currentValue)
 
       return (
         <tr key={i}>
@@ -69,7 +68,7 @@ function PortfolioTable() {
           <td>{holding.shares}</td>
           <td>$ {formattedCost}</td>
           <td>$ {formattedCurrentValue}</td>
-          <td>{formattedGainLoss}</td>
+          <td>{gainLoss}%</td>
         </tr>
       );
     });
