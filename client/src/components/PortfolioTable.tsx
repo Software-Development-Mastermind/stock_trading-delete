@@ -1,7 +1,7 @@
 import Axios from 'axios'
 import { useEffect, useState, useContext } from 'react'
 import { Container, Table } from 'react-bootstrap'
-import { UserContext } from '@utils/index'
+import { UserContext, formatDollarAmount } from '@utils/index'
 
 
 function PortfolioTable() {
@@ -26,7 +26,7 @@ function PortfolioTable() {
           <td>{holding.symbol}</td>
           <td>{holding.name}</td>
           <td>{holding.shares}</td>
-          <td>$ {holding.cost}</td>
+          <td>$ {formatDollarAmount(holding.cost)}</td>
           <td>{holding.total}</td>
         </tr>
       )
@@ -36,7 +36,7 @@ function PortfolioTable() {
 
 
   return (
-    <Container shadow-sm>
+    <Container>
       <Table>
         <thead>
           <tr>
