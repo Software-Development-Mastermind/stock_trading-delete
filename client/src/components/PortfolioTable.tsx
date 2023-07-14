@@ -60,7 +60,7 @@ function PortfolioTable() {
     const renderedRows = holdings.map((holding: any, i) => {
       const formattedCost = formatDollarAmount(holding.cost)
       const formattedCurrentValue = formatDollarAmount(holding.currentValue)
-      const gainLoss = roundDown(holding.cost / holding.currentValue)
+      const gainLoss = roundDown((holding.currentValue - holding.cost) / holding.cost * 100)
       const gainLossColor = gainLoss >= 0 ? 'green' : 'red'
 
       return (
