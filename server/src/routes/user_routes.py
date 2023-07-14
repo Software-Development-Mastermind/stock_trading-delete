@@ -24,7 +24,7 @@ class GetPortfolio(Resource):
         }
         portfolio_data.append(stocks_data)
 
-      return stocks_data, 200
+      return portfolio_data, 200
     
     else:
 

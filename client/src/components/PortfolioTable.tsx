@@ -1,39 +1,81 @@
 import Axios from 'axios'
 import { useEffect, useState, useContext } from 'react'
 import { Container, Table } from 'react-bootstrap'
-import { UserContext, formatDollarAmount } from '@utils/index'
+import { UserContext, formatDollarAmount, CompanyMethods } from '@utils/index'
 
 
 function PortfolioTable() {
 
   const user = useContext(UserContext)
   const userId = user.id
-  const [holdings, setHoldings] = useState([])
+  
+  const company = new CompanyMethods()
 
+  const [holdings, setHoldings] = useState([])
+  const [isLoading, setIsLoading] = useState(true)
+ 
   useEffect(() => {
     getUserPortfolio(userId)
-  })
+  }, [])
+
+  useEffect(() => {
+    console.log(holdings)
+  }, [])
+
+  useEffect(() => {
+    holdings.length !== 0 ? setIsLoading(false) : setIsLoading(true);
+  }, [holdings]);
 
   const getUserPortfolio = async (userId: number) => {
-    const portfolioRes = await Axios.get(`/api/get_portfolio/${userId}`)
-    setHoldings([portfolioRes.data])
-  }
-
+    setIsLoading(true);
+    const res = await Axios.get(`/api/get_portfolio/${userId}`);
+    const portfolioData = res.data;
+  
+    const holdingsWithCurrentValue = await Promise.all(
+      portfolioData.map(async (holding) => {
+        const symbol = holding.symbol;
+        const quote = await company.getQuote(symbol);
+        const sharePrice = quote.c;
+        const shares = holding.shares;
+        const currentValue = sharePrice * shares;
+  
+        return { ...holding, currentValue };
+      })
+    );
+    setHoldings(holdingsWithCurrentValue);
+    console.log(`The holdings state is ${holdings}`);
+    setIsLoading(false);
+  };
+    
   const renderPortfolioTable = () => {
-    return holdings.map((holding: any, i) => {
+
+    if (isLoading) {
+      return (
+        <tr>
+          <td>Loading...</td>
+        </tr>
+      )
+    }
+
+    const renderedRows = holdings.map((holding: any, i) => {
+      const formattedCost = formatDollarAmount(holding.cost)
+      const formattedCurrentValue = formatDollarAmount(holding.currentValue)
+      const formattedGainLoss = formatDollarAmount(holding.currentValue - holding.cost)
+
       return (
         <tr key={i}>
           <td>{holding.symbol}</td>
           <td>{holding.name}</td>
           <td>{holding.shares}</td>
-          <td>$ {formatDollarAmount(holding.cost)}</td>
-          <td>{holding.total}</td>
+          <td>$ {formattedCost}</td>
+          <td>$ {formattedCurrentValue}</td>
+          <td>{formattedGainLoss}</td>
         </tr>
-      )
-    })
+      );
+    });
+
+    return renderedRows;
   }
-
-
 
   return (
     <Container>
