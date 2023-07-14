@@ -83,8 +83,8 @@ function PortfolioTable() {
   }
 
   return (
-    <Container>
-      <Table>
+
+      <Table className='shadow-sm'>
         <thead>
           <tr>
             <th>Company</th>
@@ -99,7 +99,6 @@ function PortfolioTable() {
         {renderPortfolioTable()}
         </tbody>
       </Table>
-    </Container>
   )
 }
 
