@@ -84,7 +84,7 @@ function PortfolioTable() {
 
   return (
 
-      <Table className='shadow-sm'>
+      <Table hover className='shadow-sm'>
         <thead>
           <tr>
             <th>Company</th>

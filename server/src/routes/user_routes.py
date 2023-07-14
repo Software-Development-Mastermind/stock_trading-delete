@@ -84,7 +84,8 @@ class BuyStock(Resource):
         symbol=symbol, 
         name=name, 
         shares=shares, 
-        cost=cost)
+        cost=cost
+        )
       db.session.add(new_stock)
       db.session.commit()
       

@@ -37,7 +37,10 @@ function TradeTable({ quote, selectedStock }: QuoteData) {
 
   const getUserPortfolio = async (userId: number) => {
     const portfolioRes = await Axios.get(`/api/get_portfolio/${userId}`)
-    setPortfolio([portfolioRes.data])
+    const portfolioData = Array.isArray(portfolioRes.data) 
+      ? portfolioRes.data 
+      : [portfolioRes.data]
+    setPortfolio(portfolioData)
   }
 
   const getUserCash = async (userId: number) => {
@@ -47,10 +50,10 @@ function TradeTable({ quote, selectedStock }: QuoteData) {
   }
 
   const getSharesOwned = (symbol: string) => {
-    for (let i = 0; i < portfolio.length; i++) {
-      if (portfolio[i].symbol === symbol) {
-        setSharesOwned(portfolio[i].shares)
-      }
+    const ownedStock = portfolio.find((stock: any) => stock.symbol === symbol)
+    console.log(ownedStock)
+    if (ownedStock) {
+      setSharesOwned(ownedStock.shares)
     }
   }
 
