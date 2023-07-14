@@ -2,6 +2,7 @@ import Axios from 'axios'
 import { useEffect, useState, useContext } from 'react'
 import { Container, Table } from 'react-bootstrap'
 import { UserContext, formatDollarAmount, CompanyMethods, roundDown } from '@utils/index'
+import '@styles/PortfolioTable.css'
 
 
 function PortfolioTable() {
@@ -60,15 +61,20 @@ function PortfolioTable() {
       const formattedCost = formatDollarAmount(holding.cost)
       const formattedCurrentValue = formatDollarAmount(holding.currentValue)
       const gainLoss = roundDown(holding.cost / holding.currentValue)
+      const gainLossColor = gainLoss >= 0 ? 'green' : 'red'
 
       return (
         <tr key={i}>
-          <td>{holding.symbol}</td>
           <td>{holding.name}</td>
+          <td>{holding.symbol}</td>
           <td>{holding.shares}</td>
           <td>$ {formattedCost}</td>
           <td>$ {formattedCurrentValue}</td>
-          <td>{gainLoss}%</td>
+          <td>
+            <span className={gainLossColor}>
+              {gainLoss}%
+            </span>
+          </td>
         </tr>
       );
     });
@@ -81,8 +87,8 @@ function PortfolioTable() {
       <Table>
         <thead>
           <tr>
-            <th>Ticker</th>
             <th>Company</th>
+            <th>Ticker</th>
             <th>Shares</th>
             <th>Cost</th>
             <th>Current Value</th>
