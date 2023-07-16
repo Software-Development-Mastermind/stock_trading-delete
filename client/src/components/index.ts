@@ -6,6 +6,7 @@ import QuoteTable from './QuoteTable'
 import FinancialsTable from './FinancialsTable'
 import TradeTable from './TradeTable'
 import PortfolioTable from './PortfolioTable'
+import TradeForm from './TradeForm'
 
 
 export { 
@@ -16,5 +17,6 @@ export {
     QuoteTable,
     FinancialsTable,
     TradeTable,
-    PortfolioTable
+    PortfolioTable,
+    TradeForm
 }

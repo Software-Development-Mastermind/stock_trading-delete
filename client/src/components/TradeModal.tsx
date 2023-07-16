@@ -1,10 +1,16 @@
-import { Modal, Button, Form } from 'react-bootstrap'
+import { Modal, Button } from 'react-bootstrap'
 import { useEffect, useState } from 'react';
 
 import { CompanyMethods } from '@utils/index'
-import { QuoteTable, FinancialsTable, TradeTable } from '@components/index'
+import { 
+  QuoteTable, 
+  FinancialsTable, 
+  TradeTable, 
+  TradeForm 
+} from '@components/index'
 
 import type { StockData, QuoteData, FinancialData } from '@utils/index'
+
 
 interface TradeModalProps {
   show: boolean;
@@ -63,14 +69,6 @@ function TradeModal({ show, hide, selectedStock }: TradeModalProps): JSX.Element
     }
   }, [show, selectedStock])
 
-  // useEffect(() => {
-  //   console.log('Updated quote:', quote);
-  // }, [quote]);
-
-  // useEffect(() => {
-  //   console.log('Updated financials:', financials);
-  // }, [financials])
-
   return (
     <Modal
       centered show={show}
@@ -85,14 +83,11 @@ function TradeModal({ show, hide, selectedStock }: TradeModalProps): JSX.Element
 
       <Modal.Body>
 
-        <QuoteTable quote={quote} />
-        <FinancialsTable financials={financials} />
-        <TradeTable quote={quote} selectedStock={ selectedStock } />
+        <QuoteTable quote={ quote } />
+        <FinancialsTable financials={ financials } />
+        <TradeTable quote={ quote } selectedStock={ selectedStock } />
 
-        <Form>
-          <Form.Group>
-          </Form.Group>
-        </Form>
+        <TradeForm selectedStock={ selectedStock } />
 
       </Modal.Body>
 
