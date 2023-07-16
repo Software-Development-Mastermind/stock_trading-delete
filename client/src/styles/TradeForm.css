@@ -1,0 +1,9 @@
+.trade-form-container {
+    border: 1px solid lightslategray;
+    padding: 1rem;
+}
+
+.shares-identifier {
+    vertical-align: bottom;
+    margin-bottom: 0;
+}
