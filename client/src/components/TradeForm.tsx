@@ -73,9 +73,9 @@ function TradeForm({ quote, selectedStock }: QuoteData) {
     const formattedCash = removeCommas(userCash)
     const transactionPrice = removeCommas(price) * shares
 
-   return checked === 'buy' 
-    ? formatDollarAmount(formattedCash - transactionPrice) 
-    : formatDollarAmount(formattedCash + transactionPrice)
+    return checked === 'buy' 
+      ? formatDollarAmount(formattedCash - transactionPrice) 
+      : formatDollarAmount(formattedCash + transactionPrice)
   }
 
   const handleToggleButtonChange = (value: string) => {
@@ -88,20 +88,20 @@ function TradeForm({ quote, selectedStock }: QuoteData) {
 
   return (
     <div className='trade-form-container shadow-sm'>
-      <p>TRADE</p>
+      <p className='trade-title'>TRADE</p>
         <Table borderless size='sm'>
           <tbody>
             <tr>
-              <td>Shares Owned:</td>
-              <td className='text-start'>{sharesOwned}</td>
+              <td className='trade-table'>Shares Owned:</td>
+              <td className='text-start trade-table'>{sharesOwned}</td>
             </tr>
             <tr>
-              <td>Cash Balance:</td>
-              <td className='text-start'>$ {userCash}</td>
+              <td className='trade-table'>Cash Balance:</td>
+              <td className='text-start trade-table'>$ {userCash}</td>
             </tr>
             <tr>
-              <td>Buying Power:</td>
-              <td className='text-start'>{buyingPower} shares</td>
+              <td className='trade-table'>Buying Power:</td>
+              <td className='text-start trade-table'>{buyingPower} shares</td>
             </tr>
           </tbody>
         </Table>
