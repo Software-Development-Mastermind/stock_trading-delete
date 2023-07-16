@@ -2,6 +2,9 @@ import { Table } from 'react-bootstrap';
 import type { QuoteData } from '@utils/index'
 
 function QuoteTable({ quote }: QuoteData) {
+
+  const changeColor = quote.change >= 0 ? 'green' : 'red'
+
   return (
     <>
       <p>TODAY</p>
@@ -13,7 +16,16 @@ function QuoteTable({ quote }: QuoteData) {
           </tr>
           <tr>
             <td>Change:</td>
-            <td className='text-start'>{quote.change != null ? `$ ${quote.change} (${quote.percentChange}%)` : 'Temporarily unavailable.'}</td>
+            <td className='text-start'>
+              {quote.change != null ? (
+                <>
+                  <span className={changeColor}>$ {quote.change}</span>
+                  <span className={changeColor}> ({quote.percentChange}%)</span>
+                </>
+              ) : (
+                'Temporarily unavailable.'
+              )}
+            </td>
           </tr>
           <tr>
             <td>Today's High:</td>
