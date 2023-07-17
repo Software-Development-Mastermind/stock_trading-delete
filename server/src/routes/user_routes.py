@@ -68,7 +68,7 @@ class BuyStock(Resource):
     symbol = request.json['symbol']
     name = request.json['name']
     shares = request.json['shares']
-    cost = request.json['price'] * shares
+    cost = request.json['cost'] * shares
 
     stock = Stock.query.filter_by(user_id=user_id, symbol=symbol).first()
     if stock:
@@ -97,7 +97,7 @@ class SellStock(Resource):
 
     symbol = request.json['symbol']
     shares = request.json['shares']
-    value = request.json['price'] * shares
+    value = request.json['cost'] * shares
 
     stock = Stock.query.filter_by(user_id=user_id, symbol=symbol).first()
     if stock:

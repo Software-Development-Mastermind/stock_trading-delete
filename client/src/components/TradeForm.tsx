@@ -59,6 +59,35 @@ function TradeForm({ quote, selectedStock }: QuoteData) {
     }
   }
 
+  const buyStock = async (userId, symbol, name, shares, cost) => {
+    try {
+      const res = await Axios.post(`/api/buy_stock/${userId}`, {
+        userId,
+        symbol,
+        name,
+        shares,
+        cost
+      })
+      console.log(res)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  const sellStock = async (userId, symbol, shares, price) => {
+    try {
+      const res = await Axios.post(`/api/sell_stock/${userId}`, {
+        userId,
+        symbol,
+        shares,
+        price
+      })
+      console.log(res)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
   const calculateBuyingPower = () => {
     const formattedCash = removeCommas(userCash)
     const buyingPower = Math.floor(formattedCash / price)
@@ -86,6 +115,17 @@ function TradeForm({ quote, selectedStock }: QuoteData) {
     setShares(Number(e.target.value));
   }
 
+  const handleSubmit = e => {
+    e.preventDefault()
+    const transactionAmount = price * shares
+    if (checked === 'buy') {
+      buyStock(userId, symbol, selectedStock.name, shares, transactionAmount)
+    } else {
+      sellStock(userId, symbol, shares, transactionAmount)
+    }
+  }
+
+
   return (
     <div className='trade-form-container shadow-sm'>
       <p className='trade-title'>TRADE</p>
@@ -105,7 +145,7 @@ function TradeForm({ quote, selectedStock }: QuoteData) {
             </tr>
           </tbody>
         </Table>
-      <Form>
+      <Form onSubmit={handleSubmit}>
         <Row>
           <Col xs={12} sm={2}>
             <ButtonGroup className="mb-3">
@@ -164,7 +204,13 @@ function TradeForm({ quote, selectedStock }: QuoteData) {
               }
             </p>
           <Col xs={12}>
-            <Button className="shadow-sm">{checked === 'sell' ? 'Complete sale' : 'Complete purchase'}</Button>
+            <Button
+              className="shadow-sm"
+              type='submit'
+              >{checked === 'sell' 
+                ? 'Complete sale' 
+                : 'Complete purchase'}
+            </Button>
           </Col>
       </Form>
     </div>

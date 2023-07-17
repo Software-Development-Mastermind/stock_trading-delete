@@ -1,7 +1,9 @@
 .trade-form-container {
     border: 1px solid lightslategray;
+    border-radius: 5px;
     padding: 1rem;
-    background-color: rgb(252, 251, 251);
+    background-color: #04013f;
+    color: white;
 }
 
 .trade-title {
@@ -10,7 +12,8 @@
 }
 
 .trade-table {
-    background-color:rgb(252, 251, 251) !important;
+    background-color:#04013f !important;
+    color: white !important;
 }
 
 .shares-identifier {
