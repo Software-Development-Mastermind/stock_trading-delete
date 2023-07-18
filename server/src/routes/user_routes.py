@@ -12,8 +12,9 @@ class GetPortfolio(Resource):
 
     stocks = Stock.query.filter_by(user_id=user_id).all()
 
+    portfolio_data = []
+
     if stocks:
-      portfolio_data = []
       for stock in stocks:
         stocks_data = {
           'id': stock.id,
@@ -28,7 +29,7 @@ class GetPortfolio(Resource):
     
     else:
 
-      return "Portfolio not found!", 404
+      return "Portfolio empty.", 200
     
 @api.route('/get_cash/<user_id>')
 class GetCash(Resource):
@@ -97,7 +98,7 @@ class SellStock(Resource):
 
     symbol = request.json['symbol']
     shares = request.json['shares']
-    value = request.json['cost'] * shares
+    value = request.json['price'] * shares
 
     stock = Stock.query.filter_by(user_id=user_id, symbol=symbol).first()
     if stock:

@@ -1,6 +1,6 @@
 import Axios from 'axios'
 import { useEffect, useState, useContext } from 'react'
-import { Container, Table } from 'react-bootstrap'
+import { Table } from 'react-bootstrap'
 import { UserContext, formatDollarAmount, CompanyMethods, roundDown } from '@utils/index'
 import '@styles/PortfolioTable.css'
 

@@ -5,6 +5,7 @@ import { UserContext, formatDollarAmount, removeCommas } from '@utils/index'
 import type { QuoteData } from '@utils/index'
 
 import '@styles/TradeForm.css'
+import { get } from 'http';
 
 
 function TradeForm({ quote, selectedStock }: QuoteData) {
@@ -14,7 +15,7 @@ function TradeForm({ quote, selectedStock }: QuoteData) {
   const symbol = selectedStock.symbol.toString()
   const price = quote.currentPrice
 
-  const [userCash, setUserCash] = useState<any>(0)
+  const [userCash, setUserCash] = useState<string | number>(0)
   const [portfolio, setPortfolio] = useState<any>([])
   const [sharesOwned, setSharesOwned] = useState<any>(0)
   const [buyingPower, setBuyingPower] = useState<any>(0)
@@ -27,10 +28,13 @@ function TradeForm({ quote, selectedStock }: QuoteData) {
       await getUserCash(userId);
     };
     fetchData();
+    console.log('Fetching user cash and portfolio')
+    console.log(userCash)
   }, []);
 
   useEffect(() => {
     getSharesOwned(symbol)
+    console.log(sharesOwned)
   }, [portfolio])
 
   useEffect(() => {
@@ -46,9 +50,22 @@ function TradeForm({ quote, selectedStock }: QuoteData) {
   }
 
   const getUserCash = async (userId: number) => {
-    const res= await Axios.get(`/api/get_cash/${userId}`)
+    const res = await Axios.get(`/api/get_cash/${userId}`)
     const formattedCash = formatDollarAmount(res.data.cash)
+    console.log(`Get user cash: ${formattedCash}`)
     setUserCash(formattedCash)
+  }
+
+  const updateUserCash = async (userId: number, cash: number) => {
+    try {
+      const res = await Axios.post(`/api/update_cash/${userId}`, {
+        userId,
+        cash
+      })
+      console.log(res)
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   const getSharesOwned = (symbol: string) => {
@@ -115,14 +132,20 @@ function TradeForm({ quote, selectedStock }: QuoteData) {
     setShares(Number(e.target.value));
   }
 
-  const handleSubmit = e => {
+  const handleTransaction = async (e) => {
     e.preventDefault()
     const transactionAmount = price * shares
+    const updatedBalance = removeCommas(calculateBalanceAfterTransaction())
+    console.log(`The udpated balance is ${updatedBalance}`)
     if (checked === 'buy') {
       buyStock(userId, symbol, selectedStock.name, shares, transactionAmount)
+      updateUserCash(userId, updatedBalance)
     } else {
       sellStock(userId, symbol, shares, transactionAmount)
+      updateUserCash(userId, updatedBalance)
     }
+    await getUserPortfolio(userId)
+    await getUserCash(userId)
   }
 
 
@@ -145,7 +168,7 @@ function TradeForm({ quote, selectedStock }: QuoteData) {
             </tr>
           </tbody>
         </Table>
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={handleTransaction}>
         <Row>
           <Col xs={12} sm={2}>
             <ButtonGroup className="mb-3">
