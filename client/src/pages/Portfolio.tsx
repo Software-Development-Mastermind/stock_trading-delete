@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { AuthMethods } from '@utils/index'
 
 import Container from 'react-bootstrap/Container'
-import { Navbar, PortfolioCharts, PortfolioTable } from '@/components/index'
+import { Navbar, PerformanceChart, PieChart, PortfolioTable } from '@/components/index'
 
 function Portfolio () {
 
@@ -20,7 +20,8 @@ function Portfolio () {
         <Navbar />
         <Container>
           <h3>Portfolio</h3>
-          <PortfolioCharts />
+          <PieChart/>
+          <PerformanceChart />
           <PortfolioTable />
         </Container>
       </div>

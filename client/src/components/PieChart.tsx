@@ -15,7 +15,7 @@ const data= [
   ['NVDA', 1]
 ]
 
-function PortfolioCharts() {
+function PieChart() {
   return(
       <Chart
         chartType="PieChart"
@@ -28,4 +28,4 @@ function PortfolioCharts() {
   );
 }
 
-export default PortfolioCharts;
+export default PieChart;
