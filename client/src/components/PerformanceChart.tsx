@@ -19,7 +19,9 @@ const data = [
 
 function PerformanceChart() {
   return(
+    <div className='mb-4'>
       <Chart
+        className='shadow-sm'
         chartType="LineChart"
         data={data}
         options={options}
@@ -27,6 +29,7 @@ function PerformanceChart() {
         height="400px"
         >
       </Chart>
+    </div>
   );
 }
 
