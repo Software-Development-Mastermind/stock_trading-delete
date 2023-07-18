@@ -26,8 +26,6 @@ function TradeForm({ quote, selectedStock }: QuoteData) {
       await getUserCash(userId);
     };
     fetchData();
-    console.log('Fetching user cash and portfolio')
-    console.log(userCash)
   }, []);
 
   useEffect(() => {
