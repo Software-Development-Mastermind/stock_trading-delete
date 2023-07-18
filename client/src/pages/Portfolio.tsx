@@ -19,7 +19,7 @@ function Portfolio () {
       <div>
         <Navbar />
         <Container>
-          <h3>Holdings</h3>
+          <h3>Portfolio</h3>
           <PortfolioTable />
         </Container>
       </div>

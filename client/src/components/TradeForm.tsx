@@ -203,7 +203,6 @@ function TradeForm({ quote, selectedStock }: QuoteData) {
               <Form.Control 
                 className="shadow-sm" 
                 type="number" 
-                placeholder="0"
                 value={shares}
                 onChange = {handleSharesChange}
                 />
