@@ -202,7 +202,8 @@ function TradeForm({ quote, selectedStock }: QuoteData) {
             <Form.Group className="mb-3">
               <Form.Control 
                 className="shadow-sm" 
-                type="number" 
+                type="number"
+                min={0} 
                 value={shares}
                 onChange = {handleSharesChange}
                 />
