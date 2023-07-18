@@ -226,7 +226,7 @@ function TradeForm({ quote, selectedStock }: QuoteData) {
             </p>
           <Col xs={12}>
             <Button
-              className="shadow-sm"
+              className={`shadow-sm ${shares > 0 && shares > buyingPower ? 'insufficient-funds' : ''}`}
               type='submit'
               disabled={shares === 0 || shares > buyingPower}
               >{shares > 0 && shares > buyingPower

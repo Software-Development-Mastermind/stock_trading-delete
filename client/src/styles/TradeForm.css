@@ -20,3 +20,9 @@
     vertical-align: bottom;
     margin-bottom: 0;
 }
+
+.insufficient-funds {
+    background-color: darkred !important;
+    color: white !important;
+    border: darkred !important;
+}
