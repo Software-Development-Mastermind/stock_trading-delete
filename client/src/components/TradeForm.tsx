@@ -228,9 +228,13 @@ function TradeForm({ quote, selectedStock }: QuoteData) {
             <Button
               className="shadow-sm"
               type='submit'
-              >{checked === 'sell' 
-                ? 'Complete sale' 
-                : 'Complete purchase'}
+              disabled={shares === 0 || shares > buyingPower}
+              >{shares > 0 && shares > buyingPower
+                ? 'Insufficient funds'
+                : checked === 'buy'
+                ? 'Purchase shares'
+                : 'Sell shares'
+              }
             </Button>
           </Col>
       </Form>
