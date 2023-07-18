@@ -5,8 +5,6 @@ import { UserContext, formatDollarAmount, removeCommas } from '@utils/index'
 import type { QuoteData } from '@utils/index'
 
 import '@styles/TradeForm.css'
-import { get } from 'http';
-
 
 function TradeForm({ quote, selectedStock }: QuoteData) {
 
@@ -117,11 +115,11 @@ function TradeForm({ quote, selectedStock }: QuoteData) {
 
   const calculateBalanceAfterTransaction = () => {
     const formattedCash = removeCommas(userCash)
-    const transactionPrice = removeCommas(price) * shares
-
+    const transactionAmount = price * shares
+    
     return checked === 'buy' 
-      ? formatDollarAmount(formattedCash - transactionPrice) 
-      : formatDollarAmount(formattedCash + transactionPrice)
+      ? formatDollarAmount(formattedCash - transactionAmount) 
+      : formatDollarAmount(formattedCash + transactionAmount)
   }
 
   const handleToggleButtonChange = (value: string) => {
@@ -132,20 +130,20 @@ function TradeForm({ quote, selectedStock }: QuoteData) {
     setShares(Number(e.target.value));
   }
 
-  const handleTransaction = async (e) => {
+  const handleTransaction = async (e: any) => {
     e.preventDefault()
     const transactionAmount = price * shares
     const updatedBalance = removeCommas(calculateBalanceAfterTransaction())
-    console.log(`The udpated balance is ${updatedBalance}`)
     if (checked === 'buy') {
       buyStock(userId, symbol, selectedStock.name, shares, transactionAmount)
       updateUserCash(userId, updatedBalance)
+      setSharesOwned(sharesOwned + shares)
     } else {
       sellStock(userId, symbol, shares, transactionAmount)
       updateUserCash(userId, updatedBalance)
+      setSharesOwned(sharesOwned - shares)
     }
-    await getUserPortfolio(userId)
-    await getUserCash(userId)
+    setUserCash(formatDollarAmount(updatedBalance))
   }
 
 
