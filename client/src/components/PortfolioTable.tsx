@@ -1,48 +1,10 @@
-import Axios from 'axios'
-import { useEffect, useState, useContext } from 'react'
 import { Table } from 'react-bootstrap'
-import { UserContext, formatDollarAmount, CompanyMethods, roundDown } from '@utils/index'
+import { formatDollarAmount, roundDown } from '@utils/index'
 import '@styles/PortfolioTable.css'
 
 
 function PortfolioTable({ holdings, isLoading }) {
 
-  // const user = useContext(UserContext)
-  // const userId = user.id
-  
-  // const company = new CompanyMethods()
-
-  // const [holdings, setHoldings] = useState([])
-  // const [isLoading, setIsLoading] = useState(true)
- 
-  // useEffect(() => {
-  //   getUserPortfolio(userId)
-  // }, [])
-
-  // useEffect(() => {
-  //   holdings.length !== 0 ? setIsLoading(false) : setIsLoading(true);
-  // }, [holdings]);
-
-  // const getUserPortfolio = async (userId: number) => {
-  //   setIsLoading(true);
-  //   const res = await Axios.get(`/api/get_portfolio/${userId}`);
-  //   const portfolioData = res.data;
-  
-  //   const holdingsWithCurrentValue = await Promise.all(
-  //     portfolioData.map(async (holding) => {
-  //       const symbol = holding.symbol;
-  //       const quote = await company.getQuote(symbol);
-  //       const sharePrice = quote.c;
-  //       const shares = holding.shares;
-  //       const currentValue = sharePrice * shares;
-  
-  //       return { ...holding, currentValue };
-  //     })
-  //   );
-  //   setHoldings(holdingsWithCurrentValue);
-  //   setIsLoading(false);
-  // };
-    
   const renderPortfolioTable = () => {
 
     if (isLoading) {
@@ -80,7 +42,7 @@ function PortfolioTable({ holdings, isLoading }) {
 
   return (
 
-      <Table hover className='shadow-sm'>
+      <Table hover className='shadow-sm mt-4'>
         <thead>
           <tr className='table-head shadow-sm'>
             <th>Company</th>

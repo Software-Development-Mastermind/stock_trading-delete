@@ -29,10 +29,6 @@ function PieChart({ holdings, userCash, isLoading }) {
     }
   }, [holdings, userCash, isLoading]);
 
-  useEffect(() => {
-    console.log(data)
-  }, [data])
-
   return(
     <div className='mb-4'>
       <Chart

@@ -7,7 +7,8 @@ import FinancialsTable from './FinancialsTable'
 import PortfolioTable from './PortfolioTable'
 import TradeForm from './TradeForm'
 import PieChart from './PieChart'
-import PerformanceChart from './PerformanceChart'
+import PortfolioSummary from './PortfolioSummary'
+
 
 
 export { 
@@ -20,5 +21,5 @@ export {
     PortfolioTable,
     PieChart,
     TradeForm,
-    PerformanceChart
+    PortfolioSummary
 }

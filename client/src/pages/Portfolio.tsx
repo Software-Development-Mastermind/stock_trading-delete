@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { UserContext, AuthMethods, CompanyMethods, formatDollarAmount } from '@utils/index'
 
 import Container from 'react-bootstrap/Container'
-import { Navbar, PieChart, PortfolioTable } from '@/components/index'
+import { Navbar, PieChart, PortfolioSummary, PortfolioTable } from '@/components/index'
 
 function Portfolio () {
 
@@ -67,6 +67,7 @@ function Portfolio () {
         <Navbar />
         <Container className='mt-5'>
           <PieChart holdings={holdings} userCash={userCash} isLoading={isLoading} />
+          <PortfolioSummary holdings={holdings} userCash={userCash} isLoading={isLoading} />
           <PortfolioTable holdings={holdings} isLoading={isLoading} />
         </Container>
       </div>
