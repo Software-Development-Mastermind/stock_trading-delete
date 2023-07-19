@@ -1,0 +1,20 @@
+.summary-container {
+  background-color: #04013f;
+  padding: 1rem;
+}
+
+.summary-header {
+  color: #08b8fd;
+}
+
+.summary-content {
+  color: white;
+}
+
+.green {
+  color: green;
+}
+
+.red {
+  color: red;
+}
