@@ -37,7 +37,7 @@ function PortfolioSummary({ holdings, userCash, isLoading }) {
       console.log(`Total cost: ${totalCost}`)
       const totalValueToNumber = removeCommas(totalStockValue);
       console.log(`Total value: ${totalValueToNumber}`)
-      const gainLoss = roundDown(calculatePercentChange(totalCost, totalValueToNumber));
+      const gainLoss = roundDown(calculatePercentChange(totalValueToNumber, totalCost));
       console.log(`Gain/Loss: ${gainLoss}`)
       
       setTotalGainLoss(gainLoss);
@@ -49,15 +49,15 @@ function PortfolioSummary({ holdings, userCash, isLoading }) {
       <Row>
         <Col className='d-flex flex-column justify-content-center align-items-center'>
           <h5>Cash</h5>
-          <h5>$ {userCash} </h5>
+          <h4>$ {userCash} </h4>
         </Col>
         <Col className='d-flex flex-column justify-content-center align-items-center'>
           <h5>Total Value</h5>
-          <h5>$ {totalPortfolioValue}</h5>
+          <h4>$ {totalPortfolioValue}</h4>
         </Col>
         <Col className='d-flex flex-column justify-content-center align-items-center'>
           <h5>Total Gain/Loss</h5>
-          <h5>{totalGainLoss} %</h5>
+          <h4>{totalGainLoss} %</h4>
         </Col>
       </Row>
     </Container>
