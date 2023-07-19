@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 
 import { removeCommas, formatDollarAmount, calculatePercentChange, roundDown } from '@utils/index'
-import { get } from 'http';
+
 
 function PortfolioSummary({ holdings, userCash, isLoading }) {
 
@@ -15,31 +15,38 @@ function PortfolioSummary({ holdings, userCash, isLoading }) {
     getTotalPortfolioValue();
     getTotalGainLoss();
   }, [holdings, userCash]);
+
+  const calculateStockValue = () => {
+    if (holdings && holdings.length > 0) {
+      const totalStockValue = holdings.reduce((accumulator, holding) => {
+        return accumulator + holding.currentValue;
+      }, 0);
+      return totalStockValue;
+    }
+  }
+
+  const calculateCost = () => {
+    if (holdings && holdings.length > 0) {
+      const totalCost = holdings.reduce((accumulator, holding) => {
+        return accumulator + removeCommas(holding.cost);
+      }, 0);
+      return totalCost;
+    }
+  }
   
   const getTotalPortfolioValue = () => {
     if (holdings && holdings.length > 0) {
-      const totalValue = holdings.reduce((accumulator, holding) => {
-        return accumulator + holding.currentValue;
-      }, 0);
-      const portfolio = formatDollarAmount(totalValue + cash);
+      const stockValue = calculateStockValue();
+      const portfolio = formatDollarAmount(stockValue + cash);
       setTotalPortfolioValue(portfolio);
     }
   };
 
   const getTotalGainLoss = () => {
     if (holdings && holdings.length > 0) {
-      const totalCost = holdings.reduce((accumulator, holding) => {
-        return accumulator + removeCommas(holding.cost);
-      }, 0)
-      const totalStockValue = holdings.reduce((accumulator, holding) => {
-        return accumulator + holding.currentValue;
-      }, 0)
-      console.log(`Total cost: ${totalCost}`)
-      const totalValueToNumber = removeCommas(totalStockValue);
-      console.log(`Total value: ${totalValueToNumber}`)
-      const gainLoss = roundDown(calculatePercentChange(totalValueToNumber, totalCost));
-      console.log(`Gain/Loss: ${gainLoss}`)
-      
+      const totalStockValue = calculateStockValue();
+      const totalCost = calculateCost();
+      const gainLoss = roundDown(calculatePercentChange(totalStockValue, totalCost));
       setTotalGainLoss(gainLoss);
     }
   }
