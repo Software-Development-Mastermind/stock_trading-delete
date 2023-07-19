@@ -7,6 +7,7 @@ import {
     formatDollarAmount, 
     removeCommas,
     roundDown,
+    calculatePercentChange,
     getUserId 
 } from "./utilityFunctions";
 import type { 
@@ -24,6 +25,7 @@ export {
     removeCommas,
     getUserId,
     roundDown,
+    calculatePercentChange,
     UserContext
 };
 

@@ -28,6 +28,10 @@ const roundDown = (num: number) => {
   return Math.floor(num * 100) / 100
 }
 
+const calculatePercentChange = (current: number, previous: number) => {
+  return ((current - previous) / previous) * 100
+}
+
 const getUserId = async (email: string) => {
   try {
     const res = await Axios.get(`/api/get_user_id/${email}`)
@@ -43,6 +47,7 @@ export {
   formatDate,
   formatDollarAmount,
   removeCommas,
-  roundDown, 
+  roundDown,
+  calculatePercentChange, 
   getUserId 
 }
