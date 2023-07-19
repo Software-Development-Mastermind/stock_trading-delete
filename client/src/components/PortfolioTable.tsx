@@ -5,47 +5,43 @@ import { UserContext, formatDollarAmount, CompanyMethods, roundDown } from '@uti
 import '@styles/PortfolioTable.css'
 
 
-function PortfolioTable() {
+function PortfolioTable({ holdings, isLoading }) {
 
-  const user = useContext(UserContext)
-  const userId = user.id
+  // const user = useContext(UserContext)
+  // const userId = user.id
   
-  const company = new CompanyMethods()
+  // const company = new CompanyMethods()
 
-  const [holdings, setHoldings] = useState([])
-  const [isLoading, setIsLoading] = useState(true)
+  // const [holdings, setHoldings] = useState([])
+  // const [isLoading, setIsLoading] = useState(true)
  
-  useEffect(() => {
-    getUserPortfolio(userId)
-  }, [])
+  // useEffect(() => {
+  //   getUserPortfolio(userId)
+  // }, [])
 
-  useEffect(() => {
-    console.log(holdings)
-  }, [])
+  // useEffect(() => {
+  //   holdings.length !== 0 ? setIsLoading(false) : setIsLoading(true);
+  // }, [holdings]);
 
-  useEffect(() => {
-    holdings.length !== 0 ? setIsLoading(false) : setIsLoading(true);
-  }, [holdings]);
-
-  const getUserPortfolio = async (userId: number) => {
-    setIsLoading(true);
-    const res = await Axios.get(`/api/get_portfolio/${userId}`);
-    const portfolioData = res.data;
+  // const getUserPortfolio = async (userId: number) => {
+  //   setIsLoading(true);
+  //   const res = await Axios.get(`/api/get_portfolio/${userId}`);
+  //   const portfolioData = res.data;
   
-    const holdingsWithCurrentValue = await Promise.all(
-      portfolioData.map(async (holding) => {
-        const symbol = holding.symbol;
-        const quote = await company.getQuote(symbol);
-        const sharePrice = quote.c;
-        const shares = holding.shares;
-        const currentValue = sharePrice * shares;
+  //   const holdingsWithCurrentValue = await Promise.all(
+  //     portfolioData.map(async (holding) => {
+  //       const symbol = holding.symbol;
+  //       const quote = await company.getQuote(symbol);
+  //       const sharePrice = quote.c;
+  //       const shares = holding.shares;
+  //       const currentValue = sharePrice * shares;
   
-        return { ...holding, currentValue };
-      })
-    );
-    setHoldings(holdingsWithCurrentValue);
-    setIsLoading(false);
-  };
+  //       return { ...holding, currentValue };
+  //     })
+  //   );
+  //   setHoldings(holdingsWithCurrentValue);
+  //   setIsLoading(false);
+  // };
     
   const renderPortfolioTable = () => {
 
