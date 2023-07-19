@@ -2,7 +2,7 @@ import Axios from 'axios'
 import { useState, useEffect, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import { UserContext, AuthMethods, formatDollarAmount, CompanyMethods, roundDown } from '@utils/index'
+import { UserContext, AuthMethods, CompanyMethods, formatDollarAmount } from '@utils/index'
 
 import Container from 'react-bootstrap/Container'
 import { Navbar, PieChart, PortfolioTable } from '@/components/index'
@@ -16,6 +16,7 @@ function Portfolio () {
   const auth = new AuthMethods()
   const company = new CompanyMethods()
 
+  const [userCash, setUserCash] = useState(0)
   const [holdings, setHoldings] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   
@@ -25,6 +26,7 @@ function Portfolio () {
 
   useEffect(() => {
     getUserPortfolio(userId)
+    getUserCash(userId)
     }, [])
 
   useEffect(() => {
@@ -53,12 +55,18 @@ function Portfolio () {
     setIsLoading(false);
   };
 
+  const getUserCash = async (userId: number) => {
+    const res = await Axios.get(`/api/get_cash/${userId}`)
+    const formattedCash = formatDollarAmount(res.data.cash)
+    console.log(`Get user cash: ${formattedCash}`)
+    setUserCash(formattedCash)
+  }
+
   return (
       <div>
         <Navbar />
-        <Container>
-          <h3>Portfolio</h3>
-          <PieChart holdings={holdings} isLoading={isLoading} />
+        <Container className='mt-5'>
+          <PieChart holdings={holdings} userCash={userCash} isLoading={isLoading} />
           <PortfolioTable holdings={holdings} isLoading={isLoading} />
         </Container>
       </div>
