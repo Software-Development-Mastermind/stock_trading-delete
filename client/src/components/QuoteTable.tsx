@@ -11,6 +11,10 @@ function QuoteTable({ quote }: QuoteData) {
       <Table borderless size='sm'>
         <tbody>
           <tr>
+            <td>CURRENT PRICE PER SHARE:</td>
+            <td className='text-start'>{quote.currentPrice != null ? `$ ${quote.currentPrice}` : 'Temporarily unavailable.'}</td>
+          </tr>
+          <tr>
             <td>Open Price:</td>
             <td className='text-start'>{quote.openPrice != null ? `$ ${quote.openPrice}` : 'Temporarily unavailable.'}</td>
           </tr>

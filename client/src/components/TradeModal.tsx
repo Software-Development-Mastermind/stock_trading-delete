@@ -1,11 +1,10 @@
 import { Modal, Button } from 'react-bootstrap'
 import { useEffect, useState } from 'react';
 
-import { CompanyMethods } from '@utils/index'
+import { CompanyMethods, roundDown } from '@utils/index'
 import { 
   QuoteTable, 
-  FinancialsTable, 
-  TradeTable, 
+  FinancialsTable,  
   TradeForm 
 } from '@components/index'
 
@@ -47,21 +46,21 @@ function TradeModal({ show, hide, selectedStock }: TradeModalProps): JSX.Element
 
         const financialData = await company.getFinancials(selectedStock.symbol)
         setFinancials({
-          "52WeekHigh": financialData["52WeekHigh"],
+          "52WeekHigh": roundDown(financialData["52WeekHigh"]),
           "52WeekHighDate": financialData["52WeekHighDate"],
-          "52WeekLow": financialData["52WeekLow"],
+          "52WeekLow": roundDown(financialData["52WeekLow"]),
           "52WeekLowDate": financialData["52WeekLowDate"]
         })
 
         const quote = await company.getQuote(selectedStock.symbol)
         setQuote({
-          "currentPrice" : quote.c,
-          "change": quote.d,
-          "percentChange": quote.dp,
-          "dailyHigh": quote.h,
-          "dailyLow": quote.l,
-          "openPrice": quote.o,
-          "previousClose": quote.pc
+          "currentPrice" : roundDown(quote.c),
+          "change": roundDown(quote.d),
+          "percentChange": roundDown(quote.dp),
+          "dailyHigh": roundDown(quote.h),
+          "dailyLow": roundDown(quote.l),
+          "openPrice": roundDown(quote.o),
+          "previousClose": roundDown(quote.pc)
         })
         
       }
@@ -78,7 +77,9 @@ function TradeModal({ show, hide, selectedStock }: TradeModalProps): JSX.Element
       >
 
       <Modal.Header closeButton>
-        <Modal.Title>{`${selectedStock.name || selectedStock.description} (${selectedStock.symbol})`}</Modal.Title>
+        <Modal.Title>
+          {`${selectedStock.name || selectedStock.description} (${selectedStock.symbol})`}
+        </Modal.Title>
       </Modal.Header>
 
       <Modal.Body>
