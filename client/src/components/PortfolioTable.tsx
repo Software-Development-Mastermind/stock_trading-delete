@@ -1,9 +1,26 @@
+import { useState } from 'react'
+
 import { Table } from 'react-bootstrap'
 import { formatDollarAmount, roundDown } from '@utils/index'
+import { TradeModal } from '@components/index'
 import '@styles/PortfolioTable.css'
 
+interface StockData {
+  symbol: string;
+  name: string;
+  description: string;
+}
 
 function PortfolioTable({ holdings, isLoading }) {
+
+  const [showTradeModal, setShowTradeModal] = useState(false);
+  const [selectedStock, setSelectedStock] = useState<StockData | null>(null)
+
+  const handleHideTradeModal = () => setShowTradeModal(false)
+  const handleShowTradeModal = (stock: StockData) => {
+    setShowTradeModal(true)
+    setSelectedStock(stock)
+  }
 
   const renderPortfolioTable = () => {
 
@@ -22,7 +39,7 @@ function PortfolioTable({ holdings, isLoading }) {
       const gainLossColor = gainLoss >= 0 ? 'green' : 'red'
 
       return (
-        <tr key={i}>
+        <tr key={i} onClick={() => handleShowTradeModal(holding)}>
           <td>{holding.name}</td>
           <td>{holding.symbol}</td>
           <td>{holding.shares}</td>
@@ -41,22 +58,28 @@ function PortfolioTable({ holdings, isLoading }) {
   }
 
   return (
-
-      <Table hover className='shadow-sm mt-4'>
-        <thead>
-          <tr className='table-head shadow-sm'>
-            <th>Company</th>
-            <th>Ticker</th>
-            <th>Shares</th>
-            <th>Cost</th>
-            <th>Current Value</th>
-            <th>Gain/Loss</th>
-          </tr>
-        </thead>
-        <tbody>
-        {renderPortfolioTable()}
-        </tbody>
-      </Table>
+      <>
+        <Table hover className='shadow-sm mt-4'>
+          <thead>
+            <tr className='table-head shadow-sm'>
+              <th>Company</th>
+              <th>Ticker</th>
+              <th>Shares</th>
+              <th>Cost</th>
+              <th>Current Value</th>
+              <th>Gain/Loss</th>
+            </tr>
+          </thead>
+          <tbody>
+          {renderPortfolioTable()}
+          </tbody>
+        </Table>
+        <TradeModal
+          show={showTradeModal}
+          hide={handleHideTradeModal}
+          selectedStock={selectedStock} 
+        />
+      </>
   )
 }
 
