@@ -83,15 +83,15 @@ function Login () {
             </Container>
           </Form>
         </Container>
-        <Container className='signup-box rounded shadow-sm mt-4 p-3'>
+        <Container className='signup-box rounded text-center shadow-sm mt-4 p-3'>
           <h5 className='text-center'>
             <span className='new-account-text'>
               Need an account?
             </span>
           </h5>
-          <p className='text-center'>
-            Sign up <a href='/signup'>here</a>.
-          </p>
+          <Button variant='outline-light mt-1 mb-1'>
+            Sign Up
+          </Button>
         </Container>
       </Container>
     </>

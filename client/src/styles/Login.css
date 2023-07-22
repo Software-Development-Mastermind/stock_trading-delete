@@ -25,15 +25,22 @@
 }
 
 .login-button {
-    background-color: #374886 !important;
+    background-image: linear-gradient(45deg, #04013f, #0a1d6e);
     color: white !important;
     border: 1px solid #04013f !important;
+    transition: background-color 0.3s ease;
+}
+
+.login-button:hover {
+  background-image: linear-gradient(45deg, #0a1d6e, #2c5aa8);
+  border-color: #2c5aa8 !important; 
+  cursor: pointer; 
 }
 
 .signup-box {
     border: 1px solid #e6e6e6;
     border-radius: 5px;
-    background-color: #04013f;
+    background-image: linear-gradient(45deg, #0b0a1e, #1c2c70);
     color: white;
 }
 
