@@ -45,8 +45,8 @@ function Login () {
     <>
       <Navbar />
       <Container className='content-container'>
-        <Container className='login-box rounded shadow'>
-          <h3 className='text-center mt-3 mb-3'>Login</h3>
+        <Container className='login-box rounded shadow-sm'>
+          <h3 className='login-header text-center mt-3 mb-3'>Welcome back.</h3>
           <Form className='login-form' onSubmit={handleLogin}>
             <Form.Group className='mb-3' controlId='formBasicEmail'>
               <FloatingLabel 
@@ -62,7 +62,7 @@ function Login () {
                 />
               </FloatingLabel>
             </Form.Group>
-            <Form.Group className='mb-3' controlId='formBasicPassword'>
+            <Form.Group controlId='formBasicPassword'>
             <FloatingLabel 
                 className='md-3' 
                 label='Password'
@@ -76,12 +76,22 @@ function Login () {
                 />
               </FloatingLabel>
             </Form.Group>
-            <Container className='text-center'>
-              <Button className='mt-1' variant='primary' type='submit'>
-                Login
+            <Container className='text-center button-container'>
+              <Button variant='primary' type='submit' className='login-button shadow-sm'>
+                Sign In
               </Button>
             </Container>
           </Form>
+        </Container>
+        <Container className='signup-box rounded shadow-sm mt-4 p-3'>
+          <h5 className='text-center'>
+            <span className='new-account-text'>
+              Need an account?
+            </span>
+          </h5>
+          <p className='text-center'>
+            Sign up <a href='/signup'>here</a>.
+          </p>
         </Container>
       </Container>
     </>

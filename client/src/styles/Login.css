@@ -1,10 +1,44 @@
+.content-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    max-width: 60%;
+    margin: 0 auto;
+}
 
 .login-box {
-    width: 600px;
-    height: 280px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: gray;
+    border: 1px solid #e6e6e6;
+    border-radius: 5px;
+    background-color: #f2f2f2;
+}
+
+.login-header {
+    padding: 1rem;
+    text-align: center;
+    color: #04013f !important;
+}
+
+.button-container {
+    padding: 1rem;
+}
+
+.login-button {
+    background-color: #374886 !important;
+    color: white !important;
+    border: 1px solid #04013f !important;
+}
+
+.signup-box {
+    border: 1px solid #e6e6e6;
+    border-radius: 5px;
+    background-color: #04013f;
+    color: white;
+}
+
+.new-account-text {
+    padding: 1rem;
+    text-align: center;
+    color: #08b8fd !important;
 }

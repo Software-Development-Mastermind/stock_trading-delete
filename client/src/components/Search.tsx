@@ -17,7 +17,6 @@ function Search({ setStocks } : any) {
     if (search === search.toUpperCase()) {
 
       const tickers = await company.searchByTicker(search)
-      console.log(tickers)
       
       const match = tickers.find((ticker: any) => ticker.symbol === search)
       if (match) {
