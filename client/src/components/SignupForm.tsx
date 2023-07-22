@@ -1,11 +1,10 @@
 
 
 import { useState } from 'react';
-import Axios from 'axios';
 
 import { Container, Form, Button, FloatingLabel } from 'react-bootstrap';
 
-function SignupForm() {
+function SignupForm({ onSignup }) {
 
   const [email, setEmail] = useState('');
   const [confirmEmail, setConfirmEmail] = useState('');
@@ -31,22 +30,10 @@ function SignupForm() {
     setConfirmPassword(e.target.value);
   };
 
-  const handleSignup = async (email: string, password: string) => {
-    try {
-      const res = await Axios.post('/api/create_user', {
-        email,
-        password,
-      });
-      console.log(res);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     if (isEmailValid && isPasswordValid) {
-      handleSignup(email, password);
+      onSignup(e, email, password);
     } else {
       console.log('Invalid email or password.');
     }
