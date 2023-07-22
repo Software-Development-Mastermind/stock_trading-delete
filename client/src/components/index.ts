@@ -8,6 +8,8 @@ import PortfolioTable from './PortfolioTable'
 import TradeForm from './TradeForm'
 import PieChart from './PieChart'
 import PortfolioSummary from './PortfolioSummary'
+import LoginForm from './LoginForm'
+import SignupForm from './SignupForm'
 
 
 
@@ -21,5 +23,7 @@ export {
     PortfolioTable,
     PieChart,
     TradeForm,
-    PortfolioSummary
+    PortfolioSummary,
+    LoginForm,
+    SignupForm
 }

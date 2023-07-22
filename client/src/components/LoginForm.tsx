@@ -6,8 +6,17 @@ import {
 } from 'react-bootstrap';
 
 
-function LoginForm({ handleLogin, setEmail, setPassword, email, password }) {
+function LoginForm({ 
+  handleLogin, 
+  setEmail, 
+  setPassword, 
+  email, 
+  password, 
+  handleShowSignup 
+}) {
+
   return (
+
     <>
       <Container className='login-box rounded shadow-sm'>
         <h3 className='login-header text-center mt-3 mb-3'>Welcome back.</h3>
@@ -53,10 +62,13 @@ function LoginForm({ handleLogin, setEmail, setPassword, email, password }) {
             Need an account?
           </span>
         </h5>
-        <Button variant='outline-light mt-1 mb-1'>
+        <Button variant='outline-light mt-1 mb-1' onClick={handleShowSignup}>
           Sign Up
         </Button>
       </Container>
     </>
+
   )
 }
+
+export default LoginForm;
