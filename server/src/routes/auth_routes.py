@@ -22,6 +22,7 @@ class CreateNewUser(Resource):
 
     email = request.json['email']
     password = request.json['password']
+    print(email, password)
 
     existing_user = User.query.filter_by(email=email).first()
     if existing_user:

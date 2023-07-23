@@ -23,8 +23,7 @@ function Login () {
     }
   }, []);
 
-  const handleLogin = async (e: any, email, password) => {
-    e.preventDefault();
+  const handleLogin = async (email, password) => {
     try {
       const login = await auth.login(email, password)
       console.log(login)
@@ -48,14 +47,14 @@ function Login () {
     setShowSignup(true)
   }
 
-  const handleSignup = async (e, newEmail, newPassword) => {
+  const handleSignup = async (newEmail, newPassword) => {
     try {
       const res = await Axios.post('/api/create_user', {
         "email": newEmail,
         "password": newPassword,
       });
       if (res.status === 201) {
-        await handleLogin(e, newEmail, newPassword);
+        await handleLogin(newEmail, newPassword);
         navigate('/');
       }
       console.log(res);

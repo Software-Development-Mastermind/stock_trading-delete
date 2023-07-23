@@ -15,12 +15,20 @@ function LoginForm({
   handleShowSignup 
 }) {
 
+const handleSubmit = (e) => {
+  e.preventDefault();
+  console.log(`Login: ${email} ${password}`);
+  if (email !== '' && password !== '') {
+    handleLogin(email, password);
+  }
+}
+  
   return (
 
     <>
       <Container className='login-box rounded shadow-sm'>
         <h3 className='login-header text-center mt-3 mb-3'>Welcome back.</h3>
-        <Form className='login-form' onSubmit={handleLogin}>
+        <Form className='login-form' onSubmit={handleSubmit}>
           <Form.Group className='mb-3' controlId='formBasicEmail'>
             <FloatingLabel 
               className='md-3' 

@@ -33,7 +33,7 @@ function SignupForm({ onSignup }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (isEmailValid && isPasswordValid) {
-      onSignup(e, email, password);
+      onSignup(email, password);
     } else {
       console.log('Invalid email or password.');
     }
