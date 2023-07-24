@@ -27,3 +27,9 @@ class GetStockFinancials(Resource):
   def get(self, symbol):
     res = finnhub_api.get_financials(symbol)
     return res, 200
+  
+@api.route('/candles/<symbol>/<resolution>/<from_date>/<to_date>')
+class GetCandles(Resource):
+  def get(self, symbol, resolution, from_date, to_date):
+    res = finnhub_api.get_candles(symbol, resolution, from_date, to_date)
+    return res, 200

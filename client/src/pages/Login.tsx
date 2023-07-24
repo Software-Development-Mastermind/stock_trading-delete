@@ -5,8 +5,9 @@ import Axios from 'axios'
 import { Container } from 'react-bootstrap'
 
 import { Navbar, LoginForm, SignupForm } from '@components/index'
-import { AuthMethods, getUserId } from '@utils/index'
+import { AuthMethods, getUserId, getTimestampForOneYearAgo, getTimestampForToday  } from '@utils/index'
 import '@styles/Login.css'
+
 
 function Login () {
 
@@ -62,7 +63,10 @@ function Login () {
       console.log(err);
     }
   };
- 
+
+  console.log(`Timestamp for one year ago: ${getTimestampForOneYearAgo()}`)
+  console.log(`Timestamp for today: ${getTimestampForToday()}`)
+
   return (
     <>
       <Navbar />

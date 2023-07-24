@@ -32,7 +32,7 @@ const calculatePercentChange = (current: number, previous: number) => {
   return ((current - previous) / previous) * 100
 }
 
-const getTimestampforOneYearAgo = () => {
+const getTimestampForOneYearAgo = () => {
   const oneYearAgoDate = new Date()
   oneYearAgoDate.setFullYear(oneYearAgoDate.getFullYear() - 1)
   return Math.floor(oneYearAgoDate.getTime() / 1000)
@@ -59,6 +59,8 @@ export {
   formatDollarAmount,
   removeCommas,
   roundDown,
-  calculatePercentChange, 
+  calculatePercentChange,
+  getTimestampForOneYearAgo,
+  getTimestampForToday, 
   getUserId 
 }

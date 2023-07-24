@@ -8,6 +8,8 @@ import {
     removeCommas,
     roundDown,
     calculatePercentChange,
+    getTimestampForOneYearAgo,
+    getTimestampForToday,
     getUserId 
 } from "./utilityFunctions";
 import type { 
@@ -26,6 +28,8 @@ export {
     getUserId,
     roundDown,
     calculatePercentChange,
+    getTimestampForOneYearAgo,
+    getTimestampForToday,
     UserContext
 };
 
