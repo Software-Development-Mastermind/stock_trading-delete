@@ -32,6 +32,17 @@ const calculatePercentChange = (current: number, previous: number) => {
   return ((current - previous) / previous) * 100
 }
 
+const getTimestampforOneYearAgo = () => {
+  const oneYearAgoDate = new Date()
+  oneYearAgoDate.setFullYear(oneYearAgoDate.getFullYear() - 1)
+  return Math.floor(oneYearAgoDate.getTime() / 1000)
+}
+
+const getTimestampForToday = () => {
+  const today = new Date()
+  return Math.floor(today.getTime() / 1000)
+}
+
 const getUserId = async (email: string) => {
   try {
     const res = await Axios.get(`/api/get_user_id/${email}`)
