@@ -1,9 +1,15 @@
 import { useState, useEffect } from 'react'
+import Axios from 'axios'
 import { Chart } from 'react-google-charts';
+
+import { formatDate, getTimestampForOneYearAgo, getTimestampForToday } from '@utils/index'
 
 function PerformanceChart({ selectedStock }: any) {
 
   const [candlesData, setCandlesData] = useState<any>([])
+  const [chartData, setChartData] = useState([
+    ['Month', 'Price Low', 'Opening Price', 'Final Closing Price', 'Price High'],
+  ]);
 
   const currentDate = new Date();
   const currentMonth = currentDate.getMonth(); // 0 indexed
@@ -17,10 +23,28 @@ function PerformanceChart({ selectedStock }: any) {
     monthNames.push(`${year}-${month + 1}`);
   }
 
-  const data = [
-    ['Month', 'Price Low', 'Opening Price', 'Final Closing Price', 'Price High'],
-    [monthNames[0], 265.25, 272.21639999999996, 297.1497, 298.3197],
-  ];
+  useEffect(() => {
+    if (candlesData) {
+      console.log('Looping through candles data');
+      const newChartData = [
+        ['Month', 'Price Low', 'Opening Price', 'Final Closing Price', 'Price High'],
+      ];
+      const timestamp = candlesData.t
+      console.log(timestamp);
+  
+      for (let i = 0; i < timestamp.length; i++) {
+        const month = monthNames[i];
+        const priceLow = candlesData.l[i];
+        const openingPrice = candlesData.o[i];
+        const closingPrice = candlesData.c[i];
+        const priceHigh = candlesData.h[i];
+        newChartData.push([month, priceLow, openingPrice, closingPrice, priceHigh]);
+      }
+  
+      console.log('New chart data:', newChartData);
+      setChartData(newChartData);
+    }
+  }, [candlesData]);
 
   const symbol = selectedStock.symbol
 
@@ -42,13 +66,17 @@ function PerformanceChart({ selectedStock }: any) {
     getCandlesFromPastYear(symbol)
   }, [])
 
+  useEffect(() => {
+    console.log(`Candles data: ${candlesData["c"]}`)
+  }, [candlesData])
+
   return (
     <Chart
       width={'100%'}
       height={'400px'}
       chartType="CandlestickChart"
       loader={<div>Loading Chart</div>}
-      data={data}
+      data={chartData}
       options={{
         legend: 'none',
         candlestick: {
