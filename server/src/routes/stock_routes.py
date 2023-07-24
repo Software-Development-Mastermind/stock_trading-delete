@@ -1,4 +1,5 @@
 from flask_restx import Resource
+from flask import request
 
 from src.lib.finnhub_api import finnhub_api
 from src.lib.fmp_api import fmp_api
@@ -28,8 +29,13 @@ class GetStockFinancials(Resource):
     res = finnhub_api.get_financials(symbol)
     return res, 200
   
-@api.route('/candles/<symbol>/<resolution>/<from_date>/<to_date>')
+@api.route('/candles/<symbol>')
 class GetCandles(Resource):
-  def get(self, symbol, resolution, from_date, to_date):
+  def get(self, symbol):
+
+    resolution = request.args.get('resolution')
+    from_date = request.args.get('from_date')
+    to_date = request.args.get('to_date')
+
     res = finnhub_api.get_candles(symbol, resolution, from_date, to_date)
     return res, 200

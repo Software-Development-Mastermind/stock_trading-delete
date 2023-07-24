@@ -10,6 +10,7 @@ import PieChart from './PieChart'
 import PortfolioSummary from './PortfolioSummary'
 import LoginForm from './LoginForm'
 import SignupForm from './SignupForm'
+import PerformanceChart from './PerformanceChart'
 
 
 
@@ -25,5 +26,6 @@ export {
     TradeForm,
     PortfolioSummary,
     LoginForm,
-    SignupForm
+    SignupForm,
+    PerformanceChart
 }

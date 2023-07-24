@@ -4,7 +4,8 @@ import { useEffect, useState } from 'react';
 import { CompanyMethods, roundDown } from '@utils/index'
 import { 
   QuoteTable, 
-  FinancialsTable,  
+  FinancialsTable,
+  PerformanceChart,  
   TradeForm 
 } from '@components/index'
 
@@ -85,7 +86,8 @@ function TradeModal({ show, hide, selectedStock }: TradeModalProps): JSX.Element
       <Modal.Body>
 
         <QuoteTable quote={ quote } />
-        <FinancialsTable selectedStock={selectedStock} financials={ financials } />
+        <PerformanceChart />
+        {/* <FinancialsTable selectedStock={selectedStock} financials={ financials } /> */}
         <TradeForm quote={ quote } selectedStock={ selectedStock } />
 
       </Modal.Body>

@@ -42,7 +42,7 @@ class FinnhubAPI:
     from_date = '&from=' + from_date
     to_date = '&to=' + to_date
     
-    url = self.candles_url + symbol
+    url = self.candles_url + symbol + resolution + from_date + to_date
     res = self.session.get(url)
     return res.json()
     

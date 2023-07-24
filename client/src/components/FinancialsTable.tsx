@@ -16,7 +16,13 @@ function FinancialsTable({selectedStock, financials}: FinancialData) {
   const getCandlesFromPastYear = async (symbol: string) => {
     const year = getTimestampForOneYearAgo()
     const today = getTimestampForToday()
-    const res = await Axios.get(`api/candles/<${symbol}>/M/<${year}>/<${today}>`)
+    const res = await Axios.get(`api/candles/${symbol}`, {
+      params: {
+        "resolution": "M",
+        "from_date": year,
+        "to_date": today
+      }
+    })
     setCandlesData(res.data)
     console.log(res.data)
   }
