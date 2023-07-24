@@ -19,6 +19,7 @@ class FinnhubAPI:
     self.ticker_search_url = self.base_url + 'search?q='
     self.quote_url = self.base_url + 'quote?symbol='
     self.financials_url = self.base_url + 'stock/metric?symbol='
+    self.candles_url = self.base_url + 'stock/candle?symbol='
 
   def search_by_ticker(self, ticker):
     url = self.ticker_search_url + ticker
@@ -32,6 +33,16 @@ class FinnhubAPI:
   
   def get_financials(self, symbol):
     url = self.financials_url + symbol
+    res = self.session.get(url)
+    return res.json()
+  
+  def get_candles(self, symbol, resolution, from_date, to_date):
+    
+    resolution = '&resolution=' + resolution
+    from_date = '&from=' + from_date
+    to_date = '&to=' + to_date
+    
+    url = self.candles_url + symbol
     res = self.session.get(url)
     return res.json()
     

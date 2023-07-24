@@ -15,7 +15,8 @@ from src.routes.stock_routes import (
   SearchByCompany, 
   SearchByTicker, 
   GetStockQuote, 
-  GetStockFinancials
+  GetStockFinancials,
+  GetCandles
   )
 from src.routes.user_routes import GetCash, UpdateCash, GetPortfolio, BuyStock, SellStock
 
@@ -42,6 +43,7 @@ def create_app():
   api.add_resource(SearchByTicker, '/ticker_search/<search>')
   api.add_resource(GetStockQuote, '/stock_quote/<symbol>')
   api.add_resource(GetStockFinancials, '/stock_financials/<symbol>')
+  api.add_resource(GetCandles, '/candles/<symbol>/<resolution>/<from_date>/<to_date>')
 
   api.add_resource(GetPortfolio, '/get_portfolio/<user_id>')
   api.add_resource(GetCash, '/get_cash/<user_id>')
