@@ -13,7 +13,7 @@ function NavbarComponent () {
   const navigate = useNavigate()
   const location = useLocation()
   const user = useContext(UserContext)
-  const email = user.email
+  // const email = user.email
  
   const [activeLink, setActiveLink] = useState('')
 
@@ -45,7 +45,7 @@ function NavbarComponent () {
         </Nav.Item>
         {auth.loggedIn() && (
         <Nav.Item className='nav-item logout-btn'>
-          <a onClick={handleLogout}>Logout [{email}]</a>
+          {/* <a onClick={handleLogout}>Logout [{email}]</a> */}
         </Nav.Item>
       )}
       </Navbar>

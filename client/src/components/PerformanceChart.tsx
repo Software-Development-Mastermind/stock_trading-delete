@@ -10,20 +10,25 @@ import '@styles/PerformanceChart.css'
 function PerformanceChart({ financials, selectedStock }: any) {
 
   const [candlesData, setCandlesData] = useState<any>([])
+  const [isLoading, setIsLoading] = useState<boolean>(true)
   const [chartData, setChartData] = useState([
     ['Month', 'Price Low', 'Opening Price', 'Final Closing Price', 'Price High'],
   ]);
 
   const currentDate = new Date();
-  const currentMonth = currentDate.getMonth(); // 0 indexed
+  const currentMonth = currentDate.getMonth();
   const currentYear = currentDate.getFullYear();
-
+  
   const dates: [] = [];
 
-  for (let i = 0; i < 12; i++) {
+  // const getYear = (monthIndex: number) => {
+  //   return currentMonth - monthIndex >= 0 ? currentYear : currentYear - 1;
+  // }
+
+  for (let i = 11; i >= 0; i--) {
     const month = (currentMonth - i + 12) % 12;
-    const year = currentYear - Math.floor((currentMonth - i) / 12);
-    dates.push(`${(getMonthName(month))}-${year}`);
+    const year = currentMonth - month >= 0 ? currentYear : currentYear - 1;
+    dates.push(`${(getMonthName(month - 1))}, ${year}`);
   }
 
   useEffect(() => {
@@ -35,7 +40,7 @@ function PerformanceChart({ financials, selectedStock }: any) {
       const timestamp = candlesData.t
       console.log(timestamp);
     
-      for (let i = 0; i < timestamp.length; i++) {
+      for (let i = 0; i < timestamp.length -1; i++) {
         const date = dates[i];
         const priceLow = candlesData.l[i];
         const openingPrice = candlesData.o[i];
@@ -71,7 +76,9 @@ function PerformanceChart({ financials, selectedStock }: any) {
         "to_date": today
       }
     })
-    setCandlesData(res.data)
+    const candles = res.data
+    setCandlesData(candles)
+    setIsLoading(false)
     console.log(res.data)
   }
 
@@ -82,6 +89,10 @@ function PerformanceChart({ financials, selectedStock }: any) {
   useEffect(() => {
     console.log(`Candles data: ${candlesData["c"]}`)
   }, [candlesData])
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <Container className='shadow-sm rounded mb-1 performance-container'>
