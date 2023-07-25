@@ -24,21 +24,31 @@ function PerformanceChart({ selectedStock }: any) {
   }
 
   useEffect(() => {
-    if (candlesData) {
+    if (candlesData.length !== 0) {
       console.log('Looping through candles data');
       const newChartData = [
-        ['Month', 'Price Low', 'Opening Price', 'Final Closing Price', 'Price High'],
+        ['Month', 'Price Low', 'Opening Price', 'Final Closing Price', 'Price High', { role: 'tooltip', type: 'string', p: { html: true } }],
       ];
       const timestamp = candlesData.t
       console.log(timestamp);
-  
+    
       for (let i = 0; i < timestamp.length; i++) {
         const month = monthNames[i];
         const priceLow = candlesData.l[i];
         const openingPrice = candlesData.o[i];
         const closingPrice = candlesData.c[i];
         const priceHigh = candlesData.h[i];
-        newChartData.push([month, priceLow, openingPrice, closingPrice, priceHigh]);
+
+        const toolTipContent = 
+           `Month: ${month}
+
+            Highest Price: ${priceHigh}
+            Lowest Price: ${priceLow}
+
+            Opening Price: ${openingPrice}
+            Closing Price: ${closingPrice}`
+        
+        newChartData.push([month, priceLow, openingPrice, closingPrice, priceHigh, toolTipContent]);
       }
   
       console.log('New chart data:', newChartData);
@@ -73,7 +83,7 @@ function PerformanceChart({ selectedStock }: any) {
   return (
     <Chart
       width={'100%'}
-      height={'400px'}
+      height={'350px'}
       chartType="CandlestickChart"
       loader={<div>Loading Chart</div>}
       data={chartData}
@@ -84,7 +94,7 @@ function PerformanceChart({ selectedStock }: any) {
           risingColor: { strokeWidth: 0, fill: '#0f9d58' },
         },
       }}
-      rootProps={{ 'data-testid': '1' }}
+      tooltip={{isHtml: true }}
     />
   );
     };
