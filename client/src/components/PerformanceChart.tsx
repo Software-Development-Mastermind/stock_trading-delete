@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react'
 import Axios from 'axios'
+import { Container } from 'react-bootstrap';
 import { Chart } from 'react-google-charts';
 
-import { formatDate, getTimestampForOneYearAgo, getTimestampForToday } from '@utils/index'
+import { formatDate, roundDown, getTimestampForOneYearAgo, getTimestampForToday } from '@utils/index'
 
-function PerformanceChart({ selectedStock }: any) {
+function PerformanceChart({ financials, selectedStock }: any) {
 
   const [candlesData, setCandlesData] = useState<any>([])
   const [chartData, setChartData] = useState([
@@ -42,11 +43,11 @@ function PerformanceChart({ selectedStock }: any) {
         const toolTipContent = 
            `Month: ${month}
 
-            Highest Price: ${priceHigh}
-            Lowest Price: ${priceLow}
+            Highest Price: $ ${roundDown(priceHigh)}
+            Lowest Price: $ ${roundDown(priceLow)}
 
-            Opening Price: ${openingPrice}
-            Closing Price: ${closingPrice}`
+            Opening Price: $ ${roundDown(openingPrice)}
+            Closing Price: $ ${roundDown(closingPrice)}`
         
         newChartData.push([month, priceLow, openingPrice, closingPrice, priceHigh, toolTipContent]);
       }
@@ -81,21 +82,24 @@ function PerformanceChart({ selectedStock }: any) {
   }, [candlesData])
 
   return (
-    <Chart
-      width={'100%'}
-      height={'350px'}
-      chartType="CandlestickChart"
-      loader={<div>Loading Chart</div>}
-      data={chartData}
-      options={{
-        legend: 'none',
-        candlestick: {
-          fallingColor: { strokeWidth: 0, fill: '#a52714' },
-          risingColor: { strokeWidth: 0, fill: '#0f9d58' },
-        },
-      }}
-      tooltip={{isHtml: true }}
-    />
+    <Container className='shadow-sm rounded mb-1'>
+      <p>HISTORIC PERFORMANCE</p>
+      <Chart
+        width={'100%'}
+        height={'350px'}
+        chartType="CandlestickChart"
+        loader={<div>Loading Chart</div>}
+        data={chartData}
+        options={{
+          legend: 'none',
+          candlestick: {
+            fallingColor: { strokeWidth: 0, fill: '#a52714' },
+            risingColor: { strokeWidth: 0, fill: '#0f9d58' },
+          },
+        }}
+        tooltip={{isHtml: true }}
+      />
+    </Container>
   );
     };
 

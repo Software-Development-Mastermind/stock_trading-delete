@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 import { CompanyMethods, roundDown } from '@utils/index'
 import { 
   QuoteTable, 
-  FinancialsTable,
   PerformanceChart,  
   TradeForm 
 } from '@components/index'
@@ -40,6 +39,8 @@ function TradeModal({ show, hide, selectedStock }: TradeModalProps): JSX.Element
     "52WeekLow": 0,
     "52WeekLowDate": ''
   })
+
+  const [shownPerformance, setShownPerformance] = useState<string>('today')
   
   useEffect(() => {
     if (show && selectedStock) {
@@ -85,14 +86,19 @@ function TradeModal({ show, hide, selectedStock }: TradeModalProps): JSX.Element
 
       <Modal.Body>
 
+        <PerformanceChart financials={financials }selectedStock={selectedStock} />
         <QuoteTable quote={ quote } />
-        <PerformanceChart selectedStock={selectedStock} />
-        {/* <FinancialsTable selectedStock={selectedStock} financials={ financials } /> */}
         <TradeForm quote={ quote } selectedStock={ selectedStock } />
 
       </Modal.Body>
 
       <Modal.Footer>
+        <Button className='btn btn-primary shadow-sm'>
+          {shownPerformance === 'today' 
+          ? "See Historic Performance" 
+          : "See Today's Performance"
+          }
+        </Button>
         <Button className='btn btn-secondary shadow-sm' onClick={hide}>Close</Button>
       </Modal.Footer>
 
