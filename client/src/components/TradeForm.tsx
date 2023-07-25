@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from 'react';
 import Axios from 'axios';
-import { Row, Col, Form, Button, ButtonGroup, ToggleButton, Table } from 'react-bootstrap';
+import { Row, Col, Form, Button, ButtonGroup, ToggleButton, Table, Container } from 'react-bootstrap';
 import { UserContext, formatDollarAmount, removeCommas } from '@utils/index'
 import type { QuoteData } from '@utils/index'
 
@@ -149,7 +149,7 @@ function TradeForm({ quote, selectedStock }: QuoteData) {
 
 
   return (
-    <div className='trade-form-container shadow-sm'>
+    <Container className='trade-form-container shadow-sm mt-3'>
       <p className='trade-title'>TRADE</p>
         <Table borderless size='sm'>
           <tbody>
@@ -245,7 +245,7 @@ function TradeForm({ quote, selectedStock }: QuoteData) {
         </Button>
           </Col>
       </Form>
-    </div>
+    </Container>
   );
 }
 
