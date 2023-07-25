@@ -1,5 +1,6 @@
 .quote-container {
-  padding: 1rem
+  padding: 1rem;
+  border: 1px solid #e6e6e6;
 }
 
 .quote-title {

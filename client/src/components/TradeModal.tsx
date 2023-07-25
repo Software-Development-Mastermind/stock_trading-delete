@@ -3,13 +3,14 @@ import { useEffect, useState } from 'react';
 
 import { CompanyMethods, roundDown } from '@utils/index'
 import { 
-  CurrentSharePrice,
   QuoteTable, 
   PerformanceChart,  
   TradeForm 
 } from '@components/index'
 
 import type { StockData, QuoteData, FinancialData } from '@utils/index'
+
+import '@styles/TradeModal.css'
 
 
 interface TradeModalProps {
@@ -87,15 +88,14 @@ function TradeModal({ show, hide, selectedStock }: TradeModalProps): JSX.Element
       size='lg'
       >
 
-      <Modal.Header closeButton>
+      <Modal.Header closeButton className='modal-header'>
         <Modal.Title>
           {`${selectedStock.name || selectedStock.description} (${selectedStock.symbol})`}
         </Modal.Title>
       </Modal.Header>
 
       <Modal.Body>
-        {/* <CurrentSharePrice quote={quote}/> */}
-
+        
         {shownPerformance === 'today' ? (
           <QuoteTable quote={ quote } />
         ) : (
@@ -106,7 +106,7 @@ function TradeModal({ show, hide, selectedStock }: TradeModalProps): JSX.Element
 
       </Modal.Body>
 
-      <Modal.Footer>
+      <Modal.Footer className='modal-footer'>
         <Button className='btn shadow-sm' onClick={handlePerformanceToggle}>
           {shownPerformance === 'today' 
           ? "See Historic Performance" 
