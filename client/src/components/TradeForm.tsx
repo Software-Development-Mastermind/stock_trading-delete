@@ -12,13 +12,16 @@ function TradeForm({ quote, selectedStock }: QuoteData) {
   const userId = user.id
   const symbol = selectedStock.symbol.toString()
   const price = quote.currentPrice
-
+  
   const [userCash, setUserCash] = useState<string | number>(0)
   const [portfolio, setPortfolio] = useState<any>([])
   const [sharesOwned, setSharesOwned] = useState<any>(0)
   const [buyingPower, setBuyingPower] = useState<any>(0)
   const [checked, setChecked] = useState('buy')
   const [shares, setShares] = useState(0)
+
+  const isInsufficientShares = checked === 'sell' && shares > sharesOwned;
+  const exceedsBuyingPower = checked === 'buy' && (shares > 0 && shares > buyingPower);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -205,7 +208,8 @@ function TradeForm({ quote, selectedStock }: QuoteData) {
               <Form.Control 
                 className="shadow-sm" 
                 type="number"
-                min={0} 
+                min={0}
+                max={checked === 'sell' ? sharesOwned : undefined}
                 value={shares}
                 onChange = {handleSharesChange}
                 />
@@ -227,20 +231,18 @@ function TradeForm({ quote, selectedStock }: QuoteData) {
               }
             </p>
           <Col xs={12}>
-            <Button
-              className={`shadow-sm ${
-                checked === 'buy' && (shares > 0 && shares > buyingPower 
-                  ? 'insufficient-funds' 
-                  : '')}`}
-              type='submit'
-              disabled={shares === 0 || shares > buyingPower}
-              >{checked === 'buy' && (shares > 0 && shares > buyingPower)
+          <Button
+            className={`shadow-sm ${isInsufficientShares || exceedsBuyingPower ? 'insufficient-funds' : ''}`}
+            type='submit'
+            disabled={shares === 0 || isInsufficientShares || exceedsBuyingPower}
+            >
+              {exceedsBuyingPower
                 ? 'Insufficient funds'
                 : checked === 'sell'
                 ? 'Sell shares'
                 : 'Purchase shares'
               }
-            </Button>
+        </Button>
           </Col>
       </Form>
     </div>
