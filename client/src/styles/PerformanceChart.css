@@ -2,6 +2,11 @@
 	padding-top: 0.5rem;
 }
 
+.chart-title {
+	color: #08b8fd;
+	font-weight: bold;
+}
+
 .left-column {
 	width: 80%;
 }

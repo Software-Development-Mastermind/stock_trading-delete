@@ -23,7 +23,7 @@ function PerformanceChart({ financials, selectedStock }: any) {
   for (let i = 0; i < 12; i++) {
     const month = (currentMonth - i + 12) % 12;
     const year = currentYear - Math.floor((currentMonth - i) / 12);
-    monthNames.push(`${year}-${month + 1}`);
+    monthNames.push(`${month + 1}-${year}`);
   }
 
   useEffect(() => {
@@ -43,7 +43,7 @@ function PerformanceChart({ financials, selectedStock }: any) {
         const priceHigh = candlesData.h[i];
 
         const toolTipContent = 
-           `Month: ${month}
+           `${month}
 
             Highest Price: $ ${roundDown(priceHigh)}
             Lowest Price: $ ${roundDown(priceLow)}
@@ -85,7 +85,7 @@ function PerformanceChart({ financials, selectedStock }: any) {
 
   return (
     <Container className='shadow-sm rounded mb-1 performance-container'>
-      <p>HISTORIC PERFORMANCE</p>
+      <p className='chart-title'>HISTORIC PERFORMANCE</p>
       <Chart
         width={'100%'}
         height={'350px'}
@@ -98,6 +98,13 @@ function PerformanceChart({ financials, selectedStock }: any) {
             fallingColor: { strokeWidth: 0, fill: '#a52714' },
             risingColor: { strokeWidth: 0, fill: '#0f9d58' },
           },
+          vAxis: {
+            title: 'Share Price (USD)',
+            format: 'currency'
+          },
+          hAxis: {
+            title: 'Month'
+          }
         }}
         tooltip={{isHtml: true }}
       />
