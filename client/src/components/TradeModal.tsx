@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 
 import { CompanyMethods, roundDown } from '@utils/index'
 import { 
+  CurrentSharePrice,
   QuoteTable, 
   PerformanceChart,  
   TradeForm 
@@ -70,6 +71,14 @@ function TradeModal({ show, hide, selectedStock }: TradeModalProps): JSX.Element
     }
   }, [show, selectedStock])
 
+  const handlePerformanceToggle = () => {
+    if (shownPerformance === 'today') {
+      setShownPerformance('historic')
+    } else {
+      setShownPerformance('today')
+    }
+  }
+
   return (
     <Modal
       centered show={show}
@@ -85,19 +94,23 @@ function TradeModal({ show, hide, selectedStock }: TradeModalProps): JSX.Element
       </Modal.Header>
 
       <Modal.Body>
+        <CurrentSharePrice quote={quote}/>
 
-        <PerformanceChart financials={financials }selectedStock={selectedStock} />
-        <QuoteTable quote={ quote } />
+        {shownPerformance === 'today' ? (
+          <QuoteTable quote={ quote } />
+        ) : (
+          <PerformanceChart financials={financials } selectedStock={selectedStock} />
+        )}
+
         <TradeForm quote={ quote } selectedStock={ selectedStock } />
 
       </Modal.Body>
 
       <Modal.Footer>
-        <Button className='btn btn-primary shadow-sm'>
+        <Button className='btn shadow-sm' onClick={handlePerformanceToggle}>
           {shownPerformance === 'today' 
           ? "See Historic Performance" 
-          : "See Today's Performance"
-          }
+          : "See Today's Performance"}
         </Button>
         <Button className='btn btn-secondary shadow-sm' onClick={hide}>Close</Button>
       </Modal.Footer>

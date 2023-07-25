@@ -1,0 +1,13 @@
+.quote-container {
+  padding: 1rem
+}
+
+.quote-title {
+    color: #08b8fd;
+    font-weight: bold;
+    margin-bottom: 1rem
+}
+
+.current-share-price {
+    font-weight: bold;
+}

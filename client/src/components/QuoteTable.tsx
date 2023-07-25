@@ -1,18 +1,20 @@
-import { Table } from 'react-bootstrap';
+import { Container, Table } from 'react-bootstrap';
 import type { QuoteData } from '@utils/index'
+
+import '@styles/QuoteTable.css'
 
 function QuoteTable({ quote }: QuoteData) {
 
   const changeColor = quote.change >= 0 ? 'green' : 'red'
 
   return (
-    <>
-      <p>TODAY</p>
-      <Table borderless size='sm'>
+    <Container className='shadow-sm rounded quote-container mb-3'>
+      <p className='quote-title'>TODAY'S PERFORMANCE</p>
+      <Table borderless size='sm' className='quote-table'>
         <tbody>
           <tr>
-            <td>CURRENT SHARE PRICE:</td>
-            <td className='text-start'>{quote.currentPrice != null ? `$ ${quote.currentPrice}` : 'Temporarily unavailable.'}</td>
+            <td className='current-share-price'>Current Share Price:</td>
+            <td className='text-start current-share-price'>{quote.currentPrice != null ? `$ ${quote.currentPrice}` : 'Temporarily unavailable.'}</td>
           </tr>
           <tr>
             <td>Open Price:</td>
@@ -45,7 +47,7 @@ function QuoteTable({ quote }: QuoteData) {
           </tr>
         </tbody>
       </Table>
-    </>
+    </Container>
   )
 }
 

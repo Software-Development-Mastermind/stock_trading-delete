@@ -11,6 +11,7 @@ import PortfolioSummary from './PortfolioSummary'
 import LoginForm from './LoginForm'
 import SignupForm from './SignupForm'
 import PerformanceChart from './PerformanceChart'
+import CurrentSharePrice from './CurrentSharePrice'
 
 
 
@@ -27,5 +28,6 @@ export {
     PortfolioSummary,
     LoginForm,
     SignupForm,
-    PerformanceChart
+    PerformanceChart,
+    CurrentSharePrice
 }
