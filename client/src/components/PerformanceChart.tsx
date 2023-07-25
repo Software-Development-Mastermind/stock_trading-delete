@@ -21,14 +21,10 @@ function PerformanceChart({ financials, selectedStock }: any) {
   
   const dates: [] = [];
 
-  // const getYear = (monthIndex: number) => {
-  //   return currentMonth - monthIndex >= 0 ? currentYear : currentYear - 1;
-  // }
-
   for (let i = 11; i >= 0; i--) {
-    const month = (currentMonth - i + 12) % 12;
+    const month = (currentMonth - i + 11) % 12;
     const year = currentMonth - month >= 0 ? currentYear : currentYear - 1;
-    dates.push(`${(getMonthName(month - 1))}, ${year}`);
+    dates.push(`${(getMonthName(month))}, ${year}`);
   }
 
   useEffect(() => {
