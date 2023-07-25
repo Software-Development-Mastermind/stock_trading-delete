@@ -151,7 +151,11 @@ function TradeForm({ quote, selectedStock }: QuoteData) {
         <Table borderless size='sm'>
           <tbody>
             <tr>
-              <td className='trade-table'>Shares Owned:</td>
+              <td className='trade-table trade-header current-price'>Current Share Price:</td>
+              <td className='text-start trade-table current-price'>$ {price}</td>
+            </tr>
+            <tr>
+              <td className='trade-table trade-header'>Shares Owned:</td>
               <td className='text-start trade-table'>{sharesOwned}</td>
             </tr>
             <tr>

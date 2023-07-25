@@ -16,6 +16,15 @@
     color: white !important;
 }
 
+.trade-header {
+    width: 80%;
+}
+
+.current-price {
+    color: #08b8fd !important;
+    font-weight: bold;
+}
+
 .shares-identifier {
     vertical-align: bottom;
     margin-bottom: 0;

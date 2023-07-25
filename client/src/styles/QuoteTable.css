@@ -3,11 +3,10 @@
 }
 
 .quote-title {
-    color: #08b8fd;
-    font-weight: bold;
-    margin-bottom: 1rem
+  color: #08b8fd;
+  font-weight: bold;
 }
 
-.current-share-price {
-    font-weight: bold;
+.table-title {
+  width: 80%
 }

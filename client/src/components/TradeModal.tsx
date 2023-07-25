@@ -94,7 +94,7 @@ function TradeModal({ show, hide, selectedStock }: TradeModalProps): JSX.Element
       </Modal.Header>
 
       <Modal.Body>
-        <CurrentSharePrice quote={quote}/>
+        {/* <CurrentSharePrice quote={quote}/> */}
 
         {shownPerformance === 'today' ? (
           <QuoteTable quote={ quote } />

@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react'
 import Axios from 'axios'
-import { Container } from 'react-bootstrap';
+import { Container, Table } from 'react-bootstrap';
 import { Chart } from 'react-google-charts';
 
 import { formatDate, roundDown, getTimestampForOneYearAgo, getTimestampForToday } from '@utils/index'
+
+import '@styles/PerformanceChart.css'
 
 function PerformanceChart({ financials, selectedStock }: any) {
 
@@ -82,7 +84,7 @@ function PerformanceChart({ financials, selectedStock }: any) {
   }, [candlesData])
 
   return (
-    <Container className='shadow-sm rounded mb-1'>
+    <Container className='shadow-sm rounded mb-1 performance-container'>
       <p>HISTORIC PERFORMANCE</p>
       <Chart
         width={'100%'}
@@ -99,6 +101,18 @@ function PerformanceChart({ financials, selectedStock }: any) {
         }}
         tooltip={{isHtml: true }}
       />
+      <Table borderless size='sm'>             
+        <tbody>
+          <tr>
+            <td className='left-column'>52 Week High - {formatDate(financials["52WeekHighDate"])}:</td>
+            <td className='text-start'>{financials["52WeekHigh"] != null ? `$ ${financials["52WeekHigh"]}` : 'Temporarily unavailable.'}</td>
+          </tr>
+          <tr>
+            <td>52 Week Low - {formatDate(financials["52WeekLowDate"])}:</td>
+            <td className='text-start'>{financials["52WeekLow"] != null ? `$ ${financials["52WeekLow"]}` : 'Temporarily unavailable.'}</td>
+          </tr>
+        </tbody>
+      </Table>
     </Container>
   );
     };

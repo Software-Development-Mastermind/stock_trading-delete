@@ -13,10 +13,6 @@ function QuoteTable({ quote }: QuoteData) {
       <Table borderless size='sm' className='quote-table'>
         <tbody>
           <tr>
-            <td className='current-share-price'>Current Share Price:</td>
-            <td className='text-start current-share-price'>{quote.currentPrice != null ? `$ ${quote.currentPrice}` : 'Temporarily unavailable.'}</td>
-          </tr>
-          <tr>
             <td>Open Price:</td>
             <td className='text-start'>{quote.openPrice != null ? `$ ${quote.openPrice}` : 'Temporarily unavailable.'}</td>
           </tr>
@@ -34,7 +30,7 @@ function QuoteTable({ quote }: QuoteData) {
             </td>
           </tr>
           <tr>
-            <td>Today's High:</td>
+            <td className='table-title'>Today's High:</td>
             <td className='text-start'>{quote.dailyHigh != null ? `$ ${quote.dailyHigh}` : 'Temporarily unavailable.'}</td>
           </tr>
           <tr>
