@@ -43,6 +43,14 @@ const getTimestampForToday = () => {
   return Math.floor(today.getTime() / 1000)
 }
 
+const getMonthName = (month: number) => {
+  const monthNames = [
+   'January', 'February', 'March', 'April', 'May', 'June',
+    'July', 'August', 'September', 'October', 'November', 'December'
+  ]
+  return monthNames[month]
+}
+
 const getUserId = async (email: string) => {
   try {
     const res = await Axios.get(`/api/get_user_id/${email}`)
@@ -61,6 +69,7 @@ export {
   roundDown,
   calculatePercentChange,
   getTimestampForOneYearAgo,
-  getTimestampForToday, 
+  getTimestampForToday,
+  getMonthName, 
   getUserId 
 }

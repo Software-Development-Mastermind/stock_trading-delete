@@ -10,6 +10,7 @@ import {
     calculatePercentChange,
     getTimestampForOneYearAgo,
     getTimestampForToday,
+    getMonthName,
     getUserId 
 } from "./utilityFunctions";
 import type { 
@@ -30,6 +31,7 @@ export {
     calculatePercentChange,
     getTimestampForOneYearAgo,
     getTimestampForToday,
+    getMonthName,
     UserContext
 };
 

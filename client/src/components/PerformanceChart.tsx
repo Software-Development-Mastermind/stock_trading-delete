@@ -3,7 +3,7 @@ import Axios from 'axios'
 import { Container, Table } from 'react-bootstrap';
 import { Chart } from 'react-google-charts';
 
-import { formatDate, roundDown, getTimestampForOneYearAgo, getTimestampForToday } from '@utils/index'
+import { formatDate, getMonthName, roundDown, getTimestampForOneYearAgo, getTimestampForToday } from '@utils/index'
 
 import '@styles/PerformanceChart.css'
 
@@ -18,12 +18,12 @@ function PerformanceChart({ financials, selectedStock }: any) {
   const currentMonth = currentDate.getMonth(); // 0 indexed
   const currentYear = currentDate.getFullYear();
 
-  const monthNames = [];
+  const dates: [] = [];
 
   for (let i = 0; i < 12; i++) {
     const month = (currentMonth - i + 12) % 12;
     const year = currentYear - Math.floor((currentMonth - i) / 12);
-    monthNames.push(`${month + 1}-${year}`);
+    dates.push(`${(getMonthName(month))}-${year}`);
   }
 
   useEffect(() => {
@@ -36,14 +36,14 @@ function PerformanceChart({ financials, selectedStock }: any) {
       console.log(timestamp);
     
       for (let i = 0; i < timestamp.length; i++) {
-        const month = monthNames[i];
+        const date = dates[i];
         const priceLow = candlesData.l[i];
         const openingPrice = candlesData.o[i];
         const closingPrice = candlesData.c[i];
         const priceHigh = candlesData.h[i];
 
         const toolTipContent = 
-           `${month}
+           `${date}
 
             Highest Price: $ ${roundDown(priceHigh)}
             Lowest Price: $ ${roundDown(priceLow)}
@@ -51,7 +51,7 @@ function PerformanceChart({ financials, selectedStock }: any) {
             Opening Price: $ ${roundDown(openingPrice)}
             Closing Price: $ ${roundDown(closingPrice)}`
         
-        newChartData.push([month, priceLow, openingPrice, closingPrice, priceHigh, toolTipContent]);
+        newChartData.push([date, priceLow, openingPrice, closingPrice, priceHigh, toolTipContent]);
       }
   
       console.log('New chart data:', newChartData);
@@ -104,7 +104,12 @@ function PerformanceChart({ financials, selectedStock }: any) {
           },
           hAxis: {
             title: 'Month'
-          }
+          },
+          chartArea: { 
+            width: '70%', 
+            height: '60%',
+            bottom: '35%', 
+          },
         }}
         tooltip={{isHtml: true }}
       />
