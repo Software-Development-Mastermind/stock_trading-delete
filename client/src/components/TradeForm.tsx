@@ -176,10 +176,10 @@ function TradeForm({ quote, selectedStock }: QuoteData) {
           <Col xs={12} sm={2}>
             <ButtonGroup className="mb-3">
               <ToggleButton
-                className="shadow-sm"
+                className={`shadow-sm toggle-btn ${checked === 'buy' ? 'checked' : 'not-checked'}`}
                 id="buy-button"
                 type="checkbox"
-                variant="outline-primary"
+                variant="outline"
                 value="buy"
                 checked={checked === 'buy'}
                 onClick={() => {
@@ -189,10 +189,10 @@ function TradeForm({ quote, selectedStock }: QuoteData) {
                 Buy
               </ToggleButton>
               <ToggleButton
-                className="shadow-sm"
+                className={`shadow-sm toggle-btn ${checked === 'sell' ? 'checked' : 'not-checked'}`}
                 id="sell-button"
                 type="checkbox"
-                variant="outline-primary"
+                variant="outline"
                 value="sell"
                 checked={checked === 'sell'}
                 onClick={() => {
@@ -244,12 +244,12 @@ function TradeForm({ quote, selectedStock }: QuoteData) {
           <Col xs={12}>
           <div className='d-grid'>
             <Button
-              className={`shadow-sm ${exceedsBuyingPower ? 'insufficient-funds' : ''}`}
+              className={`shadow-sm transaction-btn ${exceedsBuyingPower ? 'insufficient-funds' : ''}`}
               type='submit'
               disabled={shares === 0 || isInsufficientShares || exceedsBuyingPower}
               >
                 {exceedsBuyingPower
-                  ? 'Insufficient funds'
+                  ? 'Insufficient Funds'
                   : checked === 'sell'
                   ? 'Sell Shares'
                   : 'Purchase Shares'

@@ -13,3 +13,13 @@
   background-color: #e6e6e6;
   width: 45vw;
 }
+
+.search-btn {
+  background-color: #08b8fd;
+  border: 1px solid #08b8fd;
+}
+
+.search-btn:hover {
+  background-color: #1578ba;
+  border: 1px solid #1578ba;
+}

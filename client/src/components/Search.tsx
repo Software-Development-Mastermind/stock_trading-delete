@@ -42,14 +42,14 @@ function Search({ setStocks } : any) {
           <Form.Control
             type='search'
             placeholder='Search by ticker or company name'
-            className='searchbar me-2 rounded-pill shadow-sm'
+            className='searchbar me-2 shadow-sm'
             aria-label='Search'
             onChange={(e) => setSearch(e.target.value)}
             value = {search}
           >
           </Form.Control>
           <Button 
-            className='rounded-pill shadow-sm' 
+            className='shadow-sm search-btn' 
             variant='primary' 
             type='submit'
             >

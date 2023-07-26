@@ -1,36 +1,54 @@
 .trade-form-container {
-    border-radius: 5px;
-    padding: 1rem;
-    background-color: #04013f;
-    color: white;
+  border-radius: 5px;
+  padding: 1rem;
+  background-color: #04013f;
+  color: white;
 }
 
 .trade-title {
-    font-weight: bold;
-    color: #08b8fd
+  font-weight: bold;
+  color: #08b8fd
 }
 
 .trade-table {
-    background-color:#04013f !important;
-    color: white !important;
+  background-color:#04013f !important;
+  color: white !important;
 }
 
 .trade-header {
-    width: 80%;
+  width: 80%;
 }
 
 .current-price {
-    color: #08b8fd !important;
-    font-weight: bold;
+  color: #08b8fd !important;
+  font-weight: bold;
+}
+
+.checked {
+  background-color: #08b8fd !important;
+  border: 1px solid #08b8fd !important;
+  color: white;
+}
+
+.not-checked {
+  background-color: transparent !important;
+  border: 1px solid #08b8fd !important;
+  color: #08b8fd;
 }
 
 .shares-identifier {
-    vertical-align: bottom;
-    margin-bottom: 0;
+  vertical-align: bottom;
+  margin-bottom: 0;
+}
+
+.transaction-btn {
+  background-color: #08b8fd !important;
+  border: 1px solid #08b8fd !important;
+  color: white;
 }
 
 .insufficient-funds {
-    background-color: darkred !important;
-    color: white !important;
-    border: darkred !important;
+  background-color: darkred !important;
+  color: white !important;
+  border: darkred !important;
 }
