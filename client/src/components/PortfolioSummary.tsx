@@ -61,8 +61,16 @@ function PortfolioSummary({ holdings, userCash, isLoading }) {
           <h4 className='summary-content'>$ {userCash} </h4>
         </Col>
         <Col className='d-flex flex-column justify-content-center align-items-center'>
+          <h5 className='summary-header'>Stock Value</h5>
+          <h4 className={gainLossColor}>{totalGainLoss} %</h4>
+        </Col>
+        <Col className='d-flex flex-column justify-content-center align-items-center'>
           <h5 className='summary-header'>Total Value</h5>
           <h4 className='summary-content'>$ {totalPortfolioValue}</h4>
+        </Col>
+        <Col className='d-flex flex-column justify-content-center align-items-center'>
+          <h5 className='summary-header'>Today's Gain/Loss</h5>
+          <h4 className={gainLossColor}>{totalGainLoss} %</h4>
         </Col>
         <Col className='d-flex flex-column justify-content-center align-items-center'>
           <h5 className='summary-header'>Total Gain/Loss</h5>

@@ -216,7 +216,7 @@ function TradeForm({ quote, selectedStock }: QuoteData) {
           </Col>
           <Col xs={8} sm={5} className='d-flex align-items-center'>
             <p className='shares-identifier'>
-              shares of {selectedStock.name} ({selectedStock.symbol})
+              share(s) of {selectedStock.name} ({selectedStock.symbol})
             </p>
           </Col>
           </Row>
@@ -250,8 +250,8 @@ function TradeForm({ quote, selectedStock }: QuoteData) {
                 {exceedsBuyingPower
                   ? 'Insufficient Funds'
                   : checked === 'sell'
-                  ? 'Sell Shares'
-                  : 'Purchase Shares'
+                  ? 'Sell Share(s)'
+                  : 'Purchase Share(s)'
                 }
           </Button>
         </div>
