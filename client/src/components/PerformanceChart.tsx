@@ -18,6 +18,7 @@ function PerformanceChart({ financials, selectedStock }: any) {
   const currentDate = new Date();
   const currentMonth = currentDate.getMonth();
   const currentYear = currentDate.getFullYear();
+  const symbol = selectedStock.symbol
   
   const dates: [] = [];
 
@@ -54,13 +55,9 @@ function PerformanceChart({ financials, selectedStock }: any) {
         
         newChartData.push([date, priceLow, openingPrice, closingPrice, priceHigh, toolTipContent]);
       }
-  
-      console.log('New chart data:', newChartData);
       setChartData(newChartData);
     }
   }, [candlesData]);
-
-  const symbol = selectedStock.symbol
 
   const getCandlesFromPastYear = async (symbol: string) => {
     const year = getTimestampForOneYearAgo()
@@ -75,16 +72,11 @@ function PerformanceChart({ financials, selectedStock }: any) {
     const candles = res.data
     setCandlesData(candles)
     setIsLoading(false)
-    console.log(res.data)
   }
 
   useEffect(() => {
     getCandlesFromPastYear(symbol)
   }, [])
-
-  useEffect(() => {
-    console.log(`Candles data: ${candlesData["c"]}`)
-  }, [candlesData])
 
   if (isLoading) {
     return <div>Loading...</div>;

@@ -3,6 +3,11 @@
 	border: 1px solid #e6e6e6;
 };
 
+.performance-container p {
+	color: #08b8fd;
+	font-weight: bold;
+}
+
 .chart-title {
 	color: #08b8fd;
 	font-weight: bold;
