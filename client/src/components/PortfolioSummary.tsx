@@ -7,13 +7,16 @@ import '@styles/PortfolioSummary.css'
 
 function PortfolioSummary({ holdings, userCash, isLoading }) {
 
+  const [stockValue, setStockValue] = useState(0);
   const [totalPortfolioValue, setTotalPortfolioValue] = useState(0);
   const [totalGainLoss, setTotalGainLoss] = useState(0);
+
 
   const cash = removeCommas(userCash);
   const gainLossColor = totalGainLoss >= 0 ? 'green' : 'red';
 
   useEffect (() => {
+    calculateStockValue();
     getTotalPortfolioValue();
     getTotalGainLoss();
   }, [holdings, userCash]);
@@ -23,7 +26,7 @@ function PortfolioSummary({ holdings, userCash, isLoading }) {
       const totalStockValue = holdings.reduce((accumulator, holding) => {
         return accumulator + holding.currentValue;
       }, 0);
-      return totalStockValue;
+      setStockValue(totalStockValue);
     }
   }
 
@@ -38,7 +41,6 @@ function PortfolioSummary({ holdings, userCash, isLoading }) {
   
   const getTotalPortfolioValue = () => {
     if (holdings && holdings.length > 0) {
-      const stockValue = calculateStockValue();
       const portfolio = formatDollarAmount(stockValue + cash);
       setTotalPortfolioValue(portfolio);
     }
@@ -46,9 +48,8 @@ function PortfolioSummary({ holdings, userCash, isLoading }) {
 
   const getTotalGainLoss = () => {
     if (holdings && holdings.length > 0) {
-      const totalStockValue = calculateStockValue();
       const totalCost = calculateCost();
-      const gainLoss = roundDown(calculatePercentChange(totalStockValue, totalCost));
+      const gainLoss = roundDown(calculatePercentChange(stockValue, totalCost));
       setTotalGainLoss(gainLoss);
     }
   }
@@ -62,7 +63,7 @@ function PortfolioSummary({ holdings, userCash, isLoading }) {
         </Col>
         <Col className='d-flex flex-column justify-content-center align-items-center'>
           <h5 className='summary-header'>Stock Value</h5>
-          <h4 className={gainLossColor}>{totalGainLoss} %</h4>
+          <h4 className='summary-content'>$ {formatDollarAmount(stockValue)}</h4>
         </Col>
         <Col className='d-flex flex-column justify-content-center align-items-center'>
           <h5 className='summary-header'>Total Value</h5>

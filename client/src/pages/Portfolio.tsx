@@ -66,9 +66,17 @@ function Portfolio () {
       <div>
         <Navbar />
         <Container className='mt-5'>
-          <PieChart holdings={holdings} userCash={userCash} isLoading={isLoading} />
-          <PortfolioSummary holdings={holdings} userCash={userCash} isLoading={isLoading} />
-          <PortfolioTable holdings={holdings} isLoading={isLoading} />
+          <PieChart 
+            holdings={holdings} 
+            userCash={userCash} 
+            isLoading={isLoading} />
+          <PortfolioSummary 
+            holdings={holdings} 
+            userCash={userCash} 
+            isLoading={isLoading} />
+          <PortfolioTable 
+            holdings={holdings} 
+            isLoading={isLoading} />
         </Container>
       </div>
   )

@@ -14,9 +14,7 @@ const formatDate = (date: string) => {
 }
 
 const formatDollarAmount = (num: number) => {
-  const withoutDecimal = num.toLocaleString('en-US')
-  const withDecimal = num.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
-  return Number.isInteger(num) ? withoutDecimal : withDecimal
+  return num.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
 }
 
 const removeCommas = (num: number) => {
