@@ -9,6 +9,7 @@ function PortfolioSummary({ holdings, userCash, isLoading }) {
 
   const [stockValue, setStockValue] = useState(0);
   const [totalPortfolioValue, setTotalPortfolioValue] = useState(0);
+  const [todaysGainLoss, setTodaysGainLoss] = useState(0);
   const [totalGainLoss, setTotalGainLoss] = useState(0);
 
 
@@ -18,6 +19,7 @@ function PortfolioSummary({ holdings, userCash, isLoading }) {
   useEffect (() => {
     calculateStockValue();
     getTotalPortfolioValue();
+    getTodaysGainLoss();
     getTotalGainLoss();
   }, [holdings, userCash]);
 
@@ -46,6 +48,16 @@ function PortfolioSummary({ holdings, userCash, isLoading }) {
     }
   }
 
+  const getTodaysGainLoss = () => {
+    if (holdings && holdings.length > 0) {
+      const totalStockChange = holdings.reduce((accumulator, holding) => {
+        return accumulator + holding.change;
+      }, 0);
+      const todaysGainLoss = roundDown(calculatePercentChange(stockValue, stockValue - totalStockChange));
+      setTodaysGainLoss(todaysGainLoss);
+    }
+  }
+
   const getTotalGainLoss = () => {
     if (holdings && holdings.length > 0) {
       const totalCost = calculateCost();
@@ -71,7 +83,7 @@ function PortfolioSummary({ holdings, userCash, isLoading }) {
         </Col>
         <Col className='d-flex flex-column justify-content-center align-items-center'>
           <h5 className='summary-header'>Today's Gain/Loss</h5>
-          <h4 className={gainLossColor}>{totalGainLoss} %</h4>
+          <h4 className={gainLossColor}>{todaysGainLoss} %</h4>
         </Col>
         <Col className='d-flex flex-column justify-content-center align-items-center'>
           <h5 className='summary-header'>Total Gain/Loss</h5>

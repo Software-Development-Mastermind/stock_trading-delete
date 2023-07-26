@@ -84,8 +84,8 @@ function PortfolioTable({ holdings, isLoading }) {
               <th>Company</th>
               <th>Ticker</th>
               <th>Shares</th>
-              <th>Cost</th>
-              <th>Current Value</th>
+              <th>Total Cost</th>
+              <th>Current Total Value</th>
               <th>Today's Gain/Loss</th>
               <th>Total Gain/Loss</th>
             </tr>
