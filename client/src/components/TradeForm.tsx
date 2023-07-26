@@ -33,7 +33,6 @@ function TradeForm({ quote, selectedStock }: QuoteData) {
 
   useEffect(() => {
     getSharesOwned(symbol)
-    console.log(sharesOwned)
   }, [portfolio])
 
   useEffect(() => {
@@ -210,7 +209,7 @@ function TradeForm({ quote, selectedStock }: QuoteData) {
                 type="number"
                 min={0}
                 max={checked === 'sell' ? sharesOwned : undefined}
-                value={shares}
+                value={shares === 0 ? "" : shares}
                 onChange = {handleSharesChange}
                 />
             </Form.Group>

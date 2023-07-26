@@ -36,6 +36,10 @@
   color: #08b8fd;
 }
 
+.not-checked:hover{
+  color: #08b8fd !important;
+}
+
 .shares-identifier {
   vertical-align: bottom;
   margin-bottom: 0;
