@@ -97,7 +97,7 @@ function PerformanceChart({ financials, selectedStock }: any) {
         width={'100%'}
         height={'350px'}
         chartType="CandlestickChart"
-        loader={<div>Loading Chart</div>}
+        loader={<div>Loading Chart...</div>}
         data={chartData}
         options={{
           legend: 'none',
