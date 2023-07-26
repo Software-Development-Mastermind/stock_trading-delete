@@ -3,7 +3,7 @@ import Axios from 'axios'
 import { Container, Table } from 'react-bootstrap';
 import { Chart } from 'react-google-charts';
 
-import { formatDate, getMonthName, roundDown, getTimestampForOneYearAgo, getTimestampForToday } from '@utils/index'
+import { formatDate, getMonthName, formatDollarAmount, getTimestampForOneYearAgo, getTimestampForToday } from '@utils/index'
 
 import '@styles/PerformanceChart.css'
 
@@ -29,6 +29,10 @@ function PerformanceChart({ financials, selectedStock }: any) {
   }
 
   useEffect(() => {
+    getCandlesFromPastYear(symbol)
+  }, [])
+
+  useEffect(() => {
     if (candlesData.length !== 0) {
       console.log('Looping through candles data');
       const newChartData = [
@@ -47,11 +51,11 @@ function PerformanceChart({ financials, selectedStock }: any) {
         const toolTipContent = 
            `${date}
 
-            Highest Price: $ ${roundDown(priceHigh)}
-            Lowest Price: $ ${roundDown(priceLow)}
+            Highest Price: $ ${formatDollarAmount(priceHigh)}
+            Lowest Price: $ ${formatDollarAmount(priceLow)}
 
-            Opening Price: $ ${roundDown(openingPrice)}
-            Closing Price: $ ${roundDown(closingPrice)}`
+            Opening Price: $ ${formatDollarAmount(openingPrice)}
+            Closing Price: $ ${formatDollarAmount(closingPrice)}`
         
         newChartData.push([date, priceLow, openingPrice, closingPrice, priceHigh, toolTipContent]);
       }
@@ -73,10 +77,6 @@ function PerformanceChart({ financials, selectedStock }: any) {
     setCandlesData(candles)
     setIsLoading(false)
   }
-
-  useEffect(() => {
-    getCandlesFromPastYear(symbol)
-  }, [])
 
   if (isLoading) {
     return <div>Loading...</div>;

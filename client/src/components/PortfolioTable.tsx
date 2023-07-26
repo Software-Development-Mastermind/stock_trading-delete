@@ -4,6 +4,7 @@ import { Table } from 'react-bootstrap'
 import { formatDollarAmount, roundDown } from '@utils/index'
 import { TradeModal } from '@components/index'
 import '@styles/PortfolioTable.css'
+import { calculatePercentChange } from '@/utils'
 
 interface StockData {
   symbol: string;
@@ -35,8 +36,15 @@ function PortfolioTable({ holdings, isLoading }) {
     const renderedRows = holdings.map((holding: any, i) => {
       const formattedCost = formatDollarAmount(holding.cost)
       const formattedCurrentValue = formatDollarAmount(holding.currentValue)
-      const gainLoss = roundDown((holding.currentValue - holding.cost) / holding.cost * 100)
-      const gainLossColor = gainLoss >= 0 ? 'green' : 'red'
+      
+      const stockGainLossAmount = formatDollarAmount(holding.currentValue - holding.openValue)
+      const stockGainLossPercentage = calculatePercentChange(holding.currentValue, holding.openValue)
+      const roundedStockGainLossPercentage = roundDown(stockGainLossPercentage);
+      const stockGainLossColor = stockGainLossPercentage >= 0 ? 'green' : 'red'
+      
+      const totalGainLossAmount = formatDollarAmount(holding.currentValue - holding.cost)
+      const totalGainLossPercentage = roundDown((holding.currentValue - holding.cost) / holding.cost * 100)
+      const totalGainLossColor = totalGainLossPercentage >= 0 ? 'green' : 'red'
 
       return (
         <tr key={i} onClick={() => handleShowTradeModal(holding)}>
@@ -46,9 +54,20 @@ function PortfolioTable({ holdings, isLoading }) {
           <td>$ {formattedCost}</td>
           <td>$ {formattedCurrentValue}</td>
           <td>
-            <span className={gainLossColor}>
-              {gainLoss}%
+             $ {stockGainLossAmount + ' '}
+             (
+            <span className={stockGainLossColor}>
+              {roundedStockGainLossPercentage}%
             </span>
+             )
+          </td>
+          <td>
+            $ {totalGainLossAmount + ' '}
+            (
+            <span className={totalGainLossColor}>
+              {totalGainLossPercentage}%
+            </span>
+            )
           </td>
         </tr>
       );
@@ -67,7 +86,8 @@ function PortfolioTable({ holdings, isLoading }) {
               <th>Shares</th>
               <th>Cost</th>
               <th>Current Value</th>
-              <th>Gain/Loss</th>
+              <th>Today's Gain/Loss</th>
+              <th>Total Gain/Loss</th>
             </tr>
           </thead>
           <tbody>

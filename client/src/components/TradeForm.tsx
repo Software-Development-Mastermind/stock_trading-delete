@@ -11,7 +11,7 @@ function TradeForm({ quote, selectedStock }: QuoteData) {
   const user = useContext(UserContext)
   const userId = user.id
   const symbol = selectedStock.symbol.toString()
-  const price = quote.currentPrice
+  const price = formatDollarAmount(quote.currentPrice)
   
   const [userCash, setUserCash] = useState<string | number>(0)
   const [portfolio, setPortfolio] = useState<any>([])

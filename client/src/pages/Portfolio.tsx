@@ -44,11 +44,14 @@ function Portfolio () {
       portfolioData.map(async (holding) => {
         const symbol = holding.symbol;
         const quote = await company.getQuote(symbol);
-        const sharePrice = quote.c;
         const shares = holding.shares;
+        const sharePrice = quote.c;
+        const openPrice = quote.o;
+        const openValue = openPrice * shares;
+        const change = quote.d;
         const currentValue = sharePrice * shares;
-  
-        return { ...holding, currentValue };
+
+        return { ...holding, currentValue, change, openPrice, openValue };
       })
     );
     setHoldings(holdingsWithCurrentValue);
@@ -61,6 +64,10 @@ function Portfolio () {
     console.log(`Get user cash: ${formattedCash}`)
     setUserCash(formattedCash)
   }
+
+  useEffect(() => {
+
+  })
 
   return (
       <div>

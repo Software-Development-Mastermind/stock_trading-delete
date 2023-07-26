@@ -38,7 +38,7 @@ function PortfolioSummary({ holdings, userCash, isLoading }) {
       return totalCost;
     }
   }
-  
+ 
   const getTotalPortfolioValue = () => {
     if (holdings && holdings.length > 0) {
       const portfolio = formatDollarAmount(stockValue + cash);
