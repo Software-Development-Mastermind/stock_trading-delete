@@ -221,15 +221,26 @@ function TradeForm({ quote, selectedStock }: QuoteData) {
             </p>
           </Col>
           </Row>
-            <p className='mt-1'>{checked === 'sell' 
-              ? `Total proceeds: $ ${calculateTransactionPrice()}` 
-              : `Total cost: $ ${calculateTransactionPrice()}`}
-            </p>
-            <p className='mt-1'>{checked === 'sell' 
-              ? `Cash balance after sale: $ ${calculateBalanceAfterTransaction()}`
-              : `Cash balance after purchase: $ ${calculateBalanceAfterTransaction()}`
-              }
-            </p>
+            <Table borderless size='sm'>
+              <tbody>
+                <tr>
+                  <td className='trade-table trade-header'>{checked === 'sell' 
+                    ? `Total proceeds:` 
+                    : `Total cost:`
+                    }
+                  </td>
+                  <td className='text-start trade-table'>$ {calculateTransactionPrice()}</td>
+                </tr>
+                <tr>
+                  <td className='trade-table'>{checked === 'sell' 
+                    ? `Cash balance after sale:`
+                    : `Cash balance after purchase:`
+                    }
+                  </td>
+                  <td className='text-start trade-table'>$ {calculateBalanceAfterTransaction()}</td>
+                </tr>
+              </tbody>
+            </Table>
           <Col xs={12}>
           <div className='d-grid'>
             <Button
