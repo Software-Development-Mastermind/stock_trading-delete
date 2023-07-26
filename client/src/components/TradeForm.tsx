@@ -231,18 +231,20 @@ function TradeForm({ quote, selectedStock }: QuoteData) {
               }
             </p>
           <Col xs={12}>
-          <Button
-            className={`shadow-sm ${exceedsBuyingPower ? 'insufficient-funds' : ''}`}
-            type='submit'
-            disabled={shares === 0 || isInsufficientShares || exceedsBuyingPower}
-            >
-              {exceedsBuyingPower
-                ? 'Insufficient funds'
-                : checked === 'sell'
-                ? 'Sell shares'
-                : 'Purchase shares'
-              }
-        </Button>
+          <div className='d-grid'>
+            <Button
+              className={`shadow-sm ${exceedsBuyingPower ? 'insufficient-funds' : ''}`}
+              type='submit'
+              disabled={shares === 0 || isInsufficientShares || exceedsBuyingPower}
+              >
+                {exceedsBuyingPower
+                  ? 'Insufficient funds'
+                  : checked === 'sell'
+                  ? 'Sell Shares'
+                  : 'Purchase Shares'
+                }
+          </Button>
+        </div>
           </Col>
       </Form>
     </Container>

@@ -108,15 +108,14 @@ function TradeModal({ show, hide, selectedStock }: TradeModalProps): JSX.Element
 
       <Modal.Footer className='modal-footer'>
         <div className='me-auto'>
-          <Button className='btn shadow-sm' onClick={handlePerformanceToggle}>
+          <Button className='btn shadow-sm' variant='outline-primary' onClick={handlePerformanceToggle}>
             {shownPerformance === 'today' 
             ? "See Historic Performance" 
             : "See Today's Performance"}
           </Button>
         </div>
-          <Button className='btn btn-secondary shadow-sm' onClick={hide}>Close</Button>
+          <Button className='btn shadow-sm' variant='outline-secondary' onClick={hide}>Close</Button>
       </Modal.Footer>
-
     </Modal>
   )
 }
