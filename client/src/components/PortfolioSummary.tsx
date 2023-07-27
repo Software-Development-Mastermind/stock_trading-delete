@@ -105,19 +105,19 @@ function PortfolioSummary({ holdings, userCash }: PortfolioSummaryProps) {
   return(
     <Container className='shadow-sm summary-container'>
       <Row>
-        <Col className='d-flex flex-column justify-content-center align-items-center'>
+        <Col className='d-flex flex-column justify-content-center align-items-center' md={2}>
           <h5 className='summary-header'>Cash</h5>
           <h4 className='summary-content'>$ {userCash} </h4>
         </Col>
-        <Col className='d-flex flex-column justify-content-center align-items-center'>
+        <Col className='d-flex flex-column justify-content-center align-items-center' md={2}>
           <h5 className='summary-header'>Stock Value</h5>
           <h4 className='summary-content'>$ {formatDollarAmount(stockValue)}</h4>
         </Col>
-        <Col className='d-flex flex-column justify-content-center align-items-center'>
+        <Col className='d-flex flex-column justify-content-center align-items-center' md={2}>
           <h5 className='summary-header'>Total Value</h5>
           <h4 className='summary-content'>$ {totalPortfolioValue}</h4>
         </Col>
-        <Col className='d-flex flex-column justify-content-center align-items-center'>
+        <Col className='d-flex flex-column justify-content-center align-items-center' md={3}>
           <h5 className='summary-header'>Today's Peformance</h5>
           <h4 className='summary-content'>
             $ {todaysGainLoss + ' '}
@@ -128,7 +128,7 @@ function PortfolioSummary({ holdings, userCash }: PortfolioSummaryProps) {
             )
           </h4>
         </Col>
-        <Col className='d-flex flex-column justify-content-center align-items-center'>
+        <Col className='d-flex flex-column justify-content-center align-items-center' md={3}>
           <h5 className='summary-header'>Total Gain/Loss</h5>
           <h4 className='summary-content'>
             $ {totalGainLoss + ' '}
