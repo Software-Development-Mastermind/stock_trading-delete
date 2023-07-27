@@ -11,12 +11,15 @@ interface StockData {
   description: string;
 }
 
-function PortfolioTable({ holdings, isLoading }) {
+function PortfolioTable({ holdings, isLoading, getUserPortfolio, userId }) {
 
   const [showTradeModal, setShowTradeModal] = useState(false);
   const [selectedStock, setSelectedStock] = useState<StockData | null>(null)
 
-  const handleHideTradeModal = () => setShowTradeModal(false)
+  const handleHideTradeModal = () => {
+    setShowTradeModal(false)
+    getUserPortfolio(userId)
+  }
   const handleShowTradeModal = (stock: StockData) => {
     setShowTradeModal(true)
     setSelectedStock(stock)
@@ -96,7 +99,7 @@ function PortfolioTable({ holdings, isLoading }) {
         <TradeModal
           show={showTradeModal}
           hide={handleHideTradeModal}
-          selectedStock={selectedStock} 
+          selectedStock={selectedStock}
         />
       </>
   )

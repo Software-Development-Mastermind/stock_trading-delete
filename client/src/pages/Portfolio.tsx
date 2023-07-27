@@ -88,14 +88,19 @@ function Portfolio () {
           <PieChart 
             holdings={holdings} 
             userCash={userCash} 
-            isLoading={isLoading} />
+            isLoading={isLoading} 
+            />
           <PortfolioSummary 
             holdings={holdings} 
             userCash={userCash} 
-            isLoading={isLoading} />
+            isLoading={isLoading} 
+            />
           <PortfolioTable 
             holdings={holdings} 
-            isLoading={isLoading} />
+            isLoading={isLoading}
+            getUserPortfolio={getUserPortfolio}
+            userId={userId}
+            />
         </Container>
       </div>
   )

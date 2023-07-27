@@ -19,7 +19,7 @@ interface TradeModalProps {
   selectedStock: StockData;
 }
 
-function TradeModal({ show, hide, selectedStock }: TradeModalProps): JSX.Element | null {
+function TradeModal({ show, hide, selectedStock, getUserPortfolo }: TradeModalProps): JSX.Element | null {
 
   if (!selectedStock) return null
 
@@ -114,7 +114,12 @@ function TradeModal({ show, hide, selectedStock }: TradeModalProps): JSX.Element
             : "Show Today's Performance"}
           </Button>
         </div>
-          <Button className='btn shadow-sm' variant='outline-secondary' onClick={hide}>Close</Button>
+          <Button 
+            className='btn shadow-sm' 
+            variant='outline-secondary' 
+            onClick={hide}>
+              Close
+          </Button>
       </Modal.Footer>
     </Modal>
   )
