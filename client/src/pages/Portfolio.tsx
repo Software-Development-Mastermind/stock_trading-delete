@@ -49,9 +49,10 @@ function Portfolio () {
         const openPrice = quote.o;
         const openValue = openPrice * shares;
         const change = quote.d;
+        const changeValue = change * shares;
         const currentValue = sharePrice * shares;
 
-        return { ...holding, currentValue, change, openPrice, openValue };
+        return { ...holding, currentValue, change, openPrice, openValue, changeValue };
       })
     );
     setHoldings(holdingsWithCurrentValue);

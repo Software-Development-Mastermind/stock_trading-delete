@@ -1,26 +1,39 @@
 import { useState, useEffect } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 
-import { removeCommas, formatDollarAmount, calculatePercentChange, roundDown } from '@utils/index'
+import { 
+  removeCommas, 
+  formatDollarAmount, 
+  calculatePercentChange, 
+  roundDown 
+} from '@utils/index'
 
 import '@styles/PortfolioSummary.css'
 
-function PortfolioSummary({ holdings, userCash, isLoading }) {
+interface PortfolioSummaryProps {
+  holdings: HoldingData[];
+  userCash: string;
+}
 
-  const [stockValue, setStockValue] = useState(0);
-  const [totalPortfolioValue, setTotalPortfolioValue] = useState(0);
-  const [todaysGainLoss, setTodaysGainLoss] = useState(0);
-  const [totalGainLoss, setTotalGainLoss] = useState(0);
+function PortfolioSummary({ holdings, userCash }: PortfolioSummaryProps) {
 
+  const [stockValue, setStockValue] = useState<number>(0);
+  const [totalPortfolioValue, setTotalPortfolioValue] = useState<number>(0);
+  const [todaysGainLoss, setTodaysGainLoss] = useState<number>(0);
+  const [todaysGainLossPercentage, setTodaysGainLossPercentage] = useState<number>(0);
+  const [totalGainLoss, setTotalGainLoss] = useState<number>(0);
+  const [totalGainLossPercentage, setTotalGainLossPercentage] = useState<number>(0);
 
-  const cash = removeCommas(userCash);
-  const gainLossColor = totalGainLoss >= 0 ? 'green' : 'red';
+  const cash: number = removeCommas(userCash);
+  const gainLossColor: string = totalGainLoss >= 0 ? 'green' : 'red';
 
   useEffect (() => {
     calculateStockValue();
     getTotalPortfolioValue();
     getTodaysGainLoss();
+    getTodaysGainLossPercentage();
     getTotalGainLoss();
+    getTotalGainLossPercentage();
   }, [holdings, userCash]);
 
   const calculateStockValue = () => {
@@ -50,19 +63,38 @@ function PortfolioSummary({ holdings, userCash, isLoading }) {
 
   const getTodaysGainLoss = () => {
     if (holdings && holdings.length > 0) {
-      const totalStockChange = holdings.reduce((accumulator, holding) => {
-        return accumulator + holding.change;
+      const totalChange = holdings.reduce((accumulator, holding) => {
+        console.log(`Holding change value: ${holding.changeValue}`)
+        return accumulator + holding.changeValue;
+      }, 0)
+      const changeInDollars = formatDollarAmount(totalChange);
+      setTodaysGainLoss(changeInDollars);
+    }
+  }
+
+  const getTodaysGainLossPercentage = () => {
+    if (holdings && holdings.length > 0) {
+      const totalOpenValue = holdings.reduce((accumulator, holding) => {
+        return accumulator + holding.openValue;
       }, 0);
-      const todaysGainLoss = roundDown(calculatePercentChange(stockValue, stockValue - totalStockChange));
-      setTodaysGainLoss(todaysGainLoss);
+      const percentageDifference = roundDown(calculatePercentChange(stockValue, totalOpenValue));
+      setTodaysGainLossPercentage(percentageDifference);
     }
   }
 
   const getTotalGainLoss = () => {
     if (holdings && holdings.length > 0) {
       const totalCost = calculateCost();
-      const gainLoss = roundDown(calculatePercentChange(stockValue, totalCost));
-      setTotalGainLoss(gainLoss);
+      const changeAmount = formatDollarAmount(stockValue - totalCost);
+      setTotalGainLoss(changeAmount);
+    }
+  }
+
+  const getTotalGainLossPercentage = () => {
+    if (holdings && holdings.length > 0) {
+      const totalCost = calculateCost();
+      const percentage = roundDown(calculatePercentChange(stockValue, totalCost));
+      setTotalGainLossPercentage(percentage);
     }
   }
 
@@ -83,11 +115,25 @@ function PortfolioSummary({ holdings, userCash, isLoading }) {
         </Col>
         <Col className='d-flex flex-column justify-content-center align-items-center'>
           <h5 className='summary-header'>Today's Gain/Loss</h5>
-          <h4 className={gainLossColor}>{todaysGainLoss} %</h4>
+          <h4 className='summary-content'>
+            $ {todaysGainLoss + ' '}
+            (
+            <span className={gainLossColor}>
+              {todaysGainLossPercentage} %
+            </span>
+            )
+          </h4>
         </Col>
         <Col className='d-flex flex-column justify-content-center align-items-center'>
           <h5 className='summary-header'>Total Gain/Loss</h5>
-          <h4 className={gainLossColor}>{totalGainLoss} %</h4>
+          <h4 className='summary-content'>
+            $ {totalGainLoss + ' '}
+            (
+            <span className={gainLossColor}>
+              {totalGainLossPercentage} %
+            </span>
+            )
+          </h4>
         </Col>
       </Row>
     </Container>

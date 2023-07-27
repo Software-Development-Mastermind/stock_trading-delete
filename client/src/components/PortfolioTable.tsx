@@ -48,7 +48,7 @@ function PortfolioTable({ holdings, isLoading }) {
 
       return (
         <tr key={i} onClick={() => handleShowTradeModal(holding)}>
-          <td>{holding.name}</td>
+          <td className='holding-name'>{holding.name}</td>
           <td>{holding.symbol}</td>
           <td>{holding.shares}</td>
           <td>$ {formattedCost}</td>
