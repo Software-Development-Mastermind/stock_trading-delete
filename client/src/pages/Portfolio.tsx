@@ -40,7 +40,7 @@ function Portfolio () {
     const res = await Axios.get(`/api/get_portfolio/${userId}`);
     const portfolioData = res.data;
 
-    const holdingsWithCurrentValue = await Promise.all(
+    const holdingsWithPerformanceData = await Promise.all(
       portfolioData.map(async (holding) => {
         const symbol = holding.symbol;
         const quote = await company.getQuote(symbol);
@@ -48,14 +48,25 @@ function Portfolio () {
         const sharePrice = quote.c;
         const openPrice = quote.o;
         const openValue = openPrice * shares;
+        const prevClose = quote.pc;
+        const prevCloseValue = prevClose * shares;
         const change = quote.d;
         const changeValue = change * shares;
         const currentValue = sharePrice * shares;
 
-        return { ...holding, currentValue, change, openPrice, openValue, changeValue };
+        return { 
+          ...holding, 
+          currentValue, 
+          change, 
+          openPrice, 
+          openValue, 
+          changeValue, 
+          prevClose, 
+          prevCloseValue 
+        };
       })
     );
-    setHoldings(holdingsWithCurrentValue);
+    setHoldings(holdingsWithPerformanceData);
     setIsLoading(false);
   };
 

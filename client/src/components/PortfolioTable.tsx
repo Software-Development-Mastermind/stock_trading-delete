@@ -4,7 +4,6 @@ import { Table } from 'react-bootstrap'
 import { formatDollarAmount, roundDown } from '@utils/index'
 import { TradeModal } from '@components/index'
 import '@styles/PortfolioTable.css'
-import { calculatePercentChange } from '@/utils'
 
 interface StockData {
   symbol: string;
@@ -37,8 +36,8 @@ function PortfolioTable({ holdings, isLoading }) {
       const formattedCost = formatDollarAmount(holding.cost)
       const formattedCurrentValue = formatDollarAmount(holding.currentValue)
       
-      const stockGainLossAmount = formatDollarAmount(holding.currentValue - holding.openValue)
-      const stockGainLossPercentage = calculatePercentChange(holding.currentValue, holding.openValue)
+      const stockGainLossAmount = formatDollarAmount(holding.changeValue)
+      const stockGainLossPercentage = ((holding.currentValue - holding.prevCloseValue) / holding.prevCloseValue) * 100
       const roundedStockGainLossPercentage = roundDown(stockGainLossPercentage);
       const stockGainLossColor = stockGainLossPercentage >= 0 ? 'green' : 'red'
       
