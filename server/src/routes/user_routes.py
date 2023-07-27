@@ -29,7 +29,7 @@ class GetPortfolio(Resource):
     
     else:
 
-      return "Portfolio empty.", 200
+      return [], 200
     
 @api.route('/get_cash/<user_id>')
 class GetCash(Resource):

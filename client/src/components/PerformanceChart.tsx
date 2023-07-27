@@ -3,7 +3,13 @@ import Axios from 'axios'
 import { Container, Table } from 'react-bootstrap';
 import { Chart } from 'react-google-charts';
 
-import { formatDate, getMonthName, formatDollarAmount, getTimestampForOneYearAgo, getTimestampForToday } from '@utils/index'
+import { 
+  formatDate, 
+  getMonthName, 
+  formatDollarAmount, 
+  getTimestampForOneYearAgo, 
+  getTimestampForToday 
+} from '@utils/index'
 
 import '@styles/PerformanceChart.css'
 
@@ -39,7 +45,6 @@ function PerformanceChart({ financials, selectedStock }: any) {
         ['Month', 'Price Low', 'Opening Price', 'Final Closing Price', 'Price High', { role: 'tooltip', type: 'string', p: { html: true } }],
       ];
       const timestamp = candlesData.t
-      console.log(timestamp);
     
       for (let i = 0; i < timestamp.length -1; i++) {
         const date = dates[i];

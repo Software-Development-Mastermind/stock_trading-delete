@@ -2,16 +2,20 @@ import { Chart } from 'react-google-charts'
 import { formatDollarAmount, removeCommas } from '@utils/index'
 import { useEffect, useState } from 'react'
 
-function PieChart({ holdings, userCash, isLoading }) {
+function PieChart({ holdings, userCash }) {
 
   const title = {
     title: "Portfolio by Asset Value"
   }
 
+  const cashAsNumber = removeCommas(userCash);
+  const formattedUserCash = formatDollarAmount(userCash);
+  const userCashToolTip = `Cash: $ ${formattedUserCash}`;
+
   const [data, setData] = useState([])
 
   useEffect(() => {
-    if (!isLoading && holdings) {
+    if (holdings) {
       const newData = [['Asset', 'Value', { type: 'string', role: 'tooltip' }]];
       holdings.forEach((holding) => {
         const { name, currentValue } = holding;
@@ -20,14 +24,21 @@ function PieChart({ holdings, userCash, isLoading }) {
         newData.push([name, currentValue, toolTip]);
       });
 
-      const cashAsNumber = removeCommas(userCash);
-      const formattedUserCash = formatDollarAmount(userCash);
-      const userCashToolTip = `Cash: $ ${formattedUserCash}`;
       newData.push(['Cash', cashAsNumber, userCashToolTip]);
 
       setData(newData);
     }
-  }, [holdings, userCash, isLoading]);
+  }, [holdings]);
+
+  useEffect(() => {
+    if (!holdings) {
+      setData([['Asset', 'Value', { type: 'string', role: 'tooltip' }], ['Cash', cashAsNumber, userCashToolTip]])
+    }
+  }, []);
+
+  useEffect(() => {
+    console.log(`holdings are: ${holdings.length}`)
+  }, [holdings])
 
   return(
     <div className='mb-4'>

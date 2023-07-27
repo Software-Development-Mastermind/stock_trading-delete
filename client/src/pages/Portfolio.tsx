@@ -39,35 +39,35 @@ function Portfolio () {
     
     const res = await Axios.get(`/api/get_portfolio/${userId}`);
     const portfolioData = res.data;
-
-    const holdingsWithPerformanceData = await Promise.all(
-      portfolioData.map(async (holding) => {
-        const symbol = holding.symbol;
-        const quote = await company.getQuote(symbol);
-        const shares = holding.shares;
-        const sharePrice = quote.c;
-        const openPrice = quote.o;
-        const openValue = openPrice * shares;
-        const prevClose = quote.pc;
-        const prevCloseValue = prevClose * shares;
-        const change = quote.d;
-        const changeValue = change * shares;
-        const currentValue = sharePrice * shares;
-
-        return { 
-          ...holding, 
-          currentValue, 
-          change, 
-          openPrice, 
-          openValue, 
-          changeValue, 
-          prevClose, 
-          prevCloseValue 
-        };
-      })
-    );
-    setHoldings(holdingsWithPerformanceData);
-    setIsLoading(false);
+    
+      const holdingsWithPerformanceData = await Promise.all(
+        portfolioData.map(async (holding) => {
+          const symbol = holding.symbol;
+          const quote = await company.getQuote(symbol);
+          const shares = holding.shares;
+          const sharePrice = quote.c;
+          const openPrice = quote.o;
+          const openValue = openPrice * shares;
+          const prevClose = quote.pc;
+          const prevCloseValue = prevClose * shares;
+          const change = quote.d;
+          const changeValue = change * shares;
+          const currentValue = sharePrice * shares;
+  
+          return { 
+            ...holding, 
+            currentValue, 
+            change, 
+            openPrice, 
+            openValue, 
+            changeValue, 
+            prevClose, 
+            prevCloseValue 
+          };
+        })
+      );
+      setHoldings(holdingsWithPerformanceData);
+      setIsLoading(false);
   };
 
   const getUserCash = async (userId: number) => {
