@@ -19,13 +19,17 @@ function PortfolioSummary({ holdings, userCash }: PortfolioSummaryProps) {
 
   const [stockValue, setStockValue] = useState<number>(0);
   const [totalPortfolioValue, setTotalPortfolioValue] = useState<number>(0);
+  
   const [todaysGainLoss, setTodaysGainLoss] = useState<number>(0);
   const [todaysGainLossPercentage, setTodaysGainLossPercentage] = useState<number>(0);
+  
   const [totalGainLoss, setTotalGainLoss] = useState<number>(0);
   const [totalGainLossPercentage, setTotalGainLossPercentage] = useState<number>(0);
 
   const cash: number = removeCommas(userCash);
-  const gainLossColor: string = totalGainLoss >= 0 ? 'green' : 'red';
+  const todaysGainLossColor: string = todaysGainLoss >= 0 ? 'green' : 'red';
+  const totalGainLossColor: string = totalGainLoss >= 0 ? 'green' : 'red';
+
 
   useEffect (() => {
     calculateStockValue();
@@ -74,10 +78,10 @@ function PortfolioSummary({ holdings, userCash }: PortfolioSummaryProps) {
 
   const getTodaysGainLossPercentage = () => {
     if (holdings && holdings.length > 0) {
-      const totalOpenValue = holdings.reduce((accumulator, holding) => {
-        return accumulator + holding.openValue;
+      const totalPrevCloseValue = holdings.reduce((accumulator, holding) => {
+        return accumulator + holding.prevCloseValue;
       }, 0);
-      const percentageDifference = roundDown(calculatePercentChange(stockValue, totalOpenValue));
+      const percentageDifference = roundDown(calculatePercentChange(stockValue, totalPrevCloseValue));
       setTodaysGainLossPercentage(percentageDifference);
     }
   }
@@ -114,11 +118,11 @@ function PortfolioSummary({ holdings, userCash }: PortfolioSummaryProps) {
           <h4 className='summary-content'>$ {totalPortfolioValue}</h4>
         </Col>
         <Col className='d-flex flex-column justify-content-center align-items-center'>
-          <h5 className='summary-header'>Today's Gain/Loss</h5>
+          <h5 className='summary-header'>Today's Peformance</h5>
           <h4 className='summary-content'>
             $ {todaysGainLoss + ' '}
             (
-            <span className={gainLossColor}>
+            <span className={todaysGainLossColor}>
               {todaysGainLossPercentage} %
             </span>
             )
@@ -129,7 +133,7 @@ function PortfolioSummary({ holdings, userCash }: PortfolioSummaryProps) {
           <h4 className='summary-content'>
             $ {totalGainLoss + ' '}
             (
-            <span className={gainLossColor}>
+            <span className={totalGainLossColor}>
               {totalGainLossPercentage} %
             </span>
             )
