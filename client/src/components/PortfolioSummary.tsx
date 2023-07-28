@@ -38,8 +38,6 @@ function PortfolioSummary({ holdings, userCash }: PortfolioSummaryProps) {
     getTodaysGainLossPercentage();
     getTotalGainLoss();
     getTotalGainLossPercentage();
-    console.log(`Today's gain/loss: ${todaysGainLossPercentage}`)
-    console.log(todaysGainLossColor)
   }, [holdings, userCash]);
 
   const calculateStockValue = () => {

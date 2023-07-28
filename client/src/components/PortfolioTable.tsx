@@ -1,7 +1,12 @@
 import { useState } from 'react'
 
-import { Table } from 'react-bootstrap'
-import { formatDollarAmount, roundDown } from '@utils/index'
+import { Table, Container } from 'react-bootstrap'
+import { 
+  formatDollarAmount, 
+  roundDown, 
+  getCurrentTime, 
+  getCurrentDate 
+} from '@utils/index'
 import { TradeModal } from '@components/index'
 import '@styles/PortfolioTable.css'
 
@@ -80,9 +85,9 @@ function PortfolioTable({ holdings, isLoading, getUserPortfolio, userId }) {
 
   return (
       <>
-        <Table hover className='shadow-sm mt-4'>
+        <Table hover className='shadow-sm mt-4 holdings-table'>
           <thead>
-            <tr className='table-head shadow-sm'>
+            <tr className='shadow-sm table-head'>
               <th>Company</th>
               <th>Ticker</th>
               <th>Shares</th>
@@ -96,6 +101,11 @@ function PortfolioTable({ holdings, isLoading, getUserPortfolio, userId }) {
           {renderPortfolioTable()}
           </tbody>
         </Table>
+        <Container className='mt-3'>
+          <p className='timestamp'>
+            Last updated: {getCurrentDate()} at {getCurrentTime()}
+          </p>
+        </Container>
         <TradeModal
           show={showTradeModal}
           hide={handleHideTradeModal}

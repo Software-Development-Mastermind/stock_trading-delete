@@ -1,6 +1,7 @@
 .summary-container {
   background-color: #04013f;
   padding: 1rem;
+  border: 1px solid #e6e6e6;
 }
 
 .summary-header {

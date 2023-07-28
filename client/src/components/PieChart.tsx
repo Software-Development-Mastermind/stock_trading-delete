@@ -2,6 +2,8 @@ import { Chart } from 'react-google-charts'
 import { formatDollarAmount, removeCommas } from '@utils/index'
 import { useEffect, useState } from 'react'
 
+import '@styles/PieChart.css'
+
 function PieChart({ holdings, userCash }) {
 
   const title = {
@@ -41,9 +43,8 @@ function PieChart({ holdings, userCash }) {
   }, [holdings])
 
   return(
-    <div className='mb-4'>
+    <div className='mb-4 chart-container shadow-sm'>
       <Chart
-        className='shadow-sm'
         chartType="PieChart"
         data={data}
         options={title}

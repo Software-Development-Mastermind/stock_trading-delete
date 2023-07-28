@@ -1,16 +1,25 @@
-.table-header {
-    background-color: lightgrey !important;
-    color: white;
+.holdings-table-header {
+  background-color: #04013f !important;
+  color: white;
+  border: 1px solid #e6e6e6 !important;
 }
 
 .holding-name {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .green {
-    color: green
+  color: green
 }
 
 .red {
-    color: red
+  color: red
+}
+
+.timestamp {
+  font-size: 0.8rem;
+  color: grey;
+  font-style: italic;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
 }

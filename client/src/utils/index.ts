@@ -11,6 +11,8 @@ import {
     getTimestampForOneYearAgo,
     getTimestampForToday,
     getMonthName,
+    getCurrentTime,
+    getCurrentDate,
     getUserId 
 } from "./utilityFunctions";
 import type { 
@@ -32,6 +34,8 @@ export {
     getTimestampForOneYearAgo,
     getTimestampForToday,
     getMonthName,
+    getCurrentTime,
+    getCurrentDate,
     UserContext
 };
 

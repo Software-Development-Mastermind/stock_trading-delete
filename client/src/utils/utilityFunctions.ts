@@ -41,6 +41,24 @@ const getTimestampForToday = () => {
   return Math.floor(today.getTime() / 1000)
 }
 
+const getCurrentDate = () => {
+  const today = new Date()
+  return today.toLocaleString('en-US', { 
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  })
+}
+
+const getCurrentTime = () => {
+  const today = new Date()
+  return today.toLocaleString('en-US', { 
+    hour: 'numeric',
+    minute: 'numeric',
+    hour12: true,
+  })
+}
+
 const getMonthName = (month: number) => {
   const monthNames = [
    'January', 'February', 'March', 'April', 'May', 'June',
@@ -69,5 +87,7 @@ export {
   getTimestampForOneYearAgo,
   getTimestampForToday,
   getMonthName, 
+  getCurrentTime,
+  getCurrentDate,
   getUserId 
 }
