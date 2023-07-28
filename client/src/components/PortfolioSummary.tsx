@@ -26,11 +26,11 @@ function PortfolioSummary({ holdings, userCash }: PortfolioSummaryProps) {
   const [totalGainLoss, setTotalGainLoss] = useState<number>(0);
   const [totalGainLossPercentage, setTotalGainLossPercentage] = useState<number>(0);
 
+  const [todaysGainLossColor, setTodaysGainLossColor] = useState<string>('green');
+  const [totalGainLossColor, setTotalGainLossColor] = useState<string>('green');
+
   const cash: number = removeCommas(userCash);
-  const todaysGainLossColor: string = todaysGainLoss >= 0 ? 'green' : 'red';
-  const totalGainLossColor: string = totalGainLoss >= 0 ? 'green' : 'red';
-
-
+  
   useEffect (() => {
     calculateStockValue();
     getTotalPortfolioValue();
@@ -38,6 +38,8 @@ function PortfolioSummary({ holdings, userCash }: PortfolioSummaryProps) {
     getTodaysGainLossPercentage();
     getTotalGainLoss();
     getTotalGainLossPercentage();
+    console.log(`Today's gain/loss: ${todaysGainLossPercentage}`)
+    console.log(todaysGainLossColor)
   }, [holdings, userCash]);
 
   const calculateStockValue = () => {
@@ -82,6 +84,7 @@ function PortfolioSummary({ holdings, userCash }: PortfolioSummaryProps) {
         return accumulator + holding.prevCloseValue;
       }, 0);
       const percentageDifference = roundDown(calculatePercentChange(stockValue, totalPrevCloseValue));
+      percentageDifference >= 0 ? setTodaysGainLossColor('green') : setTodaysGainLossColor('red');
       setTodaysGainLossPercentage(percentageDifference);
     }
   }
@@ -90,6 +93,7 @@ function PortfolioSummary({ holdings, userCash }: PortfolioSummaryProps) {
     if (holdings && holdings.length > 0) {
       const totalCost = calculateCost();
       const changeAmount = formatDollarAmount(stockValue - totalCost);
+      changeAmount >= 0 ? setTotalGainLossColor('green') : setTotalGainLossColor('red');
       setTotalGainLoss(changeAmount);
     }
   }
@@ -118,7 +122,7 @@ function PortfolioSummary({ holdings, userCash }: PortfolioSummaryProps) {
           <h4 className='summary-content'>$ {totalPortfolioValue}</h4>
         </Col>
         <Col className='d-flex flex-column justify-content-center align-items-center' md={3}>
-          <h5 className='summary-header'>Today's Peformance</h5>
+          <h5 className='summary-header'>Today's Change</h5>
           <h4 className='summary-content'>
             $ {todaysGainLoss + ' '}
             (
