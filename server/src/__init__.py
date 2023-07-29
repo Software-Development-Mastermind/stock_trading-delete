@@ -10,7 +10,7 @@ from .extensions import (
   CORS
 )
 
-from src.routes.auth_routes import CreateNewUser, AuthenticateUser
+from src.routes.auth_routes import CreateNewUser, AuthenticateUser, GetUserPassword
 from src.routes.stock_routes import (
   SearchByCompany, 
   SearchByTicker, 
@@ -38,6 +38,7 @@ def create_app():
 
   api.add_resource(CreateNewUser, '/create_user')
   api.add_resource(AuthenticateUser, '/authenticate')
+  api.add_resource(GetUserPassword, '/get_user_password/<user_id>')
   
   api.add_resource(SearchByCompany, '/company_search/<search>')
   api.add_resource(SearchByTicker, '/ticker_search/<search>')

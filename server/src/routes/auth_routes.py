@@ -70,4 +70,20 @@ class GetUserId(Resource):
 
       return "User not found!", 404
     
+@api.route('/get_user_password/<user_id>')
+class GetUserPassword(Resource):
+  def get(self, user_id):
+
+    user = User.query.filter_by(id=user_id).first()
+
+    if user:
+
+      user_password = len(user.password)
+      return user_password, 200
+    
+    else:
+
+      return "User not found!", 404
+  
+    
 
