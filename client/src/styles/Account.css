@@ -1,0 +1,12 @@
+.account-container {
+  max-height: 100vh;
+  max-width: 40vh;
+  padding: 1rem;
+  border: 1px solid #e6e6e6;
+}
+
+.account-title {
+  color: #08b8fd !important;
+  font-weight: bold;
+  font-size: larger;
+}
