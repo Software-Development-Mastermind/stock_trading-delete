@@ -43,6 +43,9 @@ function NavbarComponent () {
         <Nav.Item className={`nav-item ${activeLink === '/trade' ? 'active' : ''}`}>
             <Nav.Link href='/trade'>Trade</Nav.Link>
         </Nav.Item>
+        <Nav.Item className={`nav-item ${activeLink === '/account' ? 'active' : ''}`}>
+            <Nav.Link href='/account'>Account</Nav.Link>
+        </Nav.Item>
         {auth.loggedIn() && (
         <Nav.Item className='nav-item logout-btn'>
           <a onClick={handleLogout}>Logout [{email}]</a>

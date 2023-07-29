@@ -1,7 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { useContext } from 'react'
 import { Route, Routes } from 'react-router-dom'
-import { Login, Home, Portfolio, Trade } from '@pages/index'
+import { Login, Home, Portfolio, Trade, Account } from '@pages/index'
 import { UserContext } from '@utils/index'
 
 function App() {
@@ -14,6 +14,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/portfolio" element={<Portfolio />} />
         <Route path="/trade" element={<Trade />} />
+        <Route path="/account" element={<Account />} />
       </Routes>
     </UserContext.Provider>
   )
