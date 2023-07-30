@@ -16,10 +16,12 @@ interface StockData {
   description: string;
 }
 
-function PortfolioTable({ holdings, isLoading, getUserPortfolio, userId }) {
+function PortfolioTable({ holdings, getUserPortfolio, userId }) {
 
   const [showTradeModal, setShowTradeModal] = useState(false);
   const [selectedStock, setSelectedStock] = useState<StockData | null>(null)
+
+  const isEmpty = holdings.length === 0
 
   const handleHideTradeModal = () => {
     setShowTradeModal(false)
@@ -32,10 +34,12 @@ function PortfolioTable({ holdings, isLoading, getUserPortfolio, userId }) {
 
   const renderPortfolioTable = () => {
 
-    if (isLoading) {
+    if (isEmpty) {
       return (
         <tr>
-          <td className='text-center' colSpan={7}>Your portfolio is empty. Visit the Trade page to begin investing!</td>
+          <td className='text-center' colSpan={7}>
+            Your portfolio is empty. Visit the Trade page to begin investing!
+          </td>
         </tr>
       )
     }

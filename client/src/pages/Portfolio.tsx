@@ -18,7 +18,7 @@ function Portfolio () {
 
   const [userCash, setUserCash] = useState(0)
   const [holdings, setHoldings] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   
   useEffect(() => {
     if (!auth.loggedIn()) {navigate("/login")}
@@ -29,13 +29,7 @@ function Portfolio () {
     getUserCash(userId)
     }, [])
 
-  useEffect(() => {
-    holdings.length !== 0 ? setIsLoading(false) : setIsLoading(true);
-    }, [holdings]);
-  
-
   const getUserPortfolio = async (userId: number) => {
-    setIsLoading(true);
     
     const res = await Axios.get(`/api/get_portfolio/${userId}`);
     const portfolioData = res.data;
@@ -78,26 +72,32 @@ function Portfolio () {
   }
 
   return (
-      <div>
-        <Navbar />
-        <Container className='mt-5'>
+    <>
+    <Navbar />
+    <Container className='mt-5'>
+      {isLoading ? (
+        <div>
+          <h1>Loading...</h1>
+        </div>
+      ) : (
+        <>
           <PieChart 
             holdings={holdings} 
             userCash={userCash} 
-            isLoading={isLoading} 
             />
           <PortfolioSummary 
             holdings={holdings} 
             userCash={userCash} 
             />
-          <PortfolioTable 
-            holdings={holdings} 
-            isLoading={isLoading}
+          <PortfolioTable
+            holdings={holdings}
             getUserPortfolio={getUserPortfolio}
             userId={userId}
-            />
-        </Container>
-      </div>
+          />
+        </>
+      )}
+    </Container>
+  </>
   )
 }
 
