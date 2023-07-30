@@ -1,0 +1,15 @@
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 70vh;
+}
+
+.loading-container h3 {
+  margin-top: 1rem;
+  color: #04013f;
+}
+
+.spinner {
+  color: #08b8fd;
+}

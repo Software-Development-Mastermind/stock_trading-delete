@@ -1,11 +1,27 @@
 import Axios from 'axios'
-import { useState, useEffect, useContext } from 'react'
+import { 
+  useState, 
+  useEffect, 
+  useContext 
+} from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import { UserContext, AuthMethods, CompanyMethods, formatDollarAmount } from '@utils/index'
+import { 
+  UserContext, 
+  AuthMethods, 
+  CompanyMethods, 
+  formatDollarAmount 
+} from '@utils/index'
 
-import Container from 'react-bootstrap/Container'
-import { Navbar, PieChart, PortfolioSummary, PortfolioTable } from '@/components/index'
+import { Container, Spinner } from 'react-bootstrap'
+import { 
+  Navbar, 
+  PieChart, 
+  PortfolioSummary, 
+  PortfolioTable 
+} from '@/components/index'
+
+import '@styles/Portfolio.css'
 
 function Portfolio () {
 
@@ -58,6 +74,7 @@ function Portfolio () {
             prevClose, 
             prevCloseValue 
           };
+          
         })
       );
       setHoldings(holdingsWithPerformanceData);
@@ -67,7 +84,6 @@ function Portfolio () {
   const getUserCash = async (userId: number) => {
     const res = await Axios.get(`/api/get_cash/${userId}`)
     const formattedCash = formatDollarAmount(res.data.cash)
-    console.log(`Get user cash: ${formattedCash}`)
     setUserCash(formattedCash)
   }
 
@@ -76,8 +92,9 @@ function Portfolio () {
     <Navbar />
     <Container className='mt-5'>
       {isLoading ? (
-        <div>
-          <h1>Loading...</h1>
+        <div className='d-flex align-items-center loading-container'>
+          <Spinner animation='border' className='spinner' />
+          <h3>Loading portfolio...</h3>
         </div>
       ) : (
         <>
