@@ -31,6 +31,10 @@ function PortfolioSummary({ holdings, userCash }: PortfolioSummaryProps) {
 
   const cash: number = removeCommas(userCash);
   
+  useEffect(() => {
+    calculateStockValue();
+  }, [])
+  
   useEffect (() => {
     calculateStockValue();
     getTotalPortfolioValue();

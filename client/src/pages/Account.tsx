@@ -36,11 +36,11 @@ function Account() {
               <td className='account-title'>ACCOUNT</td>
             </tr>
             <tr>
-              <td>Email:</td>
+              <td className='content-header'>Email:</td>
               <td className='text-start'>{user.email}</td>
             </tr>
             <tr>
-              <td>Password:</td>
+              <td className='content-header'>Password:</td>
               <td className='text-start'>{renderPasswordLength()}</td>
             </tr>
           </thead>

@@ -35,7 +35,7 @@ function PortfolioTable({ holdings, isLoading, getUserPortfolio, userId }) {
     if (isLoading) {
       return (
         <tr>
-          <td>Loading...</td>
+          <td className='text-center' colSpan={7}>Your portfolio is empty. Visit the Trade page to begin investing!</td>
         </tr>
       )
     }

@@ -77,10 +77,6 @@ function Portfolio () {
     setUserCash(formattedCash)
   }
 
-  useEffect(() => {
-
-  })
-
   return (
       <div>
         <Navbar />
@@ -93,7 +89,6 @@ function Portfolio () {
           <PortfolioSummary 
             holdings={holdings} 
             userCash={userCash} 
-            isLoading={isLoading} 
             />
           <PortfolioTable 
             holdings={holdings} 
