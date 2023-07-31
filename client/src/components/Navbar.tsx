@@ -20,13 +20,13 @@ function NavbarComponent () {
   }, [location])
 
   useEffect(() => {
-    if (!auth.loggedIn()) {navigate("/login")}
+    if (!auth.loggedIn()) {navigate('/')}
     }, []);
 
   const handleLogout = async (e: any) => {
       e.preventDefault();
       auth.logout()
-      navigate('/login')
+      navigate('/')
   }
     
     return (

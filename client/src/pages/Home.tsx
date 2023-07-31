@@ -1,8 +1,25 @@
+import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
+
 import { Container, Image, Button } from 'react-bootstrap'
 import { Navbar } from '@components/index'
+import { AuthMethods } from '@utils/index'
 import '@styles/Home.css'
 
 function Home() {
+
+  const navigate = useNavigate()
+  const auth = new AuthMethods()
+
+  useEffect(() => {
+    console.log('Home: ', auth.loggedIn())
+  })
+
+  const handleClick = (e: any) => {
+    e.preventDefault()
+    navigate('/login')
+  }
+
   return (
     <>
       <Navbar />
@@ -23,9 +40,11 @@ function Home() {
         <p>
           Good luck!
         </p>
-        <Button className='shadow-sm login-button'>
-          Sign In or Create an Account to Get Started
-        </Button>
+        {!auth.loggedIn() &&
+          <Button className='shadow-sm login-button' onClick={handleClick}>
+            Sign In or Create an Account to Get Started
+          </Button>
+        }
       </Container>
     </>
     )

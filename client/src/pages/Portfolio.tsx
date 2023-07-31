@@ -37,7 +37,7 @@ function Portfolio () {
   const [isLoading, setIsLoading] = useState(true);
   
   useEffect(() => {
-    if (!auth.loggedIn()) {navigate("/login")}
+    if (!auth.loggedIn()) {navigate('/')}
     }, []);
 
   useEffect(() => {

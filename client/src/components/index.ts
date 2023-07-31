@@ -10,6 +10,7 @@ import PortfolioSummary from './PortfolioSummary'
 import LoginForm from './LoginForm'
 import SignupForm from './SignupForm'
 import PerformanceChart from './PerformanceChart'
+import withAuth from './withAuth'
 
 
 
@@ -27,4 +28,5 @@ export {
     LoginForm,
     SignupForm,
     PerformanceChart,
+    withAuth
 }

@@ -11,19 +11,24 @@ export default function withAuth(AuthComponent) {
 
     const navigate = useNavigate();
 		const location = useLocation();
+
+			useEffect(() => {
+				console.log('withAuth: ', auth.loggedIn())
+			}, []);
 		
 			useEffect(() => {
-				if (location.pathname !== '/login' && !auth.loggedIn()) {
-					navigate('/login');
+				if (location.pathname === '/login') {
+					auth.loggedIn() ? navigate('/') : navigate('/login');
 				} else {
-					navigate('/')
+					if (!auth.loggedIn()) {
+						navigate('/login');
+					}
 				}
 			}, []);
 
 		return (
 			<AuthComponent />
 		)
-		
 	}
   	return AuthWrapped;
 }

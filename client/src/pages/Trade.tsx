@@ -25,7 +25,7 @@ function Trade(): JSX.Element {
   }
 
   useEffect(() => {
-    if (!auth.loggedIn()) {navigate("/login")}
+    if (!auth.loggedIn()) {navigate('/')}
     }, []);
 
   return (
