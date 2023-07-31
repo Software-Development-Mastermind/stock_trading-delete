@@ -1,0 +1,31 @@
+.home-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 70vh;
+}
+
+.bull-image {
+  width: 40vw;
+  height: 40vh;
+  border: 1px solid #e6e6e6 !important;
+  margin: 3rem;
+}
+
+.home-paragraph {
+  text-align: justify;
+  color: rgb(141, 140, 140);
+}
+
+.text-span {
+  color: #08b8fd;
+  font-weight: bold;
+}
+
+.login-button {
+  background-image: linear-gradient(45deg, #04013f, #0a1d6e);
+  color: white !important;
+  border: 1px solid #04013f !important;
+  transition: background-color 0.3s ease;
+}
