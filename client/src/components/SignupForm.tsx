@@ -12,19 +12,13 @@ import {
 function SignupForm({ onSignup }) {
 
   const [email, setEmail] = useState('');
-  const [confirmEmail, setConfirmEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
-  const isEmailValid = email === confirmEmail && email !== '';
   const isPasswordValid = password === confirmPassword && password !== '';
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
-  };
-
-  const handleConfirmEmailChange = (e) => {
-    setConfirmEmail(e.target.value);
   };
 
   const handlePasswordChange = (e) => {
@@ -37,7 +31,7 @@ function SignupForm({ onSignup }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (isEmailValid && isPasswordValid) {
+    if (isPasswordValid) {
       onSignup(email, password);
     } else {
       console.log('Invalid email or password.');
@@ -60,17 +54,6 @@ function SignupForm({ onSignup }) {
               />
             </FloatingLabel>
           </Form.Group>
-          <Form.Group className='mb-3' controlId='formConfirmEmail'>
-            <FloatingLabel className='md-3' label='Confirm Email' controlId='floatingInput'>
-              <Form.Control
-                type='email'
-                placeholder='Confirm email'
-                value={confirmEmail}
-                onChange={handleConfirmEmailChange}
-              />
-            </FloatingLabel>
-            {!isEmailValid && <p className='text-danger'>Emails do not match.</p>}
-          </Form.Group>
           <Form.Group controlId='formBasicPassword'>
             <FloatingLabel className='md-3' label='Password' controlId='floatingInput'>
               <Form.Control
@@ -84,16 +67,22 @@ function SignupForm({ onSignup }) {
           <Form.Group controlId='formConfirmPassword'>
             <FloatingLabel className='md-3' label='Confirm Password' controlId='floatingInput'>
               <Form.Control
+                className='mt-1'
                 type='password'
                 placeholder='Confirm password'
                 value={confirmPassword}
                 onChange={handleConfirmPasswordChange}
               />
             </FloatingLabel>
-            {!isPasswordValid && <p className='text-danger'>Passwords do not match.</p>}
+            {(confirmPassword !== '' && !isPasswordValid) && <p className='text-danger p-1'>Passwords do not match.</p>}
           </Form.Group>
           <Container className='text-center button-container'>
-            <Button variant='primary' type='submit' className='login-button shadow-sm'>
+            <Button 
+              variant='primary' 
+              type='submit' 
+              className='login-button shadow-sm'
+              disabled={!isPasswordValid}
+              >
               Sign Up
             </Button>
           </Container>
