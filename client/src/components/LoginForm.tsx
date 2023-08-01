@@ -15,7 +15,7 @@ function LoginForm({
   handleShowSignup 
 }) {
 
-const handleSubmit = (e) => {
+const handleSubmit = (e: any) => {
   e.preventDefault();
   console.log(`Login: ${email} ${password}`);
   if (email !== '' && password !== '') {

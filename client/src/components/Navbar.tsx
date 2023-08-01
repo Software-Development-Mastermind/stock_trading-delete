@@ -19,10 +19,6 @@ function NavbarComponent () {
     setActiveLink(location.pathname)
   }, [location])
 
-  useEffect(() => {
-    if (!auth.loggedIn()) {navigate('/')}
-    }, []);
-
   const handleLogout = async (e: any) => {
       e.preventDefault();
       auth.logout()
