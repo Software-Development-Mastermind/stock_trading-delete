@@ -40,7 +40,7 @@ function Home() {
         <p className='home-paragraph'>
           You will start with $100,000 in cash that you can use to buy and sell stocks. 
           Visit the <span className='text-span'>Trade</span> page to search for stocks by company name or ticker and begin investing.
-          The <span className='text-span'> Portfolio </span> page will show you how your investments are performing, and will allow you to buy and sell shares in the stocks you already own.
+          The <span className='text-span'> Portfolio </span> page will show you how your investments are performing, and will allow you to buy and sell shares of the stocks you already own.
         </p>
         <p className='home-paragraph'>
           Good luck!

@@ -8,7 +8,11 @@ import {
   TradeForm 
 } from '@components/index'
 
-import type { StockData, QuoteData, FinancialData } from '@utils/index'
+import type { 
+  StockData, 
+  QuoteData, 
+  FinancialData 
+} from '@utils/index'
 
 import '@styles/TradeModal.css'
 
@@ -19,7 +23,7 @@ interface TradeModalProps {
   selectedStock: StockData;
 }
 
-function TradeModal({ show, hide, selectedStock, getUserPortfolo }: TradeModalProps): JSX.Element | null {
+function TradeModal({ show, hide, selectedStock }: TradeModalProps): JSX.Element | null {
 
   if (!selectedStock) return null
 

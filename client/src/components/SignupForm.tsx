@@ -2,7 +2,12 @@
 
 import { useState } from 'react';
 
-import { Container, Form, Button, FloatingLabel } from 'react-bootstrap';
+import { 
+  Container, 
+  Form, 
+  Button, 
+  FloatingLabel 
+} from 'react-bootstrap';
 
 function SignupForm({ onSignup }) {
 

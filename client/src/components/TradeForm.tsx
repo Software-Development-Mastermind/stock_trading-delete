@@ -1,7 +1,23 @@
 import { useState, useEffect, useContext } from 'react';
 import Axios from 'axios';
-import { Row, Col, Form, Button, ButtonGroup, ToggleButton, Table, Container } from 'react-bootstrap';
-import { UserContext, formatDollarAmount, removeCommas } from '@utils/index'
+
+import {
+  Row, 
+  Col, 
+  Form, 
+  Button, 
+  ButtonGroup, 
+  ToggleButton, 
+  Table, 
+  Container 
+} from 'react-bootstrap';
+
+import { 
+  UserContext, 
+  formatDollarAmount, 
+  removeCommas 
+} from '@utils/index'
+
 import type { QuoteData } from '@utils/index'
 
 import '@styles/TradeForm.css'
@@ -68,7 +84,6 @@ function TradeForm({ quote, selectedStock }: QuoteData) {
 
   const getSharesOwned = (symbol: string) => {
     const ownedStock = portfolio.find((stock: any) => stock.symbol === symbol)
-    console.log(ownedStock)
     if (ownedStock) {
       setSharesOwned(ownedStock.shares)
     }
@@ -97,7 +112,6 @@ function TradeForm({ quote, selectedStock }: QuoteData) {
         shares,
         price
       })
-      console.log(res)
     } catch (err) {
       console.log(err)
     }

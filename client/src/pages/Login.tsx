@@ -27,13 +27,12 @@ function Login () {
   const handleLogin = async (email, password) => {
     try {
       const login = await auth.login(email, password)
-      console.log(login)
       if (login) {
         auth.setCurrentUser({
           "email": email,
           "id": await getUserId(email)
         })
-        navigate('/')
+        navigate('/portfolio')
       } else {
         setEmail('')
         setPassword('')
@@ -56,9 +55,8 @@ function Login () {
       });
       if (res.status === 201) {
         await handleLogin(newEmail, newPassword);
-        navigate('/');
+        navigate('/portfolio');
       }
-      console.log(res);
     } catch (err) {
       console.log(err);
     }

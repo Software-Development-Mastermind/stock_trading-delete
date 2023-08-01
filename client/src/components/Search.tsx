@@ -25,8 +25,6 @@ function Search({ setStocks } : any) {
         setStocks(name)
         return
       }
-
-      console.log(tickers)
       setStocks(tickers)
       }
 

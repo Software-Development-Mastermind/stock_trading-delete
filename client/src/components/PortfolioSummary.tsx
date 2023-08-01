@@ -30,11 +30,7 @@ function PortfolioSummary({ holdings, userCash }: PortfolioSummaryProps) {
   const [totalGainLossColor, setTotalGainLossColor] = useState<string>('green');
 
   const cash: number = removeCommas(userCash);
-  
-  useEffect(() => {
-    calculateStockValue();
-  }, [])
-  
+    
   useEffect (() => {
     calculateStockValue();
     getTotalPortfolioValue();
@@ -72,7 +68,6 @@ function PortfolioSummary({ holdings, userCash }: PortfolioSummaryProps) {
   const getTodaysGainLoss = () => {
     if (holdings && holdings.length > 0) {
       const totalChange = holdings.reduce((accumulator, holding) => {
-        console.log(`Holding change value: ${holding.changeValue}`)
         return accumulator + holding.changeValue;
       }, 0)
       const changeInDollars = formatDollarAmount(totalChange);

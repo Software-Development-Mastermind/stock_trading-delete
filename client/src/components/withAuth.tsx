@@ -13,15 +13,11 @@ export default function withAuth(AuthComponent) {
 		const location = useLocation();
 
 			useEffect(() => {
-				console.log('withAuth: ', auth.loggedIn())
-			}, []);
-		
-			useEffect(() => {
 				if (location.pathname === '/login') {
 					auth.loggedIn() ? navigate('/') : navigate('/login');
 				} else {
 					if (!auth.loggedIn()) {
-						navigate('/login');
+						navigate('/');
 					}
 				}
 			}, []);
