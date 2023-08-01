@@ -31,7 +31,7 @@ const handleSubmit = (e: any) => {
         <Form className='login-form' onSubmit={handleSubmit}>
           <Form.Group className='mb-3' controlId='formBasicEmail'>
             <FloatingLabel 
-              className='md-3' 
+              className='md-3 shadow-sm' 
               label='Email address' 
               controlId='floatingInput'
               >
@@ -45,7 +45,7 @@ const handleSubmit = (e: any) => {
           </Form.Group>
           <Form.Group controlId='formBasicPassword'>
           <FloatingLabel 
-              className='md-3' 
+              className='md-3 shadow-sm' 
               label='Password'
               controlId='floatingInput'
               >
@@ -70,7 +70,7 @@ const handleSubmit = (e: any) => {
             Need an account?
           </span>
         </h5>
-        <Button variant='outline-light mt-1 mb-1' onClick={handleShowSignup}>
+        <Button variant='outline-light mt-1 mb-1 shadow-sm' onClick={handleShowSignup}>
           Sign Up
         </Button>
       </Container>

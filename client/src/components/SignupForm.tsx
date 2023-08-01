@@ -47,6 +47,7 @@ function SignupForm({ onSignup }) {
           <Form.Group className='mb-3' controlId='formBasicEmail'>
             <FloatingLabel className='md-3' label='Email address' controlId='floatingInput'>
               <Form.Control
+                className='shadow-sm'
                 type='email'
                 placeholder='Enter email'
                 value={email}
@@ -57,6 +58,7 @@ function SignupForm({ onSignup }) {
           <Form.Group controlId='formBasicPassword'>
             <FloatingLabel className='md-3' label='Password' controlId='floatingInput'>
               <Form.Control
+                className='shadow-sm'
                 type='password'
                 placeholder='Enter password'
                 value={password}
@@ -67,7 +69,7 @@ function SignupForm({ onSignup }) {
           <Form.Group controlId='formConfirmPassword'>
             <FloatingLabel className='md-3' label='Confirm Password' controlId='floatingInput'>
               <Form.Control
-                className='mt-1'
+                className='mt-1 shadow-sm'
                 type='password'
                 placeholder='Confirm password'
                 value={confirmPassword}
