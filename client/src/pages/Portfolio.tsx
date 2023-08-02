@@ -40,10 +40,12 @@ function Portfolio () {
     if (!auth.loggedIn()) {navigate('/')}
     }, []);
 
-  useEffect(() => {
-    getUserPortfolio(userId)
-    getUserCash(userId)
-    }, [])
+    useEffect(() => {
+      Promise.all([getUserPortfolio(userId), getUserCash(userId)])
+        .then(() => {
+          setIsLoading(false);
+        })
+    }, []);
 
   const getUserPortfolio = async (userId: number) => {
     
@@ -78,7 +80,6 @@ function Portfolio () {
         })
       );
       setHoldings(holdingsWithPerformanceData);
-      setIsLoading(false);
   };
 
   const getUserCash = async (userId: number) => {

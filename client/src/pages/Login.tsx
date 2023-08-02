@@ -35,7 +35,7 @@ function Login () {
           "email": email,
           "id": await getUserId(email)
         })
-        navigate('/portfolio')
+        navigate('/')
         } 
       } catch (err) {
         setEmail('')
@@ -55,7 +55,8 @@ function Login () {
         "email": newEmail,
         "password": newPassword,
       });
-      if (res.status === 201) {
+      console.log(res.status)
+      if (res.status === 200) {
         await handleLogin(newEmail, newPassword);
       }
     } catch (err: any) {
