@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import Axios from 'axios'
 
 import { Container } from 'react-bootstrap'
@@ -13,6 +13,7 @@ function Login () {
 
   const auth = new AuthMethods()
   const navigate = useNavigate()
+  const location = useLocation()
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -21,7 +22,7 @@ function Login () {
   const [signupAlert, setSignupAlert] = useState<string>('')
 
   useEffect(() => {
-    if (auth.loggedIn()) {
+    if (location.pathname === '/login' && auth.loggedIn()) {
       navigate('/')
     }
   }, []);
@@ -56,7 +57,6 @@ function Login () {
       });
       if (res.status === 201) {
         await handleLogin(newEmail, newPassword);
-        navigate('/portfolio');
       }
     } catch (err: any) {
       if (err.response.status === 409) {

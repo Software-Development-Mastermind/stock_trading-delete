@@ -23,7 +23,7 @@ from src.routes.user_routes import GetCash, UpdateCash, GetPortfolio, BuyStock, 
 api_bp = Blueprint('api', __name__, url_prefix='/api')
 
 def create_app():
-  app = Flask(__name__)
+  app = Flask(__name__, static_url_path='/', static_folder='../../client/dist')
 
   app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DB_CONNECTION_STRING')
   app.config['JWT_SECRET_KEY'] = os.getenv('JWT_SECRET_KEY')
