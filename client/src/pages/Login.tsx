@@ -17,7 +17,8 @@ function Login () {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [showSignup, setShowSignup] = useState(false)
-  const [accountAlert, setAccountAlert] = useState<string>('')
+  const [loginAlert, setLoginAlert] = useState<string>('')
+  const [signupAlert, setSignupAlert] = useState<string>('')
 
   useEffect(() => {
     if (auth.loggedIn()) {
@@ -34,12 +35,11 @@ function Login () {
           "id": await getUserId(email)
         })
         navigate('/portfolio')
-      } else {
+        } 
+      } catch (err) {
         setEmail('')
         setPassword('')
-      }
-    } catch (err) {
-      console.log(`Login failed: ${err}`)
+        setLoginAlert(err.message)
     }
   }
 
@@ -58,14 +58,14 @@ function Login () {
         await handleLogin(newEmail, newPassword);
         navigate('/portfolio');
       }
-    } catch (err) {
+    } catch (err: any) {
       if (err.response.status === 409) {
-        setAccountAlert('A user with that email already exists. Please log in or use a different email.')
+        setSignupAlert('A user with that email already exists. Please log in or use a different email.')
       } else {
-        setAccountAlert('Something went wrong. Please try again.')
+        setSignupAlert('Something went wrong. Please try again.')
       }
     }
-    };
+  };
 
   return (
     <>
@@ -74,7 +74,7 @@ function Login () {
         {showSignup ? (
           <SignupForm 
             handleSignup={handleSignup} 
-            accountAlert={accountAlert}
+            signupAlert={signupAlert}
           />
         ) : (
           <LoginForm
@@ -84,6 +84,7 @@ function Login () {
             email={email}
             password={password}
             handleShowSignup={handleShowSignup}
+            loginAlert={loginAlert}
           />
         )}  
       </Container>

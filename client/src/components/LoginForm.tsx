@@ -13,12 +13,11 @@ function LoginForm({
   email, 
   password, 
   handleShowSignup,
-  userAlreadyExists 
+  loginAlert
 }) {
 
 const handleSubmit = (e: any) => {
   e.preventDefault();
-  console.log(`Login: ${email} ${password}`);
   if (email !== '' && password !== '') {
     handleLogin(email, password);
   }
@@ -29,6 +28,7 @@ const handleSubmit = (e: any) => {
     <>
       <Container className='login-box rounded shadow-sm'>
         <h3 className='login-header text-center mt-3 mb-3'>Welcome back.</h3>
+        {loginAlert !== '' && <p className='text-danger'>{loginAlert}</p>}
         <Form className='login-form' onSubmit={handleSubmit}>
           <Form.Group className='mb-3' controlId='formBasicEmail'>
             <FloatingLabel 

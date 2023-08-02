@@ -1,6 +1,6 @@
 
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 import { 
   Container, 
@@ -9,7 +9,7 @@ import {
   FloatingLabel 
 } from 'react-bootstrap';
 
-function SignupForm({ handleSignup, accountAlert }) {
+function SignupForm({ handleSignup, signupAlert }) {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -36,10 +36,6 @@ function SignupForm({ handleSignup, accountAlert }) {
     }
   };
 
-  useEffect(() => {
-    console.log('Account alert: ', accountAlert)
-  }, [accountAlert])
-
   return (
     <>
       <Container className='login-box rounded shadow-sm'>
@@ -56,7 +52,7 @@ function SignupForm({ handleSignup, accountAlert }) {
               />
             </FloatingLabel>
           </Form.Group>
-          {accountAlert !== '' && <p className='text-danger p-1'>{accountAlert}</p>}
+          {signupAlert !== '' && <p className='text-danger p-1'>{signupAlert}</p>}
           <Form.Group controlId='formBasicPassword'>
             <FloatingLabel className='md-3' label='Password' controlId='floatingInput'>
               <Form.Control

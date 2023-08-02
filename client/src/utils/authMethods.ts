@@ -25,13 +25,14 @@ class AuthMethods implements IAuthMethods {
         }
       });
       const res_data = res.data
-      console.log(res_data.message)
-      console.log(`Token is: ${res_data.access_token}`)
       this.setToken(res_data.access_token)
       return true
     } catch (err) {
-      console.log(`Authenticating user failed: ${err}`)
-      return false
+      if (err.response.status === 401) {
+        throw new Error('Incorrect email or password.')
+      } else {
+        throw new Error('Something went wrong. Please try again.')
+      }
     }
   }
 
