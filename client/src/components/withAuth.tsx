@@ -10,7 +10,7 @@ export default function withAuth(AuthComponent) {
 	function AuthWrapped() {
 
     const navigate = useNavigate();
-		const location = useLocation();
+	const location = useLocation();
 
 			useEffect(() => {
 				if (location.pathname === '/login') {

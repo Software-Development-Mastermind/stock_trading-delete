@@ -40,7 +40,6 @@ function PerformanceChart({ financials, selectedStock }: any) {
 
   useEffect(() => {
     if (candlesData.length !== 0) {
-      console.log('Looping through candles data');
       const newChartData = [
         ['Month', 'Price Low', 'Opening Price', 'Final Closing Price', 'Price High', { role: 'tooltip', type: 'string', p: { html: true } }],
       ];

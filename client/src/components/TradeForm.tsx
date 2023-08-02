@@ -22,12 +22,17 @@ import type { QuoteData } from '@utils/index'
 
 import '@styles/TradeForm.css'
 
-function TradeForm({ quote, selectedStock }: QuoteData) {
+interface TradeFormProps {
+  quote: QuoteData;
+  selectedStock: { symbol: string; name: string };
+}
 
-  const user = useContext(UserContext)
-  const userId = user.id
-  const symbol = selectedStock.symbol.toString()
-  const price = formatDollarAmount(quote.currentPrice)
+function TradeForm({ quote, selectedStock }: TradeFormProps) {
+
+  const user: string = useContext(UserContext)
+  const userId: number = user.id
+  const symbol: string = selectedStock.symbol.toString()
+  const price: string = formatDollarAmount(quote.currentPrice)
   
   const [userCash, setUserCash] = useState<string | number>(0)
   const [portfolio, setPortfolio] = useState<any>([])
@@ -66,17 +71,15 @@ function TradeForm({ quote, selectedStock }: QuoteData) {
   const getUserCash = async (userId: number) => {
     const res = await Axios.get(`/api/get_cash/${userId}`)
     const formattedCash = formatDollarAmount(res.data.cash)
-    console.log(`Get user cash: ${formattedCash}`)
     setUserCash(formattedCash)
   }
 
   const updateUserCash = async (userId: number, cash: number) => {
     try {
-      const res = await Axios.post(`/api/update_cash/${userId}`, {
+      await Axios.post(`/api/update_cash/${userId}`, {
         userId,
         cash
       })
-      console.log(res)
     } catch (err) {
       console.log(err)
     }
@@ -89,24 +92,34 @@ function TradeForm({ quote, selectedStock }: QuoteData) {
     }
   }
 
-  const buyStock = async (userId, symbol, name, shares, cost) => {
+  const buyStock = async (
+    userId: number, 
+    symbol: string, 
+    name: string, 
+    shares: number, 
+    cost: number
+    ) => {
     try {
-      const res = await Axios.post(`/api/buy_stock/${userId}`, {
+      await Axios.post(`/api/buy_stock/${userId}`, {
         userId,
         symbol,
         name,
         shares,
         cost
       })
-      console.log(res)
     } catch (err) {
       console.log(err)
     }
   }
 
-  const sellStock = async (userId, symbol, shares, price) => {
+  const sellStock = async (
+    userId: number, 
+    symbol: string, 
+    shares: number, 
+    price: number
+    ) => {
     try {
-      const res = await Axios.post(`/api/sell_stock/${userId}`, {
+      await Axios.post(`/api/sell_stock/${userId}`, {
         userId,
         symbol,
         shares,
@@ -140,7 +153,7 @@ function TradeForm({ quote, selectedStock }: QuoteData) {
     setChecked(value);
   }
 
-  const handleSharesChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleSharesChange = (e: any) => {
     setShares(Number(e.target.value));
   }
 

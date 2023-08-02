@@ -38,10 +38,6 @@ function PieChart({ holdings, userCash }) {
     }
   }, []);
 
-  useEffect(() => {
-    console.log(`holdings are: ${holdings.length}`)
-  }, [holdings])
-
   return(
     <div className='mb-4 chart-container shadow-sm'>
       <Chart

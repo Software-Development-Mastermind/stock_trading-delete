@@ -28,6 +28,14 @@ def create_app():
   app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DB_CONNECTION_STRING')
   app.config['JWT_SECRET_KEY'] = os.getenv('JWT_SECRET_KEY')
   app.config['JWT_ALGORITHM'] = 'HS256'
+
+  @app.route('/', defaults={'path': ''})
+  @app.route('/<string:path>')
+  def serve_static(path):
+      try:
+          return app.send_static_file(path)
+      except:
+          return app.send_static_file('index.html')
   
   api.init_app(api_bp)
   CORS.init_app(app, resources={r'/api/*': {'origins:': '*'}}) 

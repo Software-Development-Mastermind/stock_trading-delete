@@ -40,11 +40,11 @@ function Portfolio () {
     if (!auth.loggedIn()) {navigate('/')}
     }, []);
 
-    useEffect(() => {
-      Promise.all([getUserPortfolio(userId), getUserCash(userId)])
-        .then(() => {
-          setIsLoading(false);
-        })
+  useEffect(() => {
+    Promise.all([getUserPortfolio(userId), getUserCash(userId)])
+      .then(() => {
+        setIsLoading(false);
+      })
     }, []);
 
   const getUserPortfolio = async (userId: number) => {
