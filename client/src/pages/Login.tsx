@@ -17,6 +17,7 @@ function Login () {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [showSignup, setShowSignup] = useState(false)
+  const [accountAlert, setAccountAlert] = useState<string>('')
 
   useEffect(() => {
     if (auth.loggedIn()) {
@@ -58,16 +59,23 @@ function Login () {
         navigate('/portfolio');
       }
     } catch (err) {
-      console.log(err);
+      if (err.response.status === 409) {
+        setAccountAlert('A user with that email already exists. Please log in or use a different email.')
+      } else {
+        setAccountAlert('Something went wrong. Please try again.')
+      }
     }
-  };
+    };
 
   return (
     <>
       <Navbar />
       <Container className='content-container'>
         {showSignup ? (
-          <SignupForm onSignup={handleSignup} />
+          <SignupForm 
+            handleSignup={handleSignup} 
+            accountAlert={accountAlert}
+          />
         ) : (
           <LoginForm
             handleLogin={handleLogin}

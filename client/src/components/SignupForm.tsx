@@ -1,6 +1,6 @@
 
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { 
   Container, 
@@ -9,35 +9,36 @@ import {
   FloatingLabel 
 } from 'react-bootstrap';
 
-function SignupForm({ onSignup }) {
+function SignupForm({ handleSignup, accountAlert }) {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
-  const isPasswordValid = password === confirmPassword && password !== '';
+  const passwordIsValid = password === confirmPassword && password !== '';
 
-  const handleEmailChange = (e) => {
+  const handleEmailChange = (e: any) => {
     setEmail(e.target.value);
   };
 
-  const handlePasswordChange = (e) => {
+  const handlePasswordChange = (e: any) => {
     setPassword(e.target.value);
   };
 
-  const handleConfirmPasswordChange = (e) => {
+  const handleConfirmPasswordChange = (e: any) => {
     setConfirmPassword(e.target.value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: any) => {
     e.preventDefault();
-    if (isPasswordValid) {
-      onSignup(email, password);
-    } else {
-      console.log('Invalid email or password.');
+    if (passwordIsValid) {
+      handleSignup(email, password);
     }
   };
 
+  useEffect(() => {
+    console.log('Account alert: ', accountAlert)
+  }, [accountAlert])
 
   return (
     <>
@@ -55,6 +56,7 @@ function SignupForm({ onSignup }) {
               />
             </FloatingLabel>
           </Form.Group>
+          {accountAlert !== '' && <p className='text-danger p-1'>{accountAlert}</p>}
           <Form.Group controlId='formBasicPassword'>
             <FloatingLabel className='md-3' label='Password' controlId='floatingInput'>
               <Form.Control
@@ -76,14 +78,14 @@ function SignupForm({ onSignup }) {
                 onChange={handleConfirmPasswordChange}
               />
             </FloatingLabel>
-            {(confirmPassword !== '' && !isPasswordValid) && <p className='text-danger p-1'>Passwords do not match.</p>}
+            {(confirmPassword !== '' && !passwordIsValid) && <p className='text-danger p-1'>Passwords do not match.</p>}
           </Form.Group>
           <Container className='text-center button-container'>
             <Button 
               variant='primary' 
               type='submit' 
               className='login-button shadow-sm'
-              disabled={!isPasswordValid}
+              disabled={!passwordIsValid}
               >
               Sign Up
             </Button>

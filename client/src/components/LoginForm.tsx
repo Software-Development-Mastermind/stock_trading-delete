@@ -12,7 +12,8 @@ function LoginForm({
   setPassword, 
   email, 
   password, 
-  handleShowSignup 
+  handleShowSignup,
+  userAlreadyExists 
 }) {
 
 const handleSubmit = (e: any) => {

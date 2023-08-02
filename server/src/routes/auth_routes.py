@@ -1,6 +1,7 @@
 from flask import request
 from flask_restx import Resource
 from flask_jwt_extended import create_access_token
+from sqlalchemy.exc import IntegrityError
 
 from ..extensions import db
 from src.models.users import User
@@ -11,28 +12,33 @@ from src import api
 class CreateNewUser(Resource):
   def post(self):
 
-    inspector = db.inspect(db.engine)
-    existing_tables = inspector.get_table_names()
+    try:
 
-    if 'users' not in existing_tables:
-      User.__table__.create(db.engine)
+      inspector = db.inspect(db.engine)
+      existing_tables = inspector.get_table_names()
 
-    if 'stocks' not in existing_tables:
-      Stock.__table__.create(db.engine)
+      if 'users' not in existing_tables:
+        User.__table__.create(db.engine)
 
-    email = request.json['email']
-    password = request.json['password']
-    print(email, password)
+      if 'stocks' not in existing_tables:
+        Stock.__table__.create(db.engine)
 
-    existing_user = User.query.filter_by(email=email).first()
-    if existing_user:
-      return "A user with that email aleady exists!", 409
-
-    new_user = User(email=email, password=password, cash=100000.00)
-    db.session.add(new_user)
-    db.session.commit()
+      email = request.json['email']
+      password = request.json['password']
     
-    return "New user created!", 201
+      new_user = User(email=email, password=password, cash=100000.00)
+      db.session.add(new_user)
+      db.session.commit()
+
+      return 201
+    
+    except IntegrityError:
+      db.session.rollback()
+      return "User already exists!", 409
+    
+    except Exception as e:
+      db.session.rollback()
+      return str(e), 500
 
 @api.route('/authenticate')
 class AuthenticateUser(Resource):
