@@ -25,12 +25,12 @@ interface PortfolioSummaryProps {
 function PortfolioSummary({ holdings, userCash }: PortfolioSummaryProps) {
 
   const [stockValue, setStockValue] = useState<number>(0);
-  const [totalPortfolioValue, setTotalPortfolioValue] = useState<number>(0);
+  const [totalPortfolioValue, setTotalPortfolioValue] = useState<number | string>(0);
   
-  const [todaysGainLoss, setTodaysGainLoss] = useState<number>(0);
+  const [todaysGainLoss, setTodaysGainLoss] = useState<string>('');
   const [todaysGainLossPercentage, setTodaysGainLossPercentage] = useState<number>(0);
   
-  const [totalGainLoss, setTotalGainLoss] = useState<number>(0);
+  const [totalGainLoss, setTotalGainLoss] = useState<string>('');
   const [totalGainLossPercentage, setTotalGainLossPercentage] = useState<number>(0);
 
   const [todaysGainLossColor, setTodaysGainLossColor] = useState<string>('green');
@@ -98,9 +98,10 @@ function PortfolioSummary({ holdings, userCash }: PortfolioSummaryProps) {
   const getTotalGainLoss = () => {
     if (holdings && holdings.length > 0) {
       const totalCost = calculateCost();
-      const changeAmount = formatDollarAmount(stockValue - totalCost);
+      const changeAmount = stockValue - totalCost;
+      const changeInDollars = formatDollarAmount(changeAmount);
       changeAmount >= 0 ? setTotalGainLossColor('green') : setTotalGainLossColor('red');
-      setTotalGainLoss(changeAmount);
+      setTotalGainLoss(changeInDollars);
     }
   }
 

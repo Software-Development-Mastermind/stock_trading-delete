@@ -27,11 +27,11 @@ function PieChart({ holdings, userCash, userCashAsDollars }: PieChartProps) {
   const cashAsNumber = removeCommas(userCash);
   const userCashToolTip = `Cash: $ ${userCashAsDollars}`;
 
-  const [data, setData] = useState<(string | number)[][]>([]);
+  const [data, setData] = useState<(string | number | {})[][]>([]);
 
   useEffect(() => {
     if (holdings) {
-      const newData: (string | number)[][] = [['Asset', 'Value', { type: 'string', role: 'tooltip' }]];
+      const newData: (string | number | {})[][] = [['Asset', 'Value', { role: 'tooltip', type: 'string'}]];
       holdings.forEach((holding) => {
         const { name, currentValue } = holding;
         const formattedCurrentValue = formatDollarAmount(currentValue);
@@ -47,7 +47,7 @@ function PieChart({ holdings, userCash, userCashAsDollars }: PieChartProps) {
 
   useEffect(() => {
     if (!holdings) {
-      setData([['Asset', 'Value', { type: 'string', role: 'tooltip' }], ['Cash', cashAsNumber, userCashToolTip]])
+      setData([['Asset', 'Value'], ['Cash', cashAsNumber, userCashToolTip]])
     }
   }, []);
 
@@ -57,8 +57,8 @@ function PieChart({ holdings, userCash, userCashAsDollars }: PieChartProps) {
         chartType="PieChart"
         data={data}
         options={title}
-        width="100%"
-        height="400px"
+        width={'100%'}
+        height={'400px'}
         >
       </Chart>
     </div>
