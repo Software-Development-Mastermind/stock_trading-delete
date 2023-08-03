@@ -14,18 +14,18 @@ interface Holding {
 
 interface PieChartProps {
   holdings: Holding[];
-  userCash: string;
+  userCash: number;
+  userCashAsDollars: string;
 }
 
-function PieChart({ holdings, userCash }: PieChartProps) {
+function PieChart({ holdings, userCash, userCashAsDollars }: PieChartProps) {
 
   const title = {
     title: "Portfolio by Asset Value"
   }
 
   const cashAsNumber = removeCommas(userCash);
-  const formattedUserCash = formatDollarAmount(userCash);
-  const userCashToolTip = `Cash: $ ${formattedUserCash}`;
+  const userCashToolTip = `Cash: $ ${userCashAsDollars}`;
 
   const [data, setData] = useState<(string | number)[][]>([]);
 

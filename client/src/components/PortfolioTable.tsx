@@ -6,8 +6,8 @@ import {
   roundDown, 
   getCurrentTime, 
   getCurrentDate 
-} from '@utils/index'
-import { TradeModal } from '@components/index'
+} from '@/utils/index'
+import { TradeModal } from '@/components/index'
 import '@styles/PortfolioTable.css'
 
 interface HoldingData {

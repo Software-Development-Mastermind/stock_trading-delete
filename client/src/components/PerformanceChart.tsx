@@ -9,7 +9,7 @@ import {
   formatDollarAmount, 
   getTimestampForOneYearAgo, 
   getTimestampForToday 
-} from '@utils/index'
+} from '@/utils/index'
 
 import '@styles/PerformanceChart.css'
 
@@ -119,7 +119,6 @@ function PerformanceChart({ financials, selectedStock }: PerformanceChartProps) 
             bottom: '35%', 
           },
         }}
-        tooltip={{isHtml: true }}
       />
       <Table borderless size='sm'>             
         <tbody>

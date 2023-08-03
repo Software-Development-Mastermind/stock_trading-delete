@@ -54,7 +54,8 @@ function Portfolio () {
   const auth = new AuthMethods()
   const company = new CompanyMethods()
 
-  const [userCashFormatted, setUserCashFormatted] = useState<string>('')
+  const [userCash, setUserCash] = useState<number>(0)
+  const [userCashAsDollars, setUserCashAsDollars] = useState<string>('')
   const [holdings, setHoldings] = useState<HoldingDataWithPerformance[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   
@@ -108,7 +109,8 @@ function Portfolio () {
     const res = await Axios.get(`/api/get_cash/${userId}`)
     const cash: number = res.data.cash
     const formattedCash: string = formatDollarAmount(cash)
-    setUserCashFormatted(formattedCash)
+    setUserCash(cash)
+    setUserCashAsDollars(formattedCash)
   }
 
   return (
@@ -123,12 +125,13 @@ function Portfolio () {
       ) : (
         <>
           <PieChart 
-            holdings={holdings} 
-            userCash={userCashFormatted} 
+            holdings={holdings}
+            userCash={userCash} 
+            userCashAsDollars={userCashAsDollars} 
             />
           <PortfolioSummary 
             holdings={holdings} 
-            userCash={userCashFormatted} 
+            userCash={userCash}
             />
           <PortfolioTable
             holdings={holdings}

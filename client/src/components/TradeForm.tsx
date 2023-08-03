@@ -18,7 +18,7 @@ import {
   removeCommas 
 } from '@/utils/index'
 
-import type { QuoteData } from '@/utils/index'
+import type { QuoteData, User } from '@/utils/index'
 
 import '@styles/TradeForm.css'
 
@@ -29,7 +29,7 @@ interface TradeFormProps {
 
 function TradeForm({ quote, selectedStock }: TradeFormProps) {
 
-  const user: string = useContext(UserContext)
+  const user: User = useContext(UserContext) as {id: number, email: string}
   const userId: number = user.id
   const symbol: string = selectedStock.symbol.toString()
   const price: number = quote.currentPrice
@@ -133,8 +133,8 @@ function TradeForm({ quote, selectedStock }: TradeFormProps) {
   }
 
   const calculateBuyingPower = () => {
-    const cashWithoutCommas = removeCommas(userCash)
-    const buyingPower = Math.floor(cashWithoutCommas / price)
+    const cashWithoutCommas: number = removeCommas(userCash)
+    const buyingPower: number = Math.floor(cashWithoutCommas / price)
     setBuyingPower(buyingPower)
   }
 
@@ -143,14 +143,14 @@ function TradeForm({ quote, selectedStock }: TradeFormProps) {
   }
 
   const calculateBalanceAfterTransaction = () => {
-    const cashWithoutCommas = removeCommas(userCash)
-    const transactionAmount = price * shares
+    const cashWithoutCommas: number = removeCommas(userCash)
+    const transactionAmount: number = price * shares
     
-    const transactionResult = checked === 'buy' 
+    const transactionResult: number = checked === 'buy' 
     ? cashWithoutCommas - transactionAmount 
     : cashWithoutCommas + transactionAmount
     
-    return formatDollarAmount(transactionResult)
+    return transactionResult
   }
 
   const handleToggleButtonChange = (value: string) => {
@@ -163,7 +163,7 @@ function TradeForm({ quote, selectedStock }: TradeFormProps) {
 
   const handleTransaction = async (e: any) => {
     e.preventDefault()
-    const transactionAmount = price * shares
+    const transactionAmount: number = price * shares
     const updatedBalance: number = removeCommas(calculateBalanceAfterTransaction())
     if (checked === 'buy') {
       buyStock(userId, symbol, selectedStock.name, shares, transactionAmount)
@@ -267,7 +267,7 @@ function TradeForm({ quote, selectedStock }: TradeFormProps) {
                     : `Cash balance after purchase:`
                     }
                   </td>
-                  <td className='text-start trade-table'>$ {calculateBalanceAfterTransaction()}</td>
+                  <td className='text-start trade-table'>$ {formatDollarAmount(calculateBalanceAfterTransaction())}</td>
                 </tr>
               </tbody>
             </Table>

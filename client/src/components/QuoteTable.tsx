@@ -1,9 +1,9 @@
 import { Container, Table } from 'react-bootstrap';
-import type { QuoteData } from '@utils/index'
+import type { QuoteData } from '@/utils/index'
 
 import '@styles/QuoteTable.css'
 
-function QuoteTable({ quote }: QuoteData) {
+function QuoteTable({ quote }: {quote: QuoteData}) {
 
   const changeColor = quote.change >= 0 ? 'green' : 'red'
 

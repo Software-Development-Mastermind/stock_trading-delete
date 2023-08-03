@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { Container, Form, Button } from "react-bootstrap"
 
-import { CompanyMethods, getFormattedFirstWord } from "@utils/index"
+import { CompanyMethods, getFormattedFirstWord } from "@/utils/index"
 
 import '@styles/Search.css'
 
