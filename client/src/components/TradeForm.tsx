@@ -16,9 +16,9 @@ import {
   UserContext, 
   formatDollarAmount, 
   removeCommas 
-} from '@utils/index'
+} from '@/utils/index'
 
-import type { QuoteData } from '@utils/index'
+import type { QuoteData } from '@/utils/index'
 
 import '@styles/TradeForm.css'
 
@@ -32,22 +32,24 @@ function TradeForm({ quote, selectedStock }: TradeFormProps) {
   const user: string = useContext(UserContext)
   const userId: number = user.id
   const symbol: string = selectedStock.symbol.toString()
-  const price: string = formatDollarAmount(quote.currentPrice)
+  const price: number = quote.currentPrice
   
-  const [userCash, setUserCash] = useState<string | number>(0)
+  const [userCash, setUserCash] = useState<number>(0)
   const [portfolio, setPortfolio] = useState<any>([])
   const [sharesOwned, setSharesOwned] = useState<any>(0)
   const [buyingPower, setBuyingPower] = useState<any>(0)
   const [checked, setChecked] = useState('buy')
   const [shares, setShares] = useState(0)
 
-  const isInsufficientShares = checked === 'sell' && shares > sharesOwned;
-  const exceedsBuyingPower = checked === 'buy' && (shares > 0 && shares > buyingPower);
+  const isInsufficientShares: boolean = checked === 'sell' && shares > sharesOwned;
+  const exceedsBuyingPower: boolean = checked === 'buy' && (shares > 0 && shares > buyingPower);
 
   useEffect(() => {
     const fetchData = async () => {
       await getUserPortfolio(userId);
       await getUserCash(userId);
+      getSharesOwned(symbol);
+      calculateBuyingPower();
     };
     fetchData();
   }, []);
@@ -70,8 +72,8 @@ function TradeForm({ quote, selectedStock }: TradeFormProps) {
 
   const getUserCash = async (userId: number) => {
     const res = await Axios.get(`/api/get_cash/${userId}`)
-    const formattedCash = formatDollarAmount(res.data.cash)
-    setUserCash(formattedCash)
+    const cash: number = res.data.cash
+    setUserCash(cash)
   }
 
   const updateUserCash = async (userId: number, cash: number) => {
@@ -131,8 +133,8 @@ function TradeForm({ quote, selectedStock }: TradeFormProps) {
   }
 
   const calculateBuyingPower = () => {
-    const formattedCash = removeCommas(userCash)
-    const buyingPower = Math.floor(formattedCash / price)
+    const cashWithoutCommas = removeCommas(userCash)
+    const buyingPower = Math.floor(cashWithoutCommas / price)
     setBuyingPower(buyingPower)
   }
 
@@ -141,12 +143,14 @@ function TradeForm({ quote, selectedStock }: TradeFormProps) {
   }
 
   const calculateBalanceAfterTransaction = () => {
-    const formattedCash = removeCommas(userCash)
+    const cashWithoutCommas = removeCommas(userCash)
     const transactionAmount = price * shares
     
-    return checked === 'buy' 
-      ? formatDollarAmount(formattedCash - transactionAmount) 
-      : formatDollarAmount(formattedCash + transactionAmount)
+    const transactionResult = checked === 'buy' 
+    ? cashWithoutCommas - transactionAmount 
+    : cashWithoutCommas + transactionAmount
+    
+    return formatDollarAmount(transactionResult)
   }
 
   const handleToggleButtonChange = (value: string) => {
@@ -160,7 +164,7 @@ function TradeForm({ quote, selectedStock }: TradeFormProps) {
   const handleTransaction = async (e: any) => {
     e.preventDefault()
     const transactionAmount = price * shares
-    const updatedBalance = removeCommas(calculateBalanceAfterTransaction())
+    const updatedBalance: number = removeCommas(calculateBalanceAfterTransaction())
     if (checked === 'buy') {
       buyStock(userId, symbol, selectedStock.name, shares, transactionAmount)
       updateUserCash(userId, updatedBalance)
@@ -170,7 +174,7 @@ function TradeForm({ quote, selectedStock }: TradeFormProps) {
       updateUserCash(userId, updatedBalance)
       setSharesOwned(sharesOwned - shares)
     }
-    setUserCash(formatDollarAmount(updatedBalance))
+    setUserCash(updatedBalance)
   }
 
 

@@ -5,6 +5,15 @@ import {
   FloatingLabel 
 } from 'react-bootstrap';
 
+interface LoginFormProps {
+  handleLogin: (email: string, password: string) => void;
+  setEmail: (email: string) => void;
+  setPassword: (password: string) => void;
+  email: string;
+  password: string;
+  handleShowSignup: (e: any) => Promise<void>; 
+  loginAlert: string;
+}
 
 function LoginForm({ 
   handleLogin, 
@@ -14,7 +23,7 @@ function LoginForm({
   password, 
   handleShowSignup,
   loginAlert
-}) {
+}: LoginFormProps) {
 
 const handleSubmit = (e: any) => {
   e.preventDefault();

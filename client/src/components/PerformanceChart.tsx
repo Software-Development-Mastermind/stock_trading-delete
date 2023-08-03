@@ -13,7 +13,12 @@ import {
 
 import '@styles/PerformanceChart.css'
 
-function PerformanceChart({ financials, selectedStock }: any) {
+interface PerformanceChartProps {
+  financials: any;
+  selectedStock: { symbol: string; name: string };
+}
+
+function PerformanceChart({ financials, selectedStock }: PerformanceChartProps) {
 
   const [candlesData, setCandlesData] = useState<any>([])
   const [isLoading, setIsLoading] = useState<boolean>(true)
@@ -26,7 +31,7 @@ function PerformanceChart({ financials, selectedStock }: any) {
   const currentYear = currentDate.getFullYear();
   const symbol = selectedStock.symbol
   
-  const dates: [] = [];
+  const dates: string[] = [];
 
   for (let i = 11; i >= 0; i--) {
     const month = (currentMonth - i + 11) % 12;
@@ -40,7 +45,7 @@ function PerformanceChart({ financials, selectedStock }: any) {
 
   useEffect(() => {
     if (candlesData.length !== 0) {
-      const newChartData = [
+      const newChartData: any[] = [
         ['Month', 'Price Low', 'Opening Price', 'Final Closing Price', 'Price High', { role: 'tooltip', type: 'string', p: { html: true } }],
       ];
       const timestamp = candlesData.t

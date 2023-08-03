@@ -1,10 +1,23 @@
 import { Chart } from 'react-google-charts'
-import { formatDollarAmount, removeCommas } from '@utils/index'
+import { formatDollarAmount, removeCommas } from '@/utils/index'
 import { useEffect, useState } from 'react'
 
 import '@styles/PieChart.css'
 
-function PieChart({ holdings, userCash }) {
+interface Holding {
+  name: string;
+  symbol: string;
+  shares: number;
+  cost: number;
+  currentValue: number;
+}
+
+interface PieChartProps {
+  holdings: Holding[];
+  userCash: string;
+}
+
+function PieChart({ holdings, userCash }: PieChartProps) {
 
   const title = {
     title: "Portfolio by Asset Value"
@@ -14,11 +27,11 @@ function PieChart({ holdings, userCash }) {
   const formattedUserCash = formatDollarAmount(userCash);
   const userCashToolTip = `Cash: $ ${formattedUserCash}`;
 
-  const [data, setData] = useState([])
+  const [data, setData] = useState<(string | number)[][]>([]);
 
   useEffect(() => {
     if (holdings) {
-      const newData = [['Asset', 'Value', { type: 'string', role: 'tooltip' }]];
+      const newData: (string | number)[][] = [['Asset', 'Value', { type: 'string', role: 'tooltip' }]];
       holdings.forEach((holding) => {
         const { name, currentValue } = holding;
         const formattedCurrentValue = formatDollarAmount(currentValue);

@@ -1,18 +1,18 @@
 import { Modal, Button } from 'react-bootstrap'
 import { useEffect, useState } from 'react';
 
-import { CompanyMethods, roundDown } from '@utils/index'
+import { CompanyMethods, roundDown } from '@/utils/index'
 import { 
   QuoteTable, 
   PerformanceChart,  
   TradeForm 
-} from '@components/index'
+} from '@/components/index'
 
 import type { 
   StockData, 
   QuoteData, 
   FinancialData 
-} from '@utils/index'
+} from '@/utils/index'
 
 import '@styles/TradeModal.css'
 
@@ -20,7 +20,7 @@ import '@styles/TradeModal.css'
 interface TradeModalProps {
   show: boolean;
   hide: () => void;
-  selectedStock: StockData;
+  selectedStock: StockData | null;
 }
 
 function TradeModal({ show, hide, selectedStock }: TradeModalProps): JSX.Element | null {

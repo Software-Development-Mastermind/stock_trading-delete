@@ -4,6 +4,7 @@ import {
   useEffect, 
   useContext 
 } from 'react'
+
 import { useNavigate } from 'react-router-dom'
 
 import { 
@@ -11,7 +12,9 @@ import {
   AuthMethods, 
   CompanyMethods, 
   formatDollarAmount 
-} from '@utils/index'
+} from '@/utils/index'
+
+import type { User } from '@/utils/index'
 
 import { Container, Spinner } from 'react-bootstrap'
 import { 
@@ -21,20 +24,39 @@ import {
   PortfolioTable 
 } from '@/components/index'
 
+
 import '@styles/Portfolio.css'
 
 function Portfolio () {
 
-  const user = useContext(UserContext)
+  interface Holding {
+    name: string;
+    symbol: string;
+    shares: number;
+    cost: number;
+    currentValue: number;
+  }
+
+  interface HoldingDataWithPerformance extends Holding {
+    currentValue: number;
+    change: number;
+    openPrice: number;
+    openValue: number;
+    changeValue: number;
+    prevClose: number;
+    prevCloseValue: number;
+  }
+
+  const user: User = useContext(UserContext)
   const userId = user.id
 
   const navigate = useNavigate()
   const auth = new AuthMethods()
   const company = new CompanyMethods()
 
-  const [userCash, setUserCash] = useState(0)
-  const [holdings, setHoldings] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [userCashFormatted, setUserCashFormatted] = useState<string>('')
+  const [holdings, setHoldings] = useState<HoldingDataWithPerformance[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   
   useEffect(() => {
     if (!auth.loggedIn()) {navigate('/')}
@@ -52,8 +74,8 @@ function Portfolio () {
     const res = await Axios.get(`/api/get_portfolio/${userId}`);
     const portfolioData = res.data;
     
-      const holdingsWithPerformanceData = await Promise.all(
-        portfolioData.map(async (holding) => {
+      const holdingsWithPerformanceData: HoldingDataWithPerformance[]  = await Promise.all(
+        portfolioData.map(async (holding: any) => {
           const symbol = holding.symbol;
           const quote = await company.getQuote(symbol);
           const shares = holding.shares;
@@ -84,8 +106,9 @@ function Portfolio () {
 
   const getUserCash = async (userId: number) => {
     const res = await Axios.get(`/api/get_cash/${userId}`)
-    const formattedCash = formatDollarAmount(res.data.cash)
-    setUserCash(formattedCash)
+    const cash: number = res.data.cash
+    const formattedCash: string = formatDollarAmount(cash)
+    setUserCashFormatted(formattedCash)
   }
 
   return (
@@ -101,11 +124,11 @@ function Portfolio () {
         <>
           <PieChart 
             holdings={holdings} 
-            userCash={userCash} 
+            userCash={userCashFormatted} 
             />
           <PortfolioSummary 
             holdings={holdings} 
-            userCash={userCash} 
+            userCash={userCashFormatted} 
             />
           <PortfolioTable
             holdings={holdings}

@@ -6,13 +6,20 @@ import {
   formatDollarAmount, 
   calculatePercentChange, 
   roundDown 
-} from '@utils/index'
+} from '@/utils/index'
 
 import '@styles/PortfolioSummary.css'
 
+interface HoldingData {
+  currentValue: number;
+  changeValue: number;
+  prevCloseValue: number;
+  cost: number;
+}
+
 interface PortfolioSummaryProps {
   holdings: HoldingData[];
-  userCash: string;
+  userCash: number;
 }
 
 function PortfolioSummary({ holdings, userCash }: PortfolioSummaryProps) {
@@ -52,11 +59,13 @@ function PortfolioSummary({ holdings, userCash }: PortfolioSummaryProps) {
   const calculateCost = () => {
     if (holdings && holdings.length > 0) {
       const totalCost = holdings.reduce((accumulator, holding) => {
-        return accumulator + removeCommas(holding.cost);
+        const cost = removeCommas(holding.cost);
+        return accumulator + (isNaN(cost) ? 0 : cost); // Handles cases where cost is not a valid number to prevent NaN if caused by async issues
       }, 0);
       return totalCost;
     }
-  }
+    return 0;
+  };
  
   const getTotalPortfolioValue = () => {
     if (holdings && holdings.length > 0) {

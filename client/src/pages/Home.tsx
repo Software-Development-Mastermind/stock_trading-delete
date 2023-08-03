@@ -2,8 +2,8 @@ import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { Container, Image, Button } from 'react-bootstrap'
-import { Navbar } from '@components/index'
-import { AuthMethods } from '@utils/index'
+import { Navbar } from '@/components/index'
+import { AuthMethods } from '@/utils/index'
 import '@styles/Home.css'
 
 function Home() {

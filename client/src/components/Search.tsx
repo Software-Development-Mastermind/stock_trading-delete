@@ -5,9 +5,9 @@ import { CompanyMethods, getFormattedFirstWord } from "@utils/index"
 
 import '@styles/Search.css'
 
-function Search({ setStocks } : any) {
+function Search({ setStocks }: any) {
 
-  const [search, setSearch] = useState('')
+  const [search, setSearch] = useState<string>('')
 
   const company = new CompanyMethods()
  

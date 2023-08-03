@@ -2,15 +2,16 @@ import { useContext, useEffect, useState } from 'react'
 import { Container, Table } from 'react-bootstrap'
 import Axios from 'axios'
 
-import { Navbar } from '@components/index'
-import { UserContext } from '@utils/index'
+import { Navbar } from '@/components/index'
+import { UserContext } from '@/utils/index'
+import type { User } from '@/utils/index'
 
 import '@styles/Account.css'
 
 function Account() {
 
-  const user = useContext(UserContext)
-  const [passwordLength, setPasswordLength] = useState(null)
+  const user: User = useContext(UserContext)
+  const [passwordLength, setPasswordLength] = useState<number | null>(null)
 
   useEffect(() => {
     getPasswordLength()
@@ -23,7 +24,7 @@ function Account() {
   }
 
   const renderPasswordLength = () => {
-    return '•'.repeat(passwordLength)
+    return '•'.repeat(passwordLength || 0)
   }
   
   return (

@@ -1,13 +1,13 @@
 import { useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { AuthMethods } from '@utils/index'
+import { AuthMethods } from '@/utils/index'
 
 
-export default function withAuth(AuthComponent) {
+export default function withAuth<T extends JSX.IntrinsicAttributes>(AuthComponent: React.ComponentType<T>) {
 
 	const auth = new AuthMethods();
 
-	function AuthWrapped() {
+	function AuthWrapped(props: T) {
 
     const navigate = useNavigate();
 	const location = useLocation();
@@ -23,7 +23,7 @@ export default function withAuth(AuthComponent) {
 			}, []);
 
 		return (
-			<AuthComponent />
+			<AuthComponent {...props} />
 		)
 	}
   	return AuthWrapped;

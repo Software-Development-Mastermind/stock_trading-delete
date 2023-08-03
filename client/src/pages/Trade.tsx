@@ -9,7 +9,7 @@ interface StockData {
   description: string;
 }
 
-function Trade(): JSX.Element {
+function Trade() {
 
   const navigate = useNavigate()
   const auth = new AuthMethods()

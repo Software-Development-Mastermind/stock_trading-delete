@@ -4,8 +4,8 @@ import Axios from 'axios'
 
 import { Container } from 'react-bootstrap'
 
-import { Navbar, LoginForm, SignupForm } from '@components/index'
-import { AuthMethods, getUserId } from '@utils/index'
+import { Navbar, LoginForm, SignupForm } from '@/components/index'
+import { AuthMethods, getUserId } from '@/utils/index'
 import '@styles/Login.css'
 
 
@@ -15,9 +15,9 @@ function Login () {
   const navigate = useNavigate()
   const location = useLocation()
 
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [showSignup, setShowSignup] = useState(false)
+  const [email, setEmail] = useState<string>('')
+  const [password, setPassword] = useState<string>('')
+  const [showSignup, setShowSignup] = useState<boolean>(false)
   const [loginAlert, setLoginAlert] = useState<string>('')
   const [signupAlert, setSignupAlert] = useState<string>('')
 
@@ -27,7 +27,7 @@ function Login () {
     }
   }, []);
 
-  const handleLogin = async (email, password) => {
+  const handleLogin = async (email: string, password: string) => {
     try {
       const login = await auth.login(email, password)
       if (login) {
@@ -37,7 +37,7 @@ function Login () {
         })
         navigate('/')
         } 
-      } catch (err) {
+      } catch (err: any) {
         setEmail('')
         setPassword('')
         setLoginAlert(err.message)
@@ -49,7 +49,7 @@ function Login () {
     setShowSignup(true)
   }
 
-  const handleSignup = async (newEmail, newPassword) => {
+  const handleSignup = async (newEmail: string, newPassword: string) => {
     try {
       const res = await Axios.post('/api/create_user', {
         "email": newEmail,

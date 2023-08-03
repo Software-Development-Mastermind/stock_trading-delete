@@ -10,13 +10,29 @@ import {
 import { TradeModal } from '@components/index'
 import '@styles/PortfolioTable.css'
 
+interface HoldingData {
+  name: string;
+  symbol: string;
+  shares: number;
+  cost: number;
+  currentValue: number;
+  changeValue: number;
+  prevCloseValue: number;
+}
+
 interface StockData {
   symbol: string;
   name: string;
   description: string;
 }
 
-function PortfolioTable({ holdings, getUserPortfolio, userId }) {
+interface PortfolioTableProps {
+  holdings: HoldingData[];
+  getUserPortfolio: (userId: number) => void;
+  userId: number;
+}
+
+function PortfolioTable({ holdings, getUserPortfolio, userId }: PortfolioTableProps) {
 
   const [showTradeModal, setShowTradeModal] = useState(false);
   const [selectedStock, setSelectedStock] = useState<StockData | null>(null)

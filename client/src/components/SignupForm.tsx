@@ -9,7 +9,12 @@ import {
   FloatingLabel 
 } from 'react-bootstrap';
 
-function SignupForm({ handleSignup, signupAlert }) {
+interface SignupFormProps {
+  handleSignup: (email: string, password: string) => void;
+  signupAlert: string;
+}
+
+function SignupForm({ handleSignup, signupAlert }: SignupFormProps) {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');

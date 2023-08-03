@@ -21,8 +21,14 @@ interface FinancialData {
   "52WeekLowDate": string;
 }
 
+interface User {
+  "id": number;
+  "email": string;
+}
+
 export type {
 	StockData,
 	QuoteData,
-	FinancialData
+	FinancialData,
+  User
 };

@@ -18,7 +18,8 @@ import {
 import type { 
     StockData, 
     QuoteData, 
-    FinancialData 
+    FinancialData,
+    User 
 } from "./types";
 
 export { 
@@ -43,4 +44,5 @@ export type {
     StockData,
     QuoteData,
     FinancialData,
+    User
 }
