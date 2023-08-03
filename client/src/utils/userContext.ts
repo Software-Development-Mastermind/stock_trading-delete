@@ -1,7 +1,9 @@
 import { createContext } from 'react';
+import { User } from './types';
 
-const currentUser = JSON.parse(localStorage.getItem('user')) || null;
+const storage = localStorage.getItem('user');
+const currentUser = JSON.parse(storage || '{}');
 
-const UserContext = createContext(currentUser);
+const UserContext = createContext<User | null>(currentUser as User | null);
 
 export default UserContext;
