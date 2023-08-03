@@ -1,9 +1,9 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { useContext } from 'react'
 import { Route, Routes } from 'react-router-dom'
-import { Login, Home, Portfolio, Trade, Account } from '@pages/index'
-import { UserContext } from '@utils/index'
-import { withAuth } from '@components/index'
+import { Login, Home, Portfolio, Trade, Account } from '@/pages/index'
+import { UserContext } from '@/utils/index'
+import { withAuth } from '@/components/index'
 
 function App() {
   

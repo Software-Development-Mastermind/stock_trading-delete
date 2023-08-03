@@ -27,7 +27,7 @@ class AuthMethods implements IAuthMethods {
       const res_data = res.data
       this.setToken(res_data.access_token)
       return true
-    } catch (err) {
+    } catch (err: any) {
       if (err.response.status === 401) {
         throw new Error('Incorrect email or password.')
       } else {
@@ -44,9 +44,8 @@ class AuthMethods implements IAuthMethods {
 
   isTokenExpired = (token: string) => {
     try {
-      const decodedToken = this.decodeToken(token)
+      const decodedToken: any = this.decodeToken(token)
       if (decodedToken.exp < Date.now() / 1000) {
-        console.log('Token expired')
         return true;
       }
       return false
@@ -72,12 +71,12 @@ class AuthMethods implements IAuthMethods {
     this.setCurrentUser({})
   }
 
-  decodeToken = (token: string) => {
+  decodeToken = (token: string): object => {
     try {
-      return decode(token)
+      return decode(token) as object;
     } catch (err) {
       console.log(`Decoding token failed: ${err}`)
-      return null
+      return {}
     }
   }
 
