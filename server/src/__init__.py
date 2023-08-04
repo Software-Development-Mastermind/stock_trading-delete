@@ -1,4 +1,5 @@
 import os
+
 from flask import Flask, Blueprint
 
 from dotenv import load_dotenv; load_dotenv()

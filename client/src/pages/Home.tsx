@@ -5,6 +5,7 @@ import { Container, Image, Button } from 'react-bootstrap'
 import { Navbar } from '@/components/index'
 import { AuthMethods } from '@/utils/index'
 import '@styles/Home.css'
+import stockMarketBull from '@assets/stockmarket.jpg'
 
 function Home() {
 
@@ -24,7 +25,7 @@ function Home() {
     <>
       <Navbar />
       <Container className='home-container'>
-        <Image src='src/assets/stockmarket.jpg' alt='Stock Market Bull' className='bull-image shadow-sm' thumbnail></Image>
+        <Image src={stockMarketBull} alt='Stock Market Bull' className='bull-image shadow-sm' thumbnail></Image>
         <h2 className='title'>
           <span className='sim-span'>
             Sim
