@@ -1,9 +1,6 @@
 import axios from 'axios';
 import decode from 'jwt-decode'
 
- 
-
-
 interface IAuthMethods {
   login: (email: string, password: string) => Promise<boolean>
   loggedIn: () => boolean
