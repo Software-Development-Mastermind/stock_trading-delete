@@ -101,10 +101,10 @@ function TradeModal({ show, hide, selectedStock }: TradeModalProps): JSX.Element
       <Modal.Body>
         
         {shownPerformance === 'today' ? (
-          <QuoteTable quote={ quote } />
-        ) : (
-          <PerformanceChart financials={financials } selectedStock={selectedStock} />
-        )}
+            <QuoteTable quote={quote} />
+          ) : (
+            <PerformanceChart financials={financials} selectedStock={selectedStock} />
+          )}
 
         <TradeForm quote={ quote } selectedStock={ selectedStock } />
 

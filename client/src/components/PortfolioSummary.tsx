@@ -38,6 +38,7 @@ function PortfolioSummary({ holdings, userCash }: PortfolioSummaryProps) {
 
   const cash: number = removeCommas(userCash);
   const cashAsDollars: string = formatDollarAmount(userCash);
+  const formattedStockValue = stockValue > 0 ? formatDollarAmount(stockValue) : 0;
 
   useEffect (() => {
     calculateStockValue();
@@ -49,6 +50,10 @@ function PortfolioSummary({ holdings, userCash }: PortfolioSummaryProps) {
     getTodaysGainLossPercentage();
     getTotalGainLoss();
     getTotalGainLossPercentage();
+  }, [stockValue])
+
+  useEffect (() => {
+    console.log('stockValue: ', stockValue);
   }, [stockValue])
 
   const calculateStockValue = () => {
@@ -126,7 +131,7 @@ function PortfolioSummary({ holdings, userCash }: PortfolioSummaryProps) {
         </Col>
         <Col className='d-flex flex-column justify-content-center align-items-center' md={2}>
           <h5 className='summary-header'>Stock Value</h5>
-          <h4 className='summary-content'>$ {formatDollarAmount(stockValue)}</h4>
+          <h4 className='summary-content'>$ {formattedStockValue}</h4>
         </Col>
         <Col className='d-flex flex-column justify-content-center align-items-center' md={2}>
           <h5 className='summary-header'>Total Value</h5>
