@@ -38,15 +38,18 @@ function PortfolioSummary({ holdings, userCash }: PortfolioSummaryProps) {
 
   const cash: number = removeCommas(userCash);
   const cashAsDollars: string = formatDollarAmount(userCash);
-    
+
   useEffect (() => {
     calculateStockValue();
     getTotalPortfolioValue();
+  }, [holdings, userCash]);
+
+  useEffect (() => {
     getTodaysGainLoss();
     getTodaysGainLossPercentage();
     getTotalGainLoss();
     getTotalGainLossPercentage();
-  }, [holdings, userCash]);
+  }, [stockValue])
 
   const calculateStockValue = () => {
     if (holdings && holdings.length > 0) {
@@ -97,7 +100,7 @@ function PortfolioSummary({ holdings, userCash }: PortfolioSummaryProps) {
   }
 
   const getTotalGainLoss = () => {
-    if (holdings && holdings.length > 0) {
+    if (holdings && holdings.length > 0 && stockValue !== 0) {
       const totalCost = calculateCost();
       const changeAmount = stockValue - totalCost;
       const changeInDollars = formatDollarAmount(changeAmount);
