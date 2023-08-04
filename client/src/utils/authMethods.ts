@@ -1,5 +1,4 @@
 import axios from 'axios';
-{/* @ts-ignore */}
 import decode from 'jwt-decode'
 
 interface IAuthMethods {
