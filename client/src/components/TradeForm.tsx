@@ -43,6 +43,8 @@ function TradeForm({ quote, selectedStock }: TradeFormProps) {
 
   const isInsufficientShares: boolean = checked === 'sell' && shares > sharesOwned;
   const exceedsBuyingPower: boolean = checked === 'buy' && (shares > 0 && shares > buyingPower);
+  
+  const cashAsDollars: string = formatDollarAmount(userCash);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -193,7 +195,7 @@ function TradeForm({ quote, selectedStock }: TradeFormProps) {
             </tr>
             <tr>
               <td className='trade-table'>Cash Balance:</td>
-              <td className='text-start trade-table'>$ {userCash}</td>
+              <td className='text-start trade-table'>$ {cashAsDollars}</td>
             </tr>
             <tr>
               <td className='trade-table'>Buying Power:</td>
