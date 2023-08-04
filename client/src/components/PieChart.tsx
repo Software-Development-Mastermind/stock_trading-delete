@@ -18,9 +18,16 @@ interface PieChartProps {
   userCashAsDollars: string;
 }
 
+interface TooltipObject {
+  role: string;
+  type: string;
+}
+
 function PieChart({ holdings, userCash, userCashAsDollars }: PieChartProps) {
 
-  const title = {
+  const title: {
+    title: string;
+  } = {
     title: "Portfolio by Asset Value"
   }
 
@@ -31,7 +38,7 @@ function PieChart({ holdings, userCash, userCashAsDollars }: PieChartProps) {
 
   useEffect(() => {
     if (holdings) {
-      const newData: (string | number | {})[][] = [['Asset', 'Value', { role: 'tooltip', type: 'string'}]];
+      const newData: (string | number | TooltipObject)[][] = [['Asset', 'Value', { role: 'tooltip', type: 'string'}]];
       holdings.forEach((holding) => {
         const { name, currentValue } = holding;
         const formattedCurrentValue = formatDollarAmount(currentValue);
@@ -50,9 +57,10 @@ function PieChart({ holdings, userCash, userCashAsDollars }: PieChartProps) {
       setData([['Asset', 'Value'], ['Cash', cashAsNumber, userCashToolTip]])
     }
   }, []);
-
+  
   return(
     <div className='mb-4 chart-container shadow-sm'>
+      {/* @ts-ignore */}
       <Chart
         chartType="PieChart"
         data={data}

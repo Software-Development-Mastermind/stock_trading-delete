@@ -37,6 +37,7 @@ function PortfolioSummary({ holdings, userCash }: PortfolioSummaryProps) {
   const [totalGainLossColor, setTotalGainLossColor] = useState<string>('green');
 
   const cash: number = removeCommas(userCash);
+  const cashAsDollars: string = formatDollarAmount(userCash);
     
   useEffect (() => {
     calculateStockValue();
@@ -118,7 +119,7 @@ function PortfolioSummary({ holdings, userCash }: PortfolioSummaryProps) {
       <Row>
         <Col className='d-flex flex-column justify-content-center align-items-center' md={2}>
           <h5 className='summary-header'>Cash</h5>
-          <h4 className='summary-content'>$ {userCash} </h4>
+          <h4 className='summary-content'>$ {cashAsDollars} </h4>
         </Col>
         <Col className='d-flex flex-column justify-content-center align-items-center' md={2}>
           <h5 className='summary-header'>Stock Value</h5>
