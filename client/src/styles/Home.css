@@ -31,6 +31,19 @@
 .text-span {
   color: #08b8fd;
   font-weight: bold;
+  cursor: pointer;
+}
+
+.text-span:hover {
+  color: #04013f;
+}
+
+.link-span {
+  display: inline;
+  margin: 0;
+  padding: 0;
+  color: #08b8fd;
+  text-decoration: none;
 }
 
 .login-button {
