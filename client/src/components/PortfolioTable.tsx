@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { Table, Container } from 'react-bootstrap'
+import { Table, Container, Nav } from 'react-bootstrap'
 import { 
   formatDollarAmount, 
   roundDown, 
@@ -8,6 +8,7 @@ import {
   getCurrentDate 
 } from '@/utils/index'
 import { TradeModal } from '@/components/index'
+
 import '@styles/PortfolioTable.css'
 
 interface HoldingData {
@@ -54,10 +55,16 @@ function PortfolioTable({ holdings, getUserPortfolio, userId }: PortfolioTablePr
       return (
         <tr>
           <td className='text-center empty-portfolio' colSpan={7}>
-            Your portfolio is empty. Visit the <span className='trade-span'>Trade</span> page to begin investing!
+            <div className='empty-portfolio-message'>
+              <span>Your portfolio is empty. Visit the</span>
+              <Nav.Link className='trade-link' href='/trade'>
+                Trade
+              </Nav.Link>
+              <span>page to begin investing!</span>
+            </div>
           </td>
         </tr>
-      )
+      );
     }
 
     const renderedRows = holdings.map((holding: any, i) => {
@@ -105,8 +112,8 @@ function PortfolioTable({ holdings, getUserPortfolio, userId }: PortfolioTablePr
 
   return (
       <>
-        <Table hover className='shadow-sm mt-4 holdings-table'>
-          <thead>
+        <Table {...(!isEmpty ? { hover: true } : {}) } className='shadow-sm mt-4 holdings-table'>
+          <thead className='table-head'>
             <tr className='shadow-sm table-head'>
               <th>Company</th>
               <th>Ticker</th>

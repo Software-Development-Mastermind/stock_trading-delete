@@ -2,11 +2,10 @@
   background-color: #04013f !important;
   color: white;
   border: 1px solid #e6e6e6 !important;
-  cursor: arrow !important;
 }
 
 .table-head {
-  cursor: arrow !important;
+  cursor: default !important;
 }
 
 .holding-name {
@@ -22,14 +21,26 @@
 }
 
 .empty-portfolio {
-  cursor: default;
+  cursor: default !important;
 }
 
-.empty-portfolio:hover {
-  background-color: #e6e6e6;
+.empty-portfolio-message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.trade-span {
+.empty-portfolio-message span {
+  margin: 0 5px;
+}
+
+.trade-nav {
+  color: black;
+  display: flex;
+  justify-content: center;
+}
+
+.trade-link {
   color: #08b8fd;
   font-weight: bold;
 }

@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 
-import Navbar from 'react-bootstrap/Navbar'
-import Nav from 'react-bootstrap/Nav'
+import { Navbar, Nav } from 'react-bootstrap'
 
 import { AuthMethods } from '@/utils/index'
 import '@styles/Navbar.css'
