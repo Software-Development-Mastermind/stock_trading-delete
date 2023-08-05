@@ -81,6 +81,7 @@ function PortfolioSummary({ holdings, userCash }: PortfolioSummaryProps) {
       const portfolio = formatDollarAmount(stockValue + cash);
       setTotalPortfolioValue(portfolio);
     }
+    setTotalPortfolioValue(cashAsDollars);
   }
 
   const getTodaysGainLoss = () => {

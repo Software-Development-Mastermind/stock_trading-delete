@@ -4,4 +4,10 @@ import Portfolio from './Portfolio'
 import Trade from './Trade'
 import Account from './Account'
 
-export { Login, Home, Portfolio, Trade, Account } 
+export { 
+    Login, 
+    Home, 
+    Portfolio, 
+    Trade, 
+    Account 
+} 
