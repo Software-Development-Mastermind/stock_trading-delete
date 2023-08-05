@@ -42,9 +42,6 @@ class AuthMethods implements IAuthMethods {
   isTokenExpired = (token: string) => {
     try {
       const decodedToken: any = this.decodeToken(token)
-      console.log(`Token expires at: ${decodedToken.exp}`
-        + ` and current time is: ${Date.now() / 1000}`)
-      console.log('Decoded token: ', decodedToken)
       if (decodedToken.exp < Date.now() / 1000) {
         return true;
       }

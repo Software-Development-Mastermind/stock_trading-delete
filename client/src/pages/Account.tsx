@@ -31,16 +31,16 @@ function Account() {
     <>
       <Navbar />
       <Container className='shadow-sm mt-5 account-container'>
-        <Table borderless>
+        <Table borderless className='account-table'>
           <thead>
-            <tr>
-              <td className='account-title'>ACCOUNT</td>
+            <tr className='account-row'>
+              <td className='account-title'>ACCOUNT DETAILS</td>
             </tr>
-            <tr>
+            <tr className='account-row'>
               <td className='content-header'>Email:</td>
               <td className='text-start'>{user.email}</td>
             </tr>
-            <tr>
+            <tr className='account-row'>
               <td className='content-header'>Password:</td>
               <td className='text-start'>{renderPasswordLength()}</td>
             </tr>

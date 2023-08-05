@@ -5,7 +5,7 @@
 .table-head th {
   background-color: #04013f;
   color: white;
-  cursor: arrow !important;
+  cursor: default;
 }
 
 tr:hover {

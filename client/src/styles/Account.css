@@ -5,10 +5,18 @@
   border: 1px solid #e6e6e6;
 }
 
+.account-table {
+  cursor: default;
+}
+
 .account-title {
   color: #08b8fd !important;
   font-weight: bold;
   font-size: larger;
+}
+
+.account-row {
+  cursor: default !important;
 }
 
 .content-header {
