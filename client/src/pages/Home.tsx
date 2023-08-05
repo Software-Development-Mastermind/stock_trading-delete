@@ -12,10 +12,6 @@ function Home() {
   const navigate = useNavigate()
   const auth = new AuthMethods()
 
-  useEffect(() => {
-    console.log('Home: ', auth.loggedIn())
-  })
-
   const handleClick = (e: any) => {
     e.preventDefault()
     navigate('/login')

@@ -2,6 +2,7 @@ from flask import request
 from flask_restx import Resource
 from flask_jwt_extended import create_access_token
 from sqlalchemy.exc import IntegrityError
+from datetime import timedelta
 
 from ..extensions import db
 from src.models.users import User
@@ -50,7 +51,11 @@ class AuthenticateUser(Resource):
     valid_credentials = User.query.filter_by(email=email, password=password).first()
     
     if valid_credentials:
-      access_token = create_access_token(identity=email)
+      access_token = create_access_token(
+        identity=email, 
+        expires_delta=timedelta(minutes=60),
+        additional_claims={"password": password}
+        )
       successful_auth_response = {'access_token': access_token, 'message': 'User authenticated!'}
       return successful_auth_response, 200
     

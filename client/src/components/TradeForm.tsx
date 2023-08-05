@@ -134,7 +134,7 @@ function TradeForm({ quote, selectedStock }: TradeFormProps) {
     }
   }
 
-  const calculateBuyingPower = (cashData: number | undefined) => {
+  const calculateBuyingPower = (cashData: number | undefined | void) => {
     if (cashData !== undefined) {
       const buyingPower: number = Math.floor(cashData / price)
       setBuyingPower(buyingPower)
