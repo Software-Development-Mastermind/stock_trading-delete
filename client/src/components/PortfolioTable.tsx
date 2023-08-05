@@ -53,8 +53,8 @@ function PortfolioTable({ holdings, getUserPortfolio, userId }: PortfolioTablePr
     if (isEmpty) {
       return (
         <tr>
-          <td className='text-center' colSpan={7}>
-            Your portfolio is empty. Visit the Trade page to begin investing!
+          <td className='text-center empty-portfolio' colSpan={7}>
+            Your portfolio is empty. Visit the <span className='trade-span'>Trade</span> page to begin investing!
           </td>
         </tr>
       )

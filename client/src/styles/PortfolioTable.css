@@ -2,6 +2,11 @@
   background-color: #04013f !important;
   color: white;
   border: 1px solid #e6e6e6 !important;
+  cursor: arrow !important;
+}
+
+.table-head {
+  cursor: arrow !important;
 }
 
 .holding-name {
@@ -14,6 +19,19 @@
 
 .red {
   color: red
+}
+
+.empty-portfolio {
+  cursor: default;
+}
+
+.empty-portfolio:hover {
+  background-color: #e6e6e6;
+}
+
+.trade-span {
+  color: #08b8fd;
+  font-weight: bold;
 }
 
 .timestamp {
