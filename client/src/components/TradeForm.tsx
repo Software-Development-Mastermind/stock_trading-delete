@@ -36,8 +36,8 @@ function TradeForm({ quote, selectedStock }: TradeFormProps) {
   
   const [userCash, setUserCash] = useState<number>(0)
   const [portfolio, setPortfolio] = useState<any>([])
-  const [sharesOwned, setSharesOwned] = useState<any>(0)
-  const [buyingPower, setBuyingPower] = useState<any>(0)
+  const [sharesOwned, setSharesOwned] = useState<number>(0)
+  const [buyingPower, setBuyingPower] = useState<number>(0)
   const [checked, setChecked] = useState('buy')
   const [shares, setShares] = useState(0)
 
@@ -49,9 +49,9 @@ function TradeForm({ quote, selectedStock }: TradeFormProps) {
   useEffect(() => {
     const fetchData = async () => {
       await getUserPortfolio(userId);
-      await getUserCash(userId);
+      const cashData = await getUserCash(userId);
       getSharesOwned(symbol);
-      calculateBuyingPower();
+      calculateBuyingPower(cashData);
     };
     fetchData();
   }, []);
@@ -61,7 +61,7 @@ function TradeForm({ quote, selectedStock }: TradeFormProps) {
   }, [portfolio])
 
   useEffect(() => {
-    calculateBuyingPower()
+    calculateBuyingPower(userCash)
   }, [userCash, price]);
 
   const getUserPortfolio = async (userId: number) => {
@@ -134,10 +134,11 @@ function TradeForm({ quote, selectedStock }: TradeFormProps) {
     }
   }
 
-  const calculateBuyingPower = () => {
-    const cashWithoutCommas: number = removeCommas(userCash)
-    const buyingPower: number = Math.floor(cashWithoutCommas / price)
-    setBuyingPower(buyingPower)
+  const calculateBuyingPower = (cashData: number | undefined) => {
+    if (cashData !== undefined) {
+      const buyingPower: number = Math.floor(cashData / price)
+      setBuyingPower(buyingPower)
+    }
   }
 
   const calculateTransactionPrice = () => {
