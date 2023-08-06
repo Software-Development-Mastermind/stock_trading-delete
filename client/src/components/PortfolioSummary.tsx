@@ -72,15 +72,6 @@ function PortfolioSummary({ holdings, userCash }: PortfolioSummaryProps) {
     return 0;
   };
  
-  // const getTotalPortfolioValue = () => {
-  //   if (holdings && holdings.length > 0) {
-  //     const portfolio = formatDollarAmount(stockValue + cash);
-  //     setTotalPortfolioValue(portfolio);
-  //   } else {
-  //     setTotalPortfolioValue(cashAsDollars);
-  //   }
-  // }
-
   const getTodaysGainLoss = () => {
     if (holdings && holdings.length > 0) {
       const totalChange = holdings.reduce((accumulator, holding) => {
