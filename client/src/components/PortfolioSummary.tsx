@@ -52,10 +52,7 @@ function PortfolioSummary({ holdings, userCash }: PortfolioSummaryProps) {
     getTotalGainLossPercentage();
   }, [stockValue])
 
-  useEffect (() => {
-    console.log('stockValue: ', stockValue);
-  }, [stockValue])
-
+  
   const calculateStockValue = () => {
     if (holdings && holdings.length > 0) {
       const totalStockValue = holdings.reduce((accumulator, holding) => {
@@ -80,8 +77,9 @@ function PortfolioSummary({ holdings, userCash }: PortfolioSummaryProps) {
     if (holdings && holdings.length > 0) {
       const portfolio = formatDollarAmount(stockValue + cash);
       setTotalPortfolioValue(portfolio);
+    } else {
+      setTotalPortfolioValue(cashAsDollars);
     }
-    setTotalPortfolioValue(cashAsDollars);
   }
 
   const getTodaysGainLoss = () => {
