@@ -25,7 +25,6 @@ interface PortfolioSummaryProps {
 function PortfolioSummary({ holdings, userCash }: PortfolioSummaryProps) {
 
   const [stockValue, setStockValue] = useState<number>(0);
-  const [totalPortfolioValue, setTotalPortfolioValue] = useState<number | string>(0);
   
   const [todaysGainLoss, setTodaysGainLoss] = useState<string>('');
   const [todaysGainLossPercentage, setTodaysGainLossPercentage] = useState<number>(0);
@@ -39,11 +38,11 @@ function PortfolioSummary({ holdings, userCash }: PortfolioSummaryProps) {
   const cash: number = removeCommas(userCash);
   const cashAsDollars: string = formatDollarAmount(userCash);
   const formattedStockValue = stockValue > 0 ? formatDollarAmount(stockValue) : 0;
+  const totalValue = (holdings && holdings.length > 0) ? formatDollarAmount(stockValue + cash) : cashAsDollars;
 
   useEffect (() => {
     calculateStockValue();
-    getTotalPortfolioValue();
-  }, [holdings, userCash]);
+  }, [holdings]);
 
   useEffect (() => {
     getTodaysGainLoss();
@@ -73,14 +72,14 @@ function PortfolioSummary({ holdings, userCash }: PortfolioSummaryProps) {
     return 0;
   };
  
-  const getTotalPortfolioValue = () => {
-    if (holdings && holdings.length > 0) {
-      const portfolio = formatDollarAmount(stockValue + cash);
-      setTotalPortfolioValue(portfolio);
-    } else {
-      setTotalPortfolioValue(cashAsDollars);
-    }
-  }
+  // const getTotalPortfolioValue = () => {
+  //   if (holdings && holdings.length > 0) {
+  //     const portfolio = formatDollarAmount(stockValue + cash);
+  //     setTotalPortfolioValue(portfolio);
+  //   } else {
+  //     setTotalPortfolioValue(cashAsDollars);
+  //   }
+  // }
 
   const getTodaysGainLoss = () => {
     if (holdings && holdings.length > 0) {
@@ -134,7 +133,7 @@ function PortfolioSummary({ holdings, userCash }: PortfolioSummaryProps) {
         </Col>
         <Col className='d-flex flex-column justify-content-center align-items-center' md={2}>
           <h5 className='summary-header'>Total Value</h5>
-          <h4 className='summary-content'>$ {totalPortfolioValue}</h4>
+          <h4 className='summary-content'>$ {totalValue}</h4>
         </Col>
         <Col className='d-flex flex-column justify-content-center align-items-center' md={3}>
           <h5 className='summary-header'>Today's Change</h5>
