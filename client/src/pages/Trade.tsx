@@ -17,6 +17,7 @@ function Trade() {
   const [stocks, setStocks] = useState<StockData[]>([]);
   const [showTradeModal, setShowTradeModal] = useState<boolean>(false);
   const [selectedStock, setSelectedStock] = useState<StockData | null>(null)
+  const [userHasSearched, setUserHasSearched] = useState<boolean>(false)
   
   const handleHideTradeModal = () => setShowTradeModal(false)
   const handleShowTradeModal = (stock: StockData) => {
@@ -28,13 +29,21 @@ function Trade() {
     if (!auth.loggedIn()) {navigate('/')}
     }, []);
 
+  const hasSearched = () => {
+    setUserHasSearched(true)
+  }
+
   return (
     <>
       <Navbar />
-      <Search setStocks={setStocks} />
+      <Search 
+        setStocks={setStocks}
+        hasSearched={hasSearched} 
+        />
       <StockTable 
         stocks={stocks}
         showModal={handleShowTradeModal} 
+        userHasSearched={userHasSearched}
         />
       <TradeModal 
         show={showTradeModal} 

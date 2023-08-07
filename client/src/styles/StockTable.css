@@ -23,3 +23,10 @@ tr:hover {
 .stock-name {
   width: 70%;
 }
+
+.no-results {
+  color: #525659 !important;
+  font-size: 0.9rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}

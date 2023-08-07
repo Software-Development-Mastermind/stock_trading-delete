@@ -6,9 +6,10 @@ import '@styles/StockTable.css'
 interface StockTableProps {
   stocks: StockData[];
   showModal: (stock: StockData) => void;
+  userHasSearched: boolean;
 }
 
-function StockTable({ stocks, showModal }: StockTableProps) {
+function StockTable({ stocks, showModal, userHasSearched }: StockTableProps) {
 
   if (!stocks) return null
 
@@ -17,6 +18,17 @@ function StockTable({ stocks, showModal }: StockTableProps) {
   }
 
   const renderStockTable = () => {
+
+    if (stocks.length === 0 && userHasSearched) {
+      return (
+        <tr>
+          <td className='text-center no-results' colSpan={2}>
+            Unable to locate any stocks matching that name or ticker symbol.
+          </td>
+        </tr>
+      )
+    }
+
     return stocks.map((stock, i) => {
       return (
         <tr key={i} onClick={() => handleShowModal(stock)}>

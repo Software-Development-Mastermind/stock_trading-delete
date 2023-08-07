@@ -5,7 +5,12 @@ import { CompanyMethods, getFormattedFirstWord } from "@/utils/index"
 
 import '@styles/Search.css'
 
-function Search({ setStocks }: any) {
+interface SearchProps {
+  setStocks: (stocks: any) => void
+  hasSearched: () => void
+}
+
+function Search({ setStocks, hasSearched }: SearchProps) {
 
   const [search, setSearch] = useState<string>('')
 
@@ -13,6 +18,7 @@ function Search({ setStocks }: any) {
  
   const handleSearch= async (e: any) => {
     e.preventDefault()
+    hasSearched()
 
     if (search === search.toUpperCase()) {
 
@@ -54,6 +60,7 @@ function Search({ setStocks }: any) {
             Search
           </Button>
         </Form>
+        <p className='mt-3 search-note'>Use capital letters to search by ticker symbol (e.g. AAPL for Apple, Inc.)</p>
       </Container>
     </div>
   )

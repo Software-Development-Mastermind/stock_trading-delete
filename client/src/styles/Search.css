@@ -23,3 +23,9 @@
   background-color: #1578ba;
   border: 1px solid #1578ba;
 }
+
+.search-note {
+  color: #525659;
+  font-size: 0.9rem;
+  font-style: italic;
+}
