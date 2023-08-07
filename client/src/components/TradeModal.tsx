@@ -1,4 +1,9 @@
-import { Modal, Button } from 'react-bootstrap'
+import { 
+  Modal, 
+  Button, 
+  Container, 
+  Spinner 
+} from 'react-bootstrap'
 import { useEffect, useState } from 'react';
 
 import { CompanyMethods, roundDown } from '@/utils/index'
@@ -47,6 +52,7 @@ function TradeModal({ show, hide, selectedStock }: TradeModalProps): JSX.Element
   })
 
   const [shownPerformance, setShownPerformance] = useState<string>('today')
+  const [stockDataIsLoaded, setStockDataIsLoaded] = useState<boolean>(false)
   
   useEffect(() => {
     if (show && selectedStock) {
@@ -62,7 +68,7 @@ function TradeModal({ show, hide, selectedStock }: TradeModalProps): JSX.Element
 
         const quote = await company.getQuote(selectedStock.symbol)
         setQuote({
-          "currentPrice" : roundDown(quote.c),
+          "currentPrice": roundDown(quote.c),
           "change": roundDown(quote.d),
           "percentChange": roundDown(quote.dp),
           "dailyHigh": roundDown(quote.h),
@@ -74,6 +80,9 @@ function TradeModal({ show, hide, selectedStock }: TradeModalProps): JSX.Element
       }
       getStockData()
     }
+    return () => {
+      setStockDataIsLoaded(false);
+    };
   }, [show, selectedStock])
 
   const handlePerformanceToggle = () => {
@@ -84,10 +93,21 @@ function TradeModal({ show, hide, selectedStock }: TradeModalProps): JSX.Element
     }
   }
 
+  useEffect (() => {
+    if (quote.currentPrice !== 0 && financials["52WeekHigh"] !== 0) {
+      setStockDataIsLoaded(true)
+    }
+  }, [quote, financials])
+
+  const handleCloseModal = () => {
+    setStockDataIsLoaded(false)
+    hide()
+  }
+
   return (
     <Modal
       centered show={show}
-      onHide={hide}
+      onHide={handleCloseModal}
       backdrop='static'
       size='lg'
       >
@@ -99,15 +119,24 @@ function TradeModal({ show, hide, selectedStock }: TradeModalProps): JSX.Element
       </Modal.Header>
 
       <Modal.Body>
-        
-        {shownPerformance === 'today' ? (
+        {stockDataIsLoaded ? (
+          shownPerformance === 'today' ? (
             <QuoteTable quote={quote} />
           ) : (
             <PerformanceChart financials={financials} selectedStock={selectedStock} />
-          )}
+          )
+        ) : (
+          <Container>
+          <div className='d-flex align-items-center loading-container'>
+            <Spinner animation='border' className='spinner' />
+            <h3>Loading stock data...</h3>
+          </div>
+          </Container>
+        )}
 
-        <TradeForm quote={ quote } selectedStock={ selectedStock } />
-
+        {stockDataIsLoaded && (
+          <TradeForm quote={quote} selectedStock={selectedStock} />
+        )}
       </Modal.Body>
 
       <Modal.Footer className='modal-footer'>

@@ -40,7 +40,7 @@ function TradeForm({ quote, selectedStock }: TradeFormProps) {
   const [buyingPower, setBuyingPower] = useState<number>(0)
   const [checked, setChecked] = useState('buy')
   const [shares, setShares] = useState(0)
-
+  
   const isInsufficientShares: boolean = checked === 'sell' && shares > sharesOwned;
   const exceedsBuyingPower: boolean = checked === 'buy' && (shares > 0 && shares > buyingPower);
   
