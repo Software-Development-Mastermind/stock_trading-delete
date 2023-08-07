@@ -45,7 +45,7 @@ function Search({ setStocks, hasSearched }: SearchProps) {
         <Form className='d-flex' onSubmit={handleSearch}>
           <Form.Control
             type='search'
-            placeholder='Search by ticker or company name'
+            placeholder='Search by ticker symbol or company name'
             className='searchbar me-2 shadow-sm'
             aria-label='Search'
             onChange={(e) => setSearch(e.target.value)}
