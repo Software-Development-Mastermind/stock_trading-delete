@@ -1,0 +1,19 @@
+# SimStocks - A Stock Trading Simulator
+
+Try it <a href='https://simstocks.onrender.com/'>here</a>.
+
+<em>SimStocks gives users a risk-free way to learn about the stock market and practice investing. Users receive $100,000 in fake cash and can manage their portfolio by buying and selling stocks, informed by current and historic stock data supplied by Finnhub.</em>
+
+<img width="1501" alt="stock-portfolio" src="https://github.com/AaronAWB/stock_trading/assets/108595340/7d47b95b-654c-420b-8eed-b0dc10581ee9">
+
+<img width="1485" alt="trade_modal" src="https://github.com/AaronAWB/stock_trading/assets/108595340/2b7267f3-c9c2-4deb-9626-68ee844a1e78">
+
+## How to use
+
+1. You will need to create an account. You can do that by clicking on the `Sign Up` button and selecting a username and password.
+
+2. New accounts will receive $100,000 in fake cash. Once you are signed in, you can search for and purchase your first stock. To do that, click the `Trade` button in the top navigation bar or the highlighted 'Trade' text on the Home screen. You can search for a stock by its ticker symbol or by its name. Click on a stock to view more information about it. If you would like to purchase shares of the stock, enter the number of shares you would like to purchase and click on the `Purchase Share(s)` button to complete the transaction.
+
+3. Navigate to the `Portfolio` page to view your current holdings. You can click on a stock to view more information about it. If you would like to sell shares of the stock, enter the number of shares you would like to sell and click on the `Sell Share(s)` button to complete the transaction.
+
+4. Check back in on your portfolio periodically to see how your stocks are performing!
