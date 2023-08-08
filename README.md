@@ -17,3 +17,34 @@ Try it <a href='https://simstocks.onrender.com/'>here</a>.
 3. Navigate to the `Portfolio` page to view your current holdings. You can click on a stock to view more information about it. If you would like to sell shares of the stock, enter the number of shares you would like to sell and click on the `Sell Share(s)` button to complete the transaction.
 
 4. Check back in on your portfolio periodically to see how your stocks are performing!
+
+## Technologies and Tools
+
+### Client
+
+* Written with HTML, CSS, and TypeScript, using the React framework.
+* Setup was done using Vite as an alternative to Create React App, allowing aliases for cleaner imports and faster build times.
+* Styling relies primarily on React Bootstrap.
+* Pages are routed using React Router.
+* HTTP calls to the server's REST API are made using the Axios library.
+* Webtokens are stored in localStorage for user authentication.
+
+### Server
+
+* Written in Python using the Flask framework.
+* Webtokens are generated using the PyJWT library.
+* Current and historical stock data is retrieved using the Finnhub API.
+* REST API is built using Flask-RESTX.
+* Database queries are handled using the SQLAlchemy ORM.
+* The app is served using Gunicorn and hosted on Render.com.
+* Data is stored in a PostgreSQL database hosted on elephantsql.com.
+
+## Local Setup
+
+1. Clone this repository to your local machine.
+2. Run the setup script by typing 'sh setup.sh' in your terminal. This will automatically install the necessary dependencies, create the PostgreSQL database, and start the server.
+3. Navigate to `localhost:3000` in your browser to view the app.
+
+## Author
+
+Aaron Brinckerhoff - Full Stack Software Developer | <a href='https://www.linkedin.com/in/aaron-brinckerhoff-6b9a5340/'>LinkedIn</a> | <a href='https://www.aaronbrinckerhoff.dev/'>Website</a>
