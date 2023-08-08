@@ -10,7 +10,7 @@ Try it <a href='https://simstocks.onrender.com/'>here</a>.
 
 ## How to use
 
-1. You will need to create an account. You can do that by clicking on the `Sign Up` button and selecting a username and password.
+1. You will need to create an account. You can do that by clicking on the `Sign In or Create an Account` button, followed by the Sign Up button on the next page, and selecting a username and password.
 
 2. New accounts will receive $100,000 in fake cash. Once you are signed in, you can search for and purchase your first stock. To do that, click the `Trade` button in the top navigation bar or the highlighted 'Trade' text on the Home screen. You can search for a stock by its ticker symbol or by its name. Click on a stock to view more information about it. If you would like to purchase shares of the stock, enter the number of shares you would like to purchase and click on the `Purchase Share(s)` button to complete the transaction.
 
