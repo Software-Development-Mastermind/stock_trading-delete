@@ -42,8 +42,9 @@ Try it <a href='https://simstocks.onrender.com/'>here</a>.
 ## Local Setup
 
 1. Clone this repository to your local machine.
-2. Run the setup script by typing 'sh setup.sh' in your terminal. This will automatically install the necessary dependencies, create the PostgreSQL database, and start the server.
-3. Navigate to `localhost:3000` in your browser to view the app.
+2. Sign up for free API keys from <a href='https://finnhub.io/docs/api/introduction'>Finnhub</a> and <a href='https://site.financialmodelingprep.com/developer/docs/'>Financial Modeling Prep</a>.
+3. Run the setup script by typing 'sh setup.sh' in your terminal. This will automatically install the necessary dependencies, create the PostgreSQL database, and start the server.
+4. Navigate to `localhost:5000` in your browser to view the app.
 
 ## Author
 
