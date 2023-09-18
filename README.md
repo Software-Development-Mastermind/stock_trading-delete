@@ -1,6 +1,6 @@
 # SimStocks - A Stock Trading Simulator
 
-Try it <a href='https://simstocks.onrender.com/'>here</a>.
+Try it <a 'http://simstocks.us-west-2.elasticbeanstalk.com/'>here</a>.
 
 <em>SimStocks gives users a risk-free way to learn about the stock market and practice investing. Users receive $100,000 in fake cash and can manage their portfolio by buying and selling stocks, informed by current and historic stock data supplied by Finnhub.</em>
 
