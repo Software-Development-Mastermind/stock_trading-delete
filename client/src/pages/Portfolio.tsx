@@ -48,8 +48,8 @@ function Portfolio () {
   }
 
   const user: User = useContext(UserContext)
-  const userId = user.id
-
+  const userId: number = user.id
+  
   const navigate = useNavigate()
   const auth = new AuthMethods()
   const company = new CompanyMethods()

@@ -10,7 +10,7 @@ export default function withAuth<T extends JSX.IntrinsicAttributes>(AuthComponen
 	function AuthWrapped(props: T) {
 
     const navigate = useNavigate();
-	const location = useLocation();
+		const location = useLocation();
 
 			useEffect(() => {
 				if (!auth.loggedIn()) {

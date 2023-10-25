@@ -36,7 +36,7 @@ function Home() {
         "email": email,
         "id": await getUserId(email)
       })
-      navigate('/portfolio')
+      navigate('/')
     }
   }
 

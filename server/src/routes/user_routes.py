@@ -35,6 +35,8 @@ class GetPortfolio(Resource):
 class GetCash(Resource):
   def get(self, user_id):
 
+    print(f'User ID for get cash: {user_id}')
+
     user = User.query.filter_by(id=user_id).first()
     print(user)
     if user:
