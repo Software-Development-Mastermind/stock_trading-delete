@@ -33,6 +33,7 @@ function TradeForm({ quote, selectedStock }: TradeFormProps) {
   const userId: number = user.id
   const symbol: string = selectedStock.symbol.toString()
   const price: number = quote.currentPrice
+  const isGuest: boolean = user.email === 'guest@guest.com'
   
   const [userCash, setUserCash] = useState<number>(0)
   const [portfolio, setPortfolio] = useState<any>([])
@@ -279,13 +280,16 @@ function TradeForm({ quote, selectedStock }: TradeFormProps) {
             <Button
               className={`shadow-sm transaction-btn ${exceedsBuyingPower ? 'insufficient-funds' : ''}`}
               type='submit'
-              disabled={shares === 0 || isInsufficientShares || exceedsBuyingPower}
+              disabled={shares === 0 || isInsufficientShares || exceedsBuyingPower || isGuest}
               >
-                {exceedsBuyingPower
-                  ? 'Insufficient Funds'
-                  : checked === 'sell'
-                  ? 'Sell Share(s)'
-                  : 'Purchase Share(s)'
+                {isGuest
+                  ? 'Sign in to trade'
+                  : (exceedsBuyingPower
+                    ? 'Insufficient Funds'
+                    : checked === 'sell'
+                    ? 'Sell Share(s)'
+                    : 'Purchase Share(s)'
+                  )
                 }
           </Button>
         </div>
