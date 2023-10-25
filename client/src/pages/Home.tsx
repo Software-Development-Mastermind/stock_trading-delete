@@ -66,12 +66,14 @@ function Home() {
           Good luck!
         </p>
         {!auth.loggedIn() &&
-          <Button className='shadow-sm login-button' onClick={handleClick}>
-            Sign In or Create an Account
-          </Button>
+          <>
+            <Button className='shadow-sm login-button' onClick={handleClick}>
+              Sign In or Create an Account
+            </Button>
+            <p className='home-paragraph'>or</p>
+            <p className='home-paragraph'>continue as <span className='text-span' onClick={handleGuestSignIn}>GUEST</span></p>
+          </>
         }
-        <p className='home-paragraph'>or</p>
-        <p className='home-paragraph'>continue as <span className='text-span' onClick={handleGuestSignIn}>GUEST</span></p>
       </Container>
     </>
     )
