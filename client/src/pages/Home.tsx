@@ -26,6 +26,12 @@ function Home() {
     navigate('/portfolio')
   }
 
+  const handleGuestSignIn = (e: any) => {
+    e.preventDefault()
+    auth.login('guest@guest.com', 'GuestUserPass')
+    navigate('/portfolio')
+  }
+
   return (
     <>
       <Navbar />
@@ -56,6 +62,8 @@ function Home() {
             Sign In or Create an Account
           </Button>
         }
+        <p className='home-paragraph'>or</p>
+        <p className='home-paragraph'>continue as <span className='text-span' onClick={handleGuestSignIn}>GUEST</span></p>
       </Container>
     </>
     )
