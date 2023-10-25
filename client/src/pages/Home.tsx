@@ -70,8 +70,7 @@ function Home() {
             <Button className='shadow-sm login-button' onClick={handleClick}>
               Sign In or Create an Account
             </Button>
-            <p className='home-paragraph'>or</p>
-            <p className='home-paragraph'>continue as <span className='text-span' onClick={handleGuestSignIn}>GUEST</span></p>
+            <p className='home-paragraph mt-3'>or continue as <span className='text-span' onClick={handleGuestSignIn}>GUEST</span></p>
           </>
         }
       </Container>
