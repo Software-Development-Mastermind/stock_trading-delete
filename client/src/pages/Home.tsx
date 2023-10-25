@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom'
 
 import { Container, Image, Button } from 'react-bootstrap'
 import { Navbar } from '@/components/index'
-import { AuthMethods } from '@/utils/index'
+import { AuthMethods, getUserId } from '@/utils/index'
 import '@styles/Home.css'
 import stockMarketBull from '@assets/stockmarket.jpg'
 
@@ -26,10 +26,18 @@ function Home() {
     navigate('/portfolio')
   }
 
-  const handleGuestSignIn = (e: any) => {
+  const handleGuestSignIn = async (e: any) => {
     e.preventDefault()
-    auth.login('guest@guest.com', 'GuestUserPass')
-    navigate('/portfolio')
+    const email = 'guest@guest.com'
+    const password = 'GuestUserPass'
+    const login = await auth.login(email, password)
+    if (login) {
+      auth.setCurrentUser({
+        "email": email,
+        "id": await getUserId(email)
+      })
+      navigate('/portfolio')
+    }
   }
 
   return (
