@@ -10,6 +10,9 @@ from src import api
 class GetPortfolio(Resource):
   def get(self, user_id):
 
+    if user_id == 'undefined':
+      return "User not logged in!", 401
+
     stocks = Stock.query.filter_by(user_id=user_id).all()
 
     portfolio_data = []
@@ -35,7 +38,8 @@ class GetPortfolio(Resource):
 class GetCash(Resource):
   def get(self, user_id):
 
-    print(f'User ID for get cash: {user_id}')
+    if user_id == 'undefined':
+      return "User not logged in!", 401
 
     user = User.query.filter_by(id=user_id).first()
     print(user)
@@ -51,7 +55,11 @@ class GetCash(Resource):
 class UpdateCash(Resource):
   def post(self, user_id):
 
+    if user_id == 'undefined':
+      return "User not logged in!", 401
+
     user = User.query.filter_by(id=user_id).first()
+    
     if user:
 
       cash = request.json['cash']
@@ -67,6 +75,9 @@ class UpdateCash(Resource):
 @api.route('/buy_stock/<user_id>')
 class BuyStock(Resource):
   def post(self, user_id):
+
+    if user_id == 'undefined':
+      return "User not logged in!", 401
       
     symbol = request.json['symbol']
     name = request.json['name']
@@ -74,6 +85,7 @@ class BuyStock(Resource):
     cost = request.json['cost']
 
     stock = Stock.query.filter_by(user_id=user_id, symbol=symbol).first()
+
     if stock:
       stock.shares += shares
       stock.cost += cost
@@ -97,6 +109,9 @@ class BuyStock(Resource):
 @api.route('sell_stock/<user_id>')
 class SellStock(Resource):
   def post(self, user_id):
+
+    if user_id == 'undefined':
+      return "User not logged in!", 401
 
     symbol = request.json['symbol']
     shares = request.json['shares']
