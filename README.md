@@ -36,7 +36,7 @@ Try it <a href='http://simstocks.us-west-2.elasticbeanstalk.com/'>here</a>.
 * Current and historical stock data is retrieved using the Finnhub API.
 * REST API is built using Flask-RESTX.
 * Database queries are handled using the SQLAlchemy ORM.
-* The app is served using Gunicorn and hosted on Render.com.
+* The app is served using Gunicorn and hosted on AWS Elastic Beanstalk.
 * Data is stored in a PostgreSQL database hosted on elephantsql.com.
 
 ## Local Setup
