@@ -85,6 +85,9 @@ class GetUserId(Resource):
 class GetUserPassword(Resource):
   def get(self, user_id):
 
+    if user_id == 'undefined':
+      return "Invalid user ID.", 404
+
     user = User.query.filter_by(id=user_id).first()
 
     if user:
