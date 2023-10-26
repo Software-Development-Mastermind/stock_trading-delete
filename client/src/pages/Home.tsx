@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom'
 
 import { Container, Image, Button } from 'react-bootstrap'
 import { Navbar } from '@/components/index'
-import { AuthMethods } from '@/utils/index'
+import { AuthMethods, getUserId } from '@/utils/index'
 import '@styles/Home.css'
 import stockMarketBull from '@assets/stockmarket.jpg'
 
@@ -24,6 +24,20 @@ function Home() {
   const handlePortfolioNav = (e: any) => {
     e.preventDefault()
     navigate('/portfolio')
+  }
+
+  const handleGuestSignIn = async (e: any) => {
+    e.preventDefault()
+    const email = 'guest@guest.com'
+    const password = 'GuestUserPass'
+    const login = await auth.login(email, password)
+    if (login) {
+      auth.setCurrentUser({
+        "email": email,
+        "id": await getUserId(email)
+      })
+      navigate('/')
+    }
   }
 
   return (
@@ -52,9 +66,12 @@ function Home() {
           Good luck!
         </p>
         {!auth.loggedIn() &&
-          <Button className='shadow-sm login-button' onClick={handleClick}>
-            Sign In or Create an Account
-          </Button>
+          <>
+            <Button className='shadow-sm login-button' onClick={handleClick}>
+              Sign In or Create an Account
+            </Button>
+            <p className='home-paragraph mt-3'>or continue as <span className='text-span' onClick={handleGuestSignIn}>GUEST</span></p>
+          </>
         }
       </Container>
     </>

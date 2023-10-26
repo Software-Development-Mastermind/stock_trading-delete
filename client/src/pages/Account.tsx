@@ -14,6 +14,7 @@ function Account() {
   const [passwordLength, setPasswordLength] = useState<number | null>(null)
 
   useEffect(() => {
+    if (!user.id) return
     getPasswordLength()
   }, [])
 
