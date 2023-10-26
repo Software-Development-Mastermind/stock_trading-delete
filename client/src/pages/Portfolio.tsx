@@ -60,14 +60,14 @@ function Portfolio () {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   
   useEffect(() => {
-    if (!auth.loggedIn()) {navigate('/')}
-    }, []);
-
-  useEffect(() => {
-    Promise.all([getUserPortfolio(userId), getUserCash(userId)])
+    if (!auth.loggedIn()) {
+      navigate('/')
+    } else {
+      Promise.all([getUserPortfolio(userId), getUserCash(userId)])
       .then(() => {
         setIsLoading(false);
       })
+    }
     }, []);
 
   const getUserPortfolio = async (userId: number) => {
