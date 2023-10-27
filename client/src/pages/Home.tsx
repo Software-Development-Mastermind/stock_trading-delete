@@ -28,13 +28,13 @@ function Home() {
 
   const handleGuestSignIn = async (e: any) => {
     e.preventDefault()
-    const email = 'guest@guest.com'
-    const password = 'GuestUserPass'
-    const login = await auth.login(email, password)
+    const GUEST_EMAIL: string = 'guest@guest.com'
+    const GUEST_PASSWORD: string = 'GuestUserPass'
+    const login = await auth.login(GUEST_EMAIL, GUEST_PASSWORD)
     if (login) {
       auth.setCurrentUser({
-        "email": email,
-        "id": await getUserId(email)
+        "email": GUEST_EMAIL,
+        "id": await getUserId(GUEST_EMAIL)
       })
       navigate('/')
     }
